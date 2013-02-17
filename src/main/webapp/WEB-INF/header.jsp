@@ -1,13 +1,13 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML>
-<html lang="fr-FR">
+<html lang="en-US">
     <head>
-	<title>Hulk Bank - THE bank qu'il vous faut</title>
+	<title>Atemia - Projects Manager</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="./design/style.css"/>
 	<link rel="stylesheet" href="./design/template.css"/>
-	<link rel="shortcut icon" type="image/x-icon" href="<c:url value="/design/favicon.ico"/>" />
+	<link rel="shortcut icon" type="image/x-icon" href="./design/favicon.ico" />
     </head>
     <body>
 	<header>

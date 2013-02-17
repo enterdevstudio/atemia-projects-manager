@@ -2,7 +2,6 @@ package fr.xinta.atemia.db.facade;
 
 import fr.xinta.atemia.db.entity.AbstractEntity;
 import java.util.List;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
@@ -10,7 +9,6 @@ import javax.persistence.criteria.Root;
 
 public abstract class AbstractFacade<T extends AbstractEntity> {
     
-    @Inject
     private EntityManager entityManager;
 
     public EntityManager getEntityManager() {
