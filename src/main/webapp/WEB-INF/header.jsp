@@ -17,7 +17,7 @@
 	<menu id="menu" type="toolbar">
 	    <li><h3>Persons</h3>
 		<menu>
-		    <li><a href="creerClient">Create</a></li>
+		    <li><a href="createPerson">Create</a></li>
 		    <li><a href="rechercherClient">Rechercher</a></li>
 		    <li><a href="afficherTousClients">Lister</a></li>
 		</menu>

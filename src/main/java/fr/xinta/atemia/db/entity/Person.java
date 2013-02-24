@@ -7,25 +7,24 @@ import javax.persistence.Entity;
 @Entity
 public class Person extends AbstractEntity implements Serializable {
     
-    private String nom;
-    private String prenom;
-    
+    private String firstName;
+    private String lastName;    
     private List<MasterRelation> relations;
 
-    public String getNom() {
-	return nom;
+    public String getFirstName() {
+	return firstName;
     }
 
-    public void setNom(String nom) {
-	this.nom = nom;
+    public void setFirstName(String firstName) {
+	this.firstName = firstName;
     }
 
-    public String getPrenom() {
-	return prenom;
+    public String getLastName() {
+	return lastName;
     }
 
-    public void setPrenom(String prenom) {
-	this.prenom = prenom;
+    public void setLastName(String lastName) {
+	this.lastName = lastName;
     }
 
     public List<MasterRelation> getRelations() {

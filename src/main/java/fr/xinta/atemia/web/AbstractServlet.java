@@ -1,16 +1,28 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.facade.PersonFacade;
+import fr.xinta.atemia.db.facade.ProjectFacade;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Toutes les servlets du projet doivent hériter de cette classe Il faut
+ * redéfinir 5 méthodes pour l'utiliser (voir ci-dessous)
+ */
 public abstract class AbstractServlet extends HttpServlet {
 
-    public static final String VIEWS_PATH = "/WEB-INF/";
+    protected static final String VIEWS_PATH = "/WEB-INF/";
+    
+    @EJB
+    protected PersonFacade personFacade;
+    @EJB
+    protected ProjectFacade projectFacade;
 
     //Méthode car on ne peut pas mettre d'attributs en abstract  
     /**

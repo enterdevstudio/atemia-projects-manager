@@ -3,6 +3,7 @@ package fr.xinta.atemia.db.facade;
 import fr.xinta.atemia.db.entity.AbstractEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -12,6 +13,8 @@ public abstract class AbstractFacade<T extends AbstractEntity> {
     private EntityManager entityManager;
 
     public EntityManager getEntityManager() {
+	if (entityManager == null)
+	    entityManager = Persistence.createEntityManagerFactory("fr.xinta_Atemia_war_1.0-SNAPSHOTPU").createEntityManager();
         return this.entityManager;
     }
     

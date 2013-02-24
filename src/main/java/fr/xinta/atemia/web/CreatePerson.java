@@ -1,5 +1,6 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Person;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +31,12 @@ public class CreatePerson extends AbstractServlet {
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
+	Person person = new Person();
+	person.setFirstName(request.getParameter("firstName"));
+	person.setLastName(request.getParameter("lastName"));
+	personFacade.persist(person);
+	
+	request.setAttribute("person", person);
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
     }
     
