@@ -1,0 +1,126 @@
+
+/* ---- Fonts ---- */
+@font-face {
+  font-family: 'Julius Sans One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Julius Sans One'), local('JuliusSansOne-Regular'), url(julius.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Text Me One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Text Me One'), local('TextMeOne-Regular'), url(text_me_one.woff) format('woff');
+}
+
+/* ---- Generic ---- */
+
+body {
+	margin-left: 0px;
+	font-family: Helvetica, sans-serif;
+}
+
+h1 { font-family: 'Julius Sans One'; }
+h2 { font-family: 'Text Me One'; }
+li { padding: 3px 0px; }
+
+/* --- This style for buttons come from bootstrap --- */
+input[type=submit] {
+    padding: 4px 9px;
+    background-image: -moz-linear-gradient(center top , #FFFFFF 0%, #DDDDDD 100%);
+    background-image: -webkit-linear-gradient(center top , #FFFFFF 0%, #DDDDDD 100%);
+    background-image: -o-linear-gradient(center top , #FFFFFF 0%, #DDDDDD 100%);
+    background-image: -ms-linear-gradient(center top , #FFFFFF 0%, #DDDDDD 100%);
+    border: 1px solid #AAAAAA;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 1px #CFCFCF;
+    color: #505050;
+    cursor: pointer;
+    min-height: 10px;
+    min-width: 90px;
+    white-space: nowrap;
+}
+
+input[type=submit]:hover {
+    background-image: -moz-linear-gradient(center top , #FFFFFF 0%, #B7B7B7 100%);
+    background-image: -webkit-linear-gradient(center top , #FFFFFF 0%, #B7B7B7 100%);
+    background-image: -o-linear-gradient(center top , #FFFFFF 0%, #B7B7B7 100%);
+    background-image: -ms-linear-gradient(center top , #FFFFFF 0%, #B7B7B7 100%);
+    border: 1px solid #848484;
+}
+
+/* ---- The Left Panel ---- */
+#panel {
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	max-width: 202px;
+	border-right: solid #CCC 1px;
+	box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+#panel a {
+	color: inherit;
+	text-decoration: none;
+}
+
+#panel header h1 {
+	margin: 12px;
+}
+
+
+/* ---- Menu in the Left Panel ---- */
+#menu { margin: 0px 0px 0px 12px; }
+menu {
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+menu h2 {
+	margin-bottom: 3px;
+}
+
+.submenu li {
+	color: #888;
+	font-size: large;
+	font-family: Verdana, sans-serif;
+	border-left: solid #888 1px;
+	padding-left: 12px;
+	margin-left: 3px;
+}
+
+.submenu li:hover {
+	color: #DDD;
+	border-color: #DDD;
+}
+
+/* ---- Footer in the Left Panel ---- */
+footer {
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	color: #888;
+	font-style: italic;
+	font-size: small;
+	text-align: center;
+	margin-top: 42px;
+}
+
+footer a { font-weight: bold; }
+footer  a:hover { color: #CCC; }
+
+
+/* ---- Content ---- */
+#content {
+	margin-left: 220px;
+}
+
+
+#content header {
+	border-bottom: solid #CCC 1px;
+	margin: 12px;
+	padding-bottom: 6px;
+}
+#content header h1 { margin-bottom: 0px; }
+#content header form { float: right; }
