@@ -7,7 +7,7 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/atemia?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="atemia"/>
-      <property name="javax.persistence.jdbc.password" value="mdpatemia"/>
+      <property name="javax.persistence.jdbc.password" value="doyouseriouslythinkthatillputmypwdingithub?"/>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>
   </persistence-unit>
