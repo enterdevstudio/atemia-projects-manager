@@ -15,9 +15,9 @@
 					<th>Name</th>
 					<th>Department</th>
 				</tr>
-				<c:forEach var="project" items="${projects}" >
+				<c:forEach var="project" items="${person.projects}" >
 				<tr>
-					<td>${project.number}</td>
+					<td><a href="#">${project.number}</a></td>
 					<td>${project.name}</td>
 					<td>${project.department}</td>
 				</tr>
