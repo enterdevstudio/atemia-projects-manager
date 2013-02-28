@@ -2,6 +2,7 @@ package fr.xinta.atemia.db.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.HashSet;
 import javax.persistence.Entity;
 
 @Entity
@@ -30,8 +31,18 @@ public class Person extends AbstractEntity implements Serializable {
     public List<MasterRelation> getRelations() {
 	return relations;
     }
-
+    
     public void setRelations(List<MasterRelation> relations) {
 	this.relations = relations;
+    }
+    
+    public Set<Project> getProjects {
+    	HashSet<Project> set = new HashSet<Project>();
+    	for (MasterRelation mr : getRelations()) {
+    		if (!set.contains(mr.getProject()) {
+    			set.add(mr.getProject());
+    		}
+    	}
+    	return set;
     }
 }
