@@ -1,17 +1,34 @@
 package fr.xinta.atemia.db.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Person extends AbstractEntity implements Serializable {
     
+    
+    
+    @GeneratedValue(strategy = GenerationType.TABLE, generator="seq")
+    @Id 
+    private Long person_id;
     private String firstName;
     private String lastName;    
     private List<MasterRelation> relations;
 
+    public Long getPerson_id() {
+	return person_id;
+    }
+
+    public void setPerson_id(Long person_id) {
+	this.person_id = person_id;
+    }
+    
     public String getFirstName() {
 	return firstName;
     }
@@ -36,12 +53,12 @@ public class Person extends AbstractEntity implements Serializable {
 	this.relations = relations;
     }
     
-    public Set<Project> getProjects {
+    public Set<Project> getProjects() {
     	HashSet<Project> set = new HashSet<Project>();
     	for (MasterRelation mr : getRelations()) {
-    		if (!set.contains(mr.getProject()) {
-    			set.add(mr.getProject());
-    		}
+	    if (!set.contains(mr.getProject())) {
+		set.add(mr.getProject());
+	    }
     	}
     	return set;
     }
