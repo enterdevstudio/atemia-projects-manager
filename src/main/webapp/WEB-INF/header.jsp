@@ -23,14 +23,14 @@
 		<h2>Persons</h2>
 		<menu class="submenu">
 		    <li><a href="createPerson">Create</a></li>
-		    <li><a href="#">List</a></li>
+		    <li><a href="listPerson">List</a></li>
 		</menu>
 	    </li>
 	    <li>
 		<h2>Projects</h2>
 		<menu class="submenu">
 		    <li><a href="#">Create</a></li>
-		    <li><a href="#">List</a></li>
+		    <li><a href="listProject">List</a></li>
 		</menu>
 	    </li>
 	    </menu>

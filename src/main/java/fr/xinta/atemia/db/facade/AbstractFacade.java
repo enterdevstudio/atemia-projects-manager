@@ -39,14 +39,13 @@ public abstract class AbstractFacade<T extends AbstractEntity> {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 
-    public AbstractEntity find(Object id) {
-        AbstractEntity entity = getEntityManager().find(getEntityClass(), id);
-        return entity;
+    public T find(Object id) {
+        return getEntityManager().find(getEntityClass(), id);
     }
     
-    public List<? extends AbstractEntity> findAll() {
+    public List<T> findAll() {
         CriteriaQuery<Object> cq = getEntityManager().getCriteriaBuilder().createQuery();
-        List<? extends AbstractEntity> entities;
+        List<T> entities;
 
         cq.select(cq.from(getEntityClass()));
 
