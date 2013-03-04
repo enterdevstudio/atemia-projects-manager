@@ -6,12 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DisplayPerson", urlPatterns = {"/displayPerson"})
-public class DisplayPerson extends AbstractServlet {
+@WebServlet(name = "DisplayProject", urlPatterns = {"/displayProject"})
+public class DisplayProject extends AbstractServlet {
 
     @Override
     protected String INITIAL_VIEW() {
-	return VIEWS_PATH + "displayPerson.jsp";
+	return VIEWS_PATH + "displayProject.jsp";
     }
 
     @Override
@@ -23,7 +23,7 @@ public class DisplayPerson extends AbstractServlet {
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
-	request.setAttribute("person", personFacade.find(request.getParameter("personId")));
+	request.setAttribute("project", projectFacade.find(request.getParameter("projectId")));
 	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
     }
 
@@ -32,6 +32,5 @@ public class DisplayPerson extends AbstractServlet {
 	    throws ServletException, IOException {
 	
 	initialRequest(request, response);
-    }
-    
+    }     
 }

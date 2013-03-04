@@ -19,7 +19,7 @@
 			</tr>
 			<c:forEach var="project" items="${projects}">
 			<tr>
-			    <td><a href="displayProject?project-id=${project.projectId}">
+			    <td><a href="displayProject?projectId=${project.projectId}">
 				    <c:out value="${project.projectId}" />
 				</a></td>
 			    <td><c:out value="${project.name}" /></td>

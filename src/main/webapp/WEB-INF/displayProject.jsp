@@ -14,7 +14,7 @@
 		<li><strong>Nb of hours sold :</strong> ${project.nbHoursSold}</li>
 		<li><strong>Workers :</strong>
 		<c:forEach var="person" items="${project.workers}" >
-		    <a href="#">${person.firstName} ${person.lastName}</a>
+		    <a href="displayPerson?personId=${person.id}">${person.firstName} ${person.lastName}</a>
 		</c:forEach></li>
 	    </ul>
 			

@@ -18,7 +18,7 @@
 			</tr>
 			<c:forEach var="person" items="${persons}" >
 			<tr>
-			    <td><a href="displayPerson?person-id=${person.personId}">
+			    <td><a href="displayPerson?personId=${person.personId}">
 				    <c:out value="${person.personId}" />
 				</a></td>
 			    <td><c:out value="${person.firstName}" /></td>

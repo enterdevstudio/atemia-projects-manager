@@ -17,7 +17,7 @@
 		</tr>
 		<c:forEach var="project" items="${person.projects}" >
 		<tr>
-		    <td><a href="displayProject?project-id=${project.projectId}">${project.projectId}</a></td>
+		    <td><a href="displayProject?projectId=${project.projectId}">${project.projectId}</a></td>
 		    <td>${project.name}</td>
 		    <td>${project.department}</td>
 		</tr>
