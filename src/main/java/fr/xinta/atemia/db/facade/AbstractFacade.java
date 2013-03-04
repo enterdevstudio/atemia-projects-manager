@@ -10,12 +10,21 @@ import javax.persistence.criteria.Root;
 
 public abstract class AbstractFacade<T extends AbstractEntity> {
     
+    private Class<T> entityClass;
     private EntityManager entityManager;
 
     public EntityManager getEntityManager() {
 	if (entityManager == null)
 	    entityManager = Persistence.createEntityManagerFactory("fr.xinta_Atemia_war_1.0-SNAPSHOTPU").createEntityManager();
         return this.entityManager;
+    }
+    
+    public Class<T> getEntityClass() {
+	return this.entityClass;
+    }
+    
+    public AbstractFacade(Class<T> entityClass) {
+        this.entityClass = entityClass;
     }
     
     public void persist(AbstractEntity entity) {
@@ -30,16 +39,16 @@ public abstract class AbstractFacade<T extends AbstractEntity> {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 
-    public AbstractEntity find(Object id, Class<? extends AbstractEntity> entityClass) {
-        AbstractEntity entity = getEntityManager().find(entityClass, id);
+    public AbstractEntity find(Object id) {
+        AbstractEntity entity = getEntityManager().find(getEntityClass(), id);
         return entity;
     }
     
-    public List<? extends AbstractEntity> findAll(Class<? extends AbstractEntity> entityClass) {
+    public List<? extends AbstractEntity> findAll() {
         CriteriaQuery<Object> cq = getEntityManager().getCriteriaBuilder().createQuery();
         List<? extends AbstractEntity> entities;
 
-        cq.select(cq.from(entityClass));
+        cq.select(cq.from(getEntityClass()));
 
         Query q = getEntityManager().createQuery(cq);
         entities = q.getResultList();
@@ -47,9 +56,9 @@ public abstract class AbstractFacade<T extends AbstractEntity> {
         return entities;
     }
 
-    public int count(Class<? extends AbstractEntity> entityClass) {
+    public int count() {
         CriteriaQuery<Object> cq = getEntityManager().getCriteriaBuilder().createQuery();
-        Root<? extends AbstractEntity> rt = cq.from(entityClass);
+        Root<? extends AbstractEntity> rt = cq.from(getEntityClass());
 
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         Query q = getEntityManager().createQuery(cq);

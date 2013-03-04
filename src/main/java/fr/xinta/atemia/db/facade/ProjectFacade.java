@@ -7,4 +7,7 @@ import javax.ejb.Stateless;
 @Stateless
 public class ProjectFacade extends AbstractFacade<Project> {
     
+    public ProjectFacade() {
+	super(Project.class);
+    }
 }
