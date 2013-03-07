@@ -10,12 +10,16 @@ import javax.persistence.criteria.Root;
 
 public abstract class AbstractFacade<T extends AbstractEntity> {
     
+    protected final String PERSISTENCE = "fr.xinta_Atemia_war_1.0";
+    
     private Class<T> entityClass;
     private EntityManager entityManager;
 
     public EntityManager getEntityManager() {
-	if (entityManager == null)
-	    entityManager = Persistence.createEntityManagerFactory("fr.xinta_Atemia_war_1.0-SNAPSHOTPU").createEntityManager();
+	if (entityManager == null) {
+	    entityManager = Persistence.createEntityManagerFactory(PERSISTENCE).createEntityManager();
+	}
+	
         return this.entityManager;
     }
     
