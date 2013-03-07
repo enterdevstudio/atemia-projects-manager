@@ -29,7 +29,7 @@
 	    <li>
 		<h2>Projects</h2>
 		<menu class="submenu">
-		    <li><a href="#">Create</a></li>
+		    <li><a href="createProject">Create</a></li>
 		    <li><a href="listProject">List</a></li>
 		</menu>
 	    </li>
