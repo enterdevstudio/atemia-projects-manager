@@ -4,7 +4,6 @@
 		<h1>Projects in the application</h1>
 	    </header>
 
-
 	    <c:choose>
 		<c:when test="${empty projects}">
 		    <p>There is no projects in the application for the moment.</p>

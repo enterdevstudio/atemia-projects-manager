@@ -13,8 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Person extends AbstractEntity implements Serializable {
-    
+public class Person extends AbstractEntity implements Serializable {    
     
     
     @GeneratedValue(strategy = GenerationType.TABLE, generator="seq")
@@ -28,11 +27,11 @@ public class Person extends AbstractEntity implements Serializable {
 	relations = new ArrayList<MasterRelation>();
     }
 
-    public Long getPerson_id() {
+    public Long getPersonId() {
 	return person_id;
     }
 
-    public void setPerson_id(Long person_id) {
+    public void setPersonId(Long person_id) {
 	this.person_id = person_id;
     }
     

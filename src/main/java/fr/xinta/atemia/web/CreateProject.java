@@ -34,7 +34,7 @@ public class CreateProject extends AbstractServlet {
 	project.setName(request.getParameter("name"));
 	project.setDepartment(request.getParameter("department"));
 	project.setNbHoursSold(Integer.parseInt(request.getParameter("nbHoursSold")));
-	projectFacade.persist(project);
+	//projectFacade.persist(project);
 	
 	request.setAttribute("project", project);
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);

@@ -7,8 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "CreatePerson", urlPatterns = {"/createPerson"})
-public class CreatePerson extends AbstractServlet {
+@WebServlet(name = "EditPerson", urlPatterns = {"/editPerson"})
+public class EditPerson extends AbstractServlet {
 
     @Override
     protected String INITIAL_VIEW() {
@@ -24,6 +24,8 @@ public class CreatePerson extends AbstractServlet {
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
+	// For fill the fiel with the current value
+	request.setAttribute("person", personFacade.find(request.getParameter("person-id")));
 	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
     }
 
@@ -34,7 +36,7 @@ public class CreatePerson extends AbstractServlet {
 	Person person = new Person();
 	person.setFirstName(request.getParameter("firstName"));
 	person.setLastName(request.getParameter("lastName"));
-	//personFacade.persist(person);
+	//TODO need to update ?
 	
 	request.setAttribute("person", person);
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);

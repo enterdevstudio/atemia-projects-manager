@@ -28,11 +28,11 @@ public class Project extends AbstractEntity implements Serializable {
 	relations = new ArrayList<MasterRelation>();
     }
 
-    public Long getProject_id() {
+    public Long getProjectId() {
 	return project_id;
     }
 
-    public void setProject_id(Long project_id) {
+    public void setProjectId(Long project_id) {
 	this.project_id = project_id;
     }
 
