@@ -4,7 +4,8 @@
 <html lang="en-US">
     <head>
 	<title>Atemia - Projects Manager</title>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8" />	
+	<meta name="content-type" content="text/html;" charset="utf-8" />
 	<link rel="stylesheet" href="./design/style.css" />
 	<link rel="stylesheet" href="./design/template.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="./design/favicon.ico" />
