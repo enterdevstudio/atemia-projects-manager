@@ -1,6 +1,7 @@
 package fr.xinta.atemia.db.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +23,10 @@ public class Project extends AbstractEntity implements Serializable {
     private String department;
     private int nbHoursSold;
     private List<MasterRelation> relations;
+    
+    public Project() {
+	relations = new ArrayList<MasterRelation>();
+    }
 
     public Long getProject_id() {
 	return project_id;
