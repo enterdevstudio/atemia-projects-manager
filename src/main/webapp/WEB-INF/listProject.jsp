@@ -18,9 +18,11 @@
 			</tr>
 			<c:forEach var="project" items="${projects}">
 			<tr>
-			    <td><a href="displayProject?projectId=${project.projectId}">
+			    <td>
+				<a href="displayProject?projectId=${project.projectId}">
 				    <c:out value="${project.projectId}" />
-				</a></td>
+				</a>
+			    </td>
 			    <td><c:out value="${project.name}" /></td>
 			    <td><c:out value="${project.department}" /></td>
 			    <td><c:out value="${project.nbHoursSold}" /></td>
