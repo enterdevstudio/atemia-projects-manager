@@ -6,19 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table
 public class Project extends AbstractEntity implements Serializable {
 
-    
-    @GeneratedValue(strategy = GenerationType.TABLE, generator="seq")
-    @Id 
-    private Long project_id;
     private String name;
     private String department;
     private int nbHoursSold;
@@ -26,14 +19,6 @@ public class Project extends AbstractEntity implements Serializable {
     
     public Project() {
 	relations = new ArrayList<MasterRelation>();
-    }
-
-    public Long getProjectId() {
-	return project_id;
-    }
-
-    public void setProjectId(Long project_id) {
-	this.project_id = project_id;
     }
 
     public String getName() {

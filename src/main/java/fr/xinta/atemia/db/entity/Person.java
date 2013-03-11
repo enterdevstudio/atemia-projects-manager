@@ -6,19 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table
 public class Person extends AbstractEntity implements Serializable {    
     
-    
-    @GeneratedValue(strategy = GenerationType.TABLE, generator="seq")
-    @Id 
-    private Long person_id;
     private String firstName;
     private String lastName;    
     private List<MasterRelation> relations;
@@ -27,14 +20,6 @@ public class Person extends AbstractEntity implements Serializable {
 	relations = new ArrayList<MasterRelation>();
     }
 
-    public Long getPersonId() {
-	return person_id;
-    }
-
-    public void setPersonId(Long person_id) {
-	this.person_id = person_id;
-    }
-    
     public String getFirstName() {
 	return firstName;
     }

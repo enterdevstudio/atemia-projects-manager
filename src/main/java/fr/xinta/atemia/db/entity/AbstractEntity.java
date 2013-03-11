@@ -11,6 +11,7 @@ import javax.persistence.Temporal;
 
 @MappedSuperclass
 public abstract class AbstractEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
