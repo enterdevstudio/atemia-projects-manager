@@ -2,11 +2,11 @@
 	    
 	    <header>
 		<form method="post" action="createPerson">
-		    <input type="hidden" name="person-id" value="${person.personId}" />
+		    <input type="hidden" name="person-id" value="${person.id}" />
 		    <input type="submit" name="update" value="Update" />
 		</form>
 		<form method="post" action="editPerson">
-		    <input type="hidden" name="person-id" value="${person.personId}" />
+		    <input type="hidden" name="person-id" value="${person.id}" />
 		    <input type="submit" name="delete" value="Delete" />
 		</form>
 		<h1>${person.firstName} ${person.lastName}</h1>
@@ -26,7 +26,7 @@
 			</tr>
 			<c:forEach var="project" items="${person.projects}" >
 			<tr>
-			    <td><a href="displayProject?projectId=${project.projectId}">${project.projectId}</a></td>
+			    <td><a href="displayProject?project-id=${project.id}">${project.id}</a></td>
 			    <td>${project.name}</td>
 			    <td>${project.department}</td>
 			</tr>

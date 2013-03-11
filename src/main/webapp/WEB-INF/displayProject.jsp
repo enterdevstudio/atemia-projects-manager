@@ -9,7 +9,7 @@
 		<h1>Project</h1>
 	    </header>
 	    <ul>
-		<li><strong>Number :</strong> ${project.projectId}</li>
+		<li><strong>Number :</strong> ${project.id}</li>
 		<li><strong>Name :</strong> ${project.name}</li>
 		<li><strong>Department :</strong> ${project.department}</li>
 		<li><strong>Nb of hours sold :</strong> ${project.nbHoursSold}</li>
@@ -20,7 +20,7 @@
 		</c:when>
 		<c:otherwise>
 		<c:forEach var="person" items="${project.workers}">
-		    <a href="displayPerson?personId=${person.id}">${person.firstName} ${person.lastName} </a>
+		    <a href="displayPerson?person-id=${person.id}">${person.firstName} ${person.lastName} </a>
 		</c:forEach>
 		</li>
 		</c:otherwise>

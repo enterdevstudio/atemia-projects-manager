@@ -2,6 +2,7 @@ package fr.xinta.atemia.web;
 
 import fr.xinta.atemia.db.entity.Person;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,13 @@ public class ListPerson extends AbstractServlet {
 
     @Override
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+//	List<Person> persons = new ArrayList<Person>();
+//	Person p = new Person();
+//	p.setFirstName("Raphael");
+//	p.setLastName("Bouju");
+//	persons.add(p);	
+//	request.setAttribute("persons", persons);
 	
 	request.setAttribute("persons", personFacade.findAll());
 	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);

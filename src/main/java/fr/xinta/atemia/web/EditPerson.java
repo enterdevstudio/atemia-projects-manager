@@ -25,7 +25,15 @@ public class EditPerson extends AbstractServlet {
 	    throws ServletException, IOException {
 	
 	// For fill the fiel with the current value
-	request.setAttribute("person", personFacade.find(request.getParameter("person-id")));
+	String id = request.getParameter("person-id");
+	Person person = personFacade.find(id);
+	
+	if (person != null) {
+	    request.setAttribute("person", person);
+	} else {
+	    request.setAttribute("message", "No person has the id " + id + ". Aborting.");
+	}
+	
 	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
     }
 

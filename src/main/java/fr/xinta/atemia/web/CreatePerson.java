@@ -34,7 +34,7 @@ public class CreatePerson extends AbstractServlet {
 	Person person = new Person();
 	person.setFirstName(request.getParameter("firstName"));
 	person.setLastName(request.getParameter("lastName"));
-	//personFacade.persist(person);
+	personFacade.persist(person);
 	
 	request.setAttribute("person", person);
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);

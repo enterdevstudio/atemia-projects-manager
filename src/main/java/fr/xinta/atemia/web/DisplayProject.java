@@ -1,5 +1,6 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Project;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,15 @@ public class DisplayProject extends AbstractServlet {
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
-	request.setAttribute("project", projectFacade.find(request.getParameter("projectId")));
+	String id = request.getParameter("project-id");
+	Project project = projectFacade.find(id);
+	
+	if (project != null) {
+	    request.setAttribute("project", project);
+	} else {
+	    request.setAttribute("message", "No project has the id " + id + ". Aborting.");
+	}
+	
 	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
     }
 

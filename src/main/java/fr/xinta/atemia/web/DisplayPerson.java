@@ -1,5 +1,6 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Person;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,15 @@ public class DisplayPerson extends AbstractServlet {
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
-	request.setAttribute("person", personFacade.find(request.getParameter("personId")));
+	String id = request.getParameter("person-id");
+	Person person = personFacade.find(id);
+	
+	if (person != null) {
+	    request.setAttribute("person", person);
+	} else {
+	    request.setAttribute("message", "No person has the id " + id + ". Aborting.");
+	}
+	
 	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
     }
 

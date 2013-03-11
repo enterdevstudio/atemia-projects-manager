@@ -30,11 +30,12 @@ public class CreateProject extends AbstractServlet {
     @Override
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
+	
 	Project project = new Project();
 	project.setName(request.getParameter("name"));
 	project.setDepartment(request.getParameter("department"));
 	project.setNbHoursSold(Integer.parseInt(request.getParameter("nbHoursSold")));
-	//projectFacade.persist(project);
+	projectFacade.persist(project);
 	
 	request.setAttribute("project", project);
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
