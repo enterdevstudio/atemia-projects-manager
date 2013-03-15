@@ -1,28 +1,29 @@
 package fr.xinta.atemia.db.entity;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.HashMap;
 import javax.persistence.Entity;
+import javax.persistence.TableGenerator;
 
 @Entity
-public class Week extends AbstractEntity implements Serializable {
+@TableGenerator(name = "seq",initialValue=1,allocationSize=50) 
+public class Week extends AbstractEntity {
     
     private int num;
-    private List<MasterRelation> relations;
+    private HashMap<Person, Period> job; //Linked because we need to keep it ordered
+    
+    public Week() {
+	job = new HashMap<Person, Period>();
+    }
 
-    public int getNum() {
+    public int getNumber() {
 	return num;
     }
 
-    public void setNum(int num) {
+    public void setNumber(int num) {
 	this.num = num;
     }
-
-    public List<MasterRelation> getRelations() {
-	return relations;
-    }
-
-    public void setRelations(List<MasterRelation> relations) {
-	this.relations = relations;
+    
+    public HashMap<Person, Period> getJob() {
+	return job;
     }
 }

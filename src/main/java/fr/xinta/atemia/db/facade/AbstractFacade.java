@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 
 public abstract class AbstractFacade<T extends AbstractEntity> {
     
-    protected final String PERSISTENCE = "fr.xinta_Atemia_war_1.0";
+    protected final String PERSISTENCE = "fr.xinta_Atemia";
     
     private Class<T> entityClass;
     private EntityManager entityManager;

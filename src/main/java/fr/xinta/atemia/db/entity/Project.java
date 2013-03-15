@@ -1,24 +1,22 @@
 package fr.xinta.atemia.db.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
-@Table
-public class Project extends AbstractEntity implements Serializable {
+@TableGenerator(name = "seq",initialValue=1,allocationSize=50) 
+public class Project extends AbstractEntity {
 
     private String name;
     private String department;
     private int nbHoursSold;
-    private List<MasterRelation> relations;
+    private List<Week> weeks;
     
     public Project() {
-	relations = new ArrayList<MasterRelation>();
+	weeks = new ArrayList<Week>();
     }
 
     public String getName() {
@@ -45,21 +43,12 @@ public class Project extends AbstractEntity implements Serializable {
 	this.nbHoursSold = nbHoursSold;
     }
 
-    public List<MasterRelation> getRelations() {
-	return relations;
-    }
-
-    public void setRelations(List<MasterRelation> relations) {
-	this.relations = relations;
+    public List<Week> getWeeks() {
+	return weeks;
     }
     
     public Set<Person> getWorkers() {
-	Set<Person> set = new HashSet<Person>();
-	for (MasterRelation mr : getRelations()) {
-	    if (!set.contains(mr.getPerson())) {
-		set.add(mr.getPerson());
-	    }
-	}
-	return set;
+	return (weeks.isEmpty()) ? null :
+		weeks.get(0).getJob().keySet();
     }
 }

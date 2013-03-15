@@ -1,16 +1,15 @@
 package fr.xinta.atemia.db.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
-@Table
-public class Person extends AbstractEntity implements Serializable {    
+@TableGenerator(name = "seq",initialValue=1,allocationSize=50) 
+public class Person extends AbstractEntity {    
     
     private String firstName;
     private String lastName;    

@@ -1,5 +1,6 @@
 package fr.xinta.atemia.db.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,10 +11,10 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 
 @MappedSuperclass
-public abstract class AbstractEntity {
+public abstract class AbstractEntity implements Serializable {
     
+    @GeneratedValue(strategy = GenerationType.TABLE, generator="seq")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
