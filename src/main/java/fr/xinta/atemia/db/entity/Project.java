@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.TableGenerator;
 
 @Entity
@@ -13,6 +14,7 @@ public class Project extends AbstractEntity {
     private String name;
     private String department;
     private int nbHoursSold;
+    @OneToMany
     private List<Week> weeks;
     
     public Project() {
