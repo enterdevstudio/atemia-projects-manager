@@ -1,10 +1,10 @@
 package fr.xinta.atemia.db.entity;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.TableGenerator;
 
 @Entity
@@ -14,11 +14,13 @@ public class Project extends AbstractEntity {
     private String name;
     private String department;
     private int nbHoursSold;
-    @OneToMany
-    private List<Week> weeks;
+    @ManyToMany
+    private HashMap<Integer, Week> weeks;
+    private List<Person> workers;
     
     public Project() {
-	weeks = new ArrayList<Week>();
+	weeks = new HashMap<Integer, Week>();
+	workers = new LinkedList<Person>();
     }
 
     public String getName() {
@@ -45,12 +47,26 @@ public class Project extends AbstractEntity {
 	this.nbHoursSold = nbHoursSold;
     }
 
-    public List<Week> getWeeks() {
+    public HashMap<Integer, Week> getWeeks() {
 	return weeks;
     }
     
-    public Set<Person> getWorkers() {
-	return (weeks.isEmpty()) ? null :
-		weeks.get(0).getJob().keySet();
+    public List<Person> getWorkers() {
+	return workers;
+    }
+    
+    public void AddWorker(Person worker, int startWeek, int endWeek) {
+	workers.add(worker);
+	
+	for (int i = startWeek; i <= endWeek; i++) {
+	    Week week = weeks.get(i);
+	    if (week == null) {
+		week = new Week();
+		week.setNumber(i);
+		weeks.put(i, week);
+	    }
+	    
+	    week.getJob().put(worker, Period.PRODUCTION);
+	}
     }
 }
