@@ -23,6 +23,13 @@ public class Index extends AbstractServlet {
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
+        request.setAttribute("nbPersons", 9);//personFacade.count());
+        request.setAttribute("nbProjects", 9);//projectFacade.count());
+        //TODO calcul charge de la semaine 
+        //Nombre de semaines affectée dans l'appli /
+        //nombre de semaine travaillées par an x nb personne
+        request.setAttribute("ratioWeeks", "x (y%)");
+        
 	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
     }
 
@@ -30,7 +37,7 @@ public class Index extends AbstractServlet {
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
-	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+	initialRequest(request, response);
     }
     
 }
