@@ -1,11 +1,7 @@
 package fr.xinta.atemia.web;
 
-import fr.xinta.atemia.db.entity.Period;
-import fr.xinta.atemia.db.entity.Person;
 import fr.xinta.atemia.db.entity.Project;
-import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
-import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +25,8 @@ public class DisplayProject extends AbstractServlet {
 	    throws ServletException, IOException {
 	
 	String id = request.getParameter("project-id");
-	//Project project = projectFacade.find(id);
-	Project project = new Project();	
+	Project project = projectFacade.find(id);
+//	Project project = new Project();	
 //	Week week = new Week();
 //	Week week2 = new Week();
 //	week.setNumber(11);

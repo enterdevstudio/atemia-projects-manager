@@ -14,9 +14,9 @@
 			<input type="text" name="department" value="${project.department}" id="input-department" required />
 		    </p>
 
-		    <p><label for="input-nbHoursSold">Number of hours sold :</label></p>
+		    <p><label for="input-nbDaysSold">Number of days sold :</label></p>
 		    <p>
-			<input type="text" name="nbHoursSold" value="${project.nbHoursSold}" id="input-nbHoursSold" required />
+			<input type="text" name="nbDaysSold" value="${project.nbDaysSold}" id="input-nbDaysSold" required />
 		    </p>
 
 		    <p>

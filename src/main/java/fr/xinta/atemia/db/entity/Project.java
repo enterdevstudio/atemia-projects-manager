@@ -13,7 +13,7 @@ public class Project extends AbstractEntity {
 
     private String name;
     private String department;
-    private int nbHoursSold;
+    private int nbDaysSold;
     @OneToMany
     private HashMap<Integer, Week> weeks;
     @OneToMany
@@ -40,12 +40,12 @@ public class Project extends AbstractEntity {
 	this.department = department;
     }
 
-    public int getNbHoursSold() {
-	return nbHoursSold;
+    public int getNbDaysSold() {
+	return nbDaysSold;
     }
 
-    public void setNbHoursSold(int nbHoursSold) {
-	this.nbHoursSold = nbHoursSold;
+    public void setNbDaysSold(int nbHoursSold) {
+	this.nbDaysSold = nbHoursSold;
     }
 
     public HashMap<Integer, Week> getWeeks() {

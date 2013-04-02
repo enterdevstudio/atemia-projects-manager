@@ -14,7 +14,7 @@
 			    <th>ID</th>
 			    <th>Name</th>
 			    <th>Department</th>
-			    <th>Number of hours sold</th>
+			    <th>Number of days sold</th>
 			</tr>
 			<c:forEach var="project" items="${projects}">
 			<tr>
@@ -25,7 +25,7 @@
 			    </td>
 			    <td><c:out value="${project.name}" /></td>
 			    <td><c:out value="${project.department}" /></td>
-			    <td><c:out value="${project.nbHoursSold}" /></td>
+			    <td><c:out value="${project.nbDaysSold}" /></td>
 			</tr>
 			</c:forEach>			    
 		    </table>

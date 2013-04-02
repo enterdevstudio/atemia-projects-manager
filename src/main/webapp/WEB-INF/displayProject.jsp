@@ -13,7 +13,7 @@
 		<li><strong>Number :</strong> ${project.id}</li>
 		<li><strong>Name :</strong> ${project.name}</li>
 		<li><strong>Department :</strong> ${project.department}</li>
-		<li><strong>Nb of hours sold :</strong> ${project.nbHoursSold}</li>
+		<li><strong>Nb of days sold :</strong> ${project.nbDaysSold}</li>
 		<li><strong>Workers :</strong>
 	    <c:choose>
 		<c:when test="${empty project.workers}">
