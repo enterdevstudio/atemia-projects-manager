@@ -2,10 +2,10 @@ package fr.xinta.atemia.db.entity;
 
 import java.util.HashMap;
 import javax.persistence.Entity;
-import javax.persistence.TableGenerator;
+import javax.persistence.Table;
 
 @Entity
-@TableGenerator(name = "seq",initialValue=1,allocationSize=50) 
+@Table
 public class Week extends AbstractEntity {
     
     private int num;

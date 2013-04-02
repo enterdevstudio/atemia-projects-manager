@@ -4,18 +4,19 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.TableGenerator;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-@TableGenerator(name = "seq",initialValue=1,allocationSize=50) 
+@Table
 public class Project extends AbstractEntity {
 
     private String name;
     private String department;
     private int nbHoursSold;
-    @ManyToMany
+    @OneToMany
     private HashMap<Integer, Week> weeks;
+    @OneToMany
     private List<Person> workers;
     
     public Project() {
