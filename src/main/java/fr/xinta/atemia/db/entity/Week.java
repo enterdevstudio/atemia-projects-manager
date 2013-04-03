@@ -1,5 +1,6 @@
 package fr.xinta.atemia.db.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -9,10 +10,14 @@ import javax.persistence.Table;
 public class Week extends AbstractEntity {
     
     private int num;
-    private HashMap<Person, Period> job; //Linked because we need to keep it ordered
+    private ArrayList<int[]> job;
+    //the index of the list corresponds to the number of the person
+    //the array key is the period (which is an enum)
+    //the array value is the number of days of this period worked this week
+    //by the worker num the index.
     
     public Week() {
-	job = new HashMap<Person, Period>();
+	job = new ArrayList<int[]>();
     }
 
     public int getNumber() {
@@ -23,7 +28,7 @@ public class Week extends AbstractEntity {
 	this.num = num;
     }
     
-    public HashMap<Person, Period> getJob() {
+    public ArrayList<int[]> getJob() {
 	return job;
     }
 }

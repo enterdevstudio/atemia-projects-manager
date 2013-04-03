@@ -1,7 +1,7 @@
 package fr.xinta.atemia.db.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -15,13 +15,13 @@ public class Project extends AbstractEntity {
     private String department;
     private int nbDaysSold;
     @OneToMany
-    private HashMap<Integer, Week> weeks;
+    private ArrayList<Week> weeks;
     @OneToMany
-    private List<Person> workers;
+    private ArrayList<Person> workers;
     
     public Project() {
-	weeks = new HashMap<Integer, Week>();
-	workers = new LinkedList<Person>();
+	weeks = new ArrayList<Week>();
+	workers = new ArrayList<Person>();
     }
 
     public String getName() {
@@ -47,8 +47,8 @@ public class Project extends AbstractEntity {
     public void setNbDaysSold(int nbHoursSold) {
 	this.nbDaysSold = nbHoursSold;
     }
-
-    public HashMap<Integer, Week> getWeeks() {
+    
+    public ArrayList<Week> getWeeks() {
 	return weeks;
     }
     
@@ -64,10 +64,12 @@ public class Project extends AbstractEntity {
 	    if (week == null) {
 		week = new Week();
 		week.setNumber(i);
-		weeks.put(i, week);
+		weeks.add(i, week);
 	    }
 	    
-	    week.getJob().put(worker, Period.PRODUCTION);
+            int[] tab = new int[Period.values().length - 1];
+            tab[Period.PRODUCTION.ordinal()] = 5; //We put 5 days in production by default
+	    week.getJob().add(workers.size() - 1, tab);
 	}
     }
 }

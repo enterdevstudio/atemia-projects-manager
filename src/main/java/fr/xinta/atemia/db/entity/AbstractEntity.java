@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
     
-    @GeneratedValue(strategy = GenerationType.TABLE, generator="seq")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
     

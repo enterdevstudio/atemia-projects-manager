@@ -32,19 +32,40 @@
 		<input type="hidden" name="project-id" value="${project.id}" />
 		<input type="submit" name="addWorker" value="Add a worker" />
 	    </form>
+                
+
+            <table>
+                <tr>
+                    <td style="border: 0px;">Caption : </td>
+                    <td class="production">Production</td>
+                    <td class="terrain">Terrain</td>
+                    <td class="copil">Copil</td>
+                    <td class="conges">Congés</td>
+                </tr>
+            </table>
 		
 	    <table>
 		<tr>
 		    <th>Week</th>
 		<c:forEach var="person" items="${project.workers}">
-		    <th>${person.firstName} ${person.lastName}</th>
+                    <th>${person.firstName} ${person.lastName}</th>
 		</c:forEach>
 		</tr>
 	    <c:forEach var="week" items="${project.weeks}">
 		<tr>
-		    <td>${week.value.number}</td>			
-		<c:forEach var="job" items="${week.value.job}">
-		    <td>${job.value}</td>
+		    <td>${week.number}</td>			
+		<c:forEach var="job" items="${week.job}">                    
+                    <td>
+                    <c:if test="${job[0] > 0}">
+                        <span class="production">${job[0]}</span>
+                    </c:if><c:if test="${job[1] > 0}">
+                        <span class="terrain">${job[1]}</span>
+                    </c:if><c:if test="${job[2] > 0}">
+                        <span class="copil">${job[2]}</span>
+                    </c:if><c:if test="${job[3] > 0}">
+                        <span class="conges">${job[3]}</span>
+                    </c:if>
+                    </td>
 		</c:forEach>
 		</tr>
 	    </c:forEach>
