@@ -53,7 +53,7 @@
 		</tr>
 	    <c:forEach var="week" items="${project.weeks}">
 		<tr>
-		    <td>${week.number}</td>			
+		    <td>${week.number} (${week.year})</td>			
 		<c:forEach var="job" items="${week.job}">                    
                     <td>
                     <c:if test="${job[0] > 0}">
