@@ -1,7 +1,6 @@
 package fr.xinta.atemia.db.entity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -56,14 +55,18 @@ public class Project extends AbstractEntity {
 	return workers;
     }
     
-    public void AddWorker(Person worker, int startWeek, int endWeek) {
+    public void AddWorker(Person worker, int startWeek,
+            int startYear, int endWeek, int endYear) {
+        
 	workers.add(worker);
+        int end = endWeek + endYear - startYear - 1;
 	
-	for (int i = startWeek; i <= endWeek; i++) {
+	for (int i = startWeek; i <= end; i++) {
 	    Week week = weeks.get(i);
 	    if (week == null) {
 		week = new Week();
-		week.setNumber(i);
+		week.setNumber(i % 52);
+                week.setYear(startYear + i / 52);
 		weeks.add(i, week);
 	    }
 	    
