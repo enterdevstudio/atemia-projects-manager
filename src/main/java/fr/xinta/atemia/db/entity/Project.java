@@ -1,22 +1,21 @@
 package fr.xinta.atemia.db.entity;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table
 public class Project extends AbstractEntity {
 
     private String name;
     private String department;
     private int nbDaysSold;
     @OneToMany
-    private ArrayList<Week> weeks;
-    @OneToMany
-    private ArrayList<Person> workers;
+    private List<Week> weeks;
+    @ManyToMany
+    private List<Person> workers;
     
     public Project() {
 	weeks = new ArrayList<Week>();
@@ -47,7 +46,7 @@ public class Project extends AbstractEntity {
 	this.nbDaysSold = nbHoursSold;
     }
     
-    public ArrayList<Week> getWeeks() {
+    public List<Week> getWeeks() {
 	return weeks;
     }
     
@@ -59,20 +58,20 @@ public class Project extends AbstractEntity {
             int startYear, int endWeek, int endYear) {
         
 	workers.add(worker);
-        int end = endWeek + endYear - startYear - 1;
-	
-	for (int i = startWeek; i <= end; i++) {
-	    Week week = weeks.get(i);
-	    if (week == null) {
-		week = new Week();
-		week.setNumber(i % 52);
-                week.setYear(startYear + i / 52);
-		weeks.add(i, week);
-	    }
-	    
-            int[] tab = new int[Period.values().length - 1];
-            tab[Period.PRODUCTION.ordinal()] = 5; //We put 5 days in production by default
-	    week.getJob().add(workers.size() - 1, tab);
-	}
+//        int end = endWeek + endYear - startYear - 1;
+//	
+//	for (int i = startWeek; i <= end; i++) {
+//	    Week week = weeks.get(i);
+//	    if (week == null) {
+//		week = new Week();
+//		week.setNumber(i % 52);
+//                week.setYear(startYear + i / 52);
+//		weeks.add(i, week);
+//	    }
+//	    
+//            int[] tab = new int[Period.values().length - 1];
+//            tab[Period.PRODUCTION.ordinal()] = 5; //We put 5 days in production by default
+//	    week.getJob().add(workers.size() - 1, tab);
+//	}
     }
 }

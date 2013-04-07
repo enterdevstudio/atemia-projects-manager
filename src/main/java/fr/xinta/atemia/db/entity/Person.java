@@ -1,14 +1,21 @@
 package fr.xinta.atemia.db.entity;
 
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.ManyToMany;
 
 @Entity
-@Table
 public class Person extends AbstractEntity {    
     
     private String firstName;
     private String lastName;
+    @ManyToMany(mappedBy="workers")
+    private List<Project> projects;
+    
+    public Person() {
+        projects = new ArrayList<Project>();
+    }
 
     public String getFirstName() {
 	return firstName;
@@ -25,9 +32,8 @@ public class Person extends AbstractEntity {
     public void setLastName(String lastName) {
 	this.lastName = lastName;
     }
-    
-//    public Set<Project> getProjects() {
-//    	HashSet<Project> set = new HashSet<Project>();
-//    	return set;
-//    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
 }

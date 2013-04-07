@@ -1,23 +1,25 @@
 package fr.xinta.atemia.db.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 @Entity
-@Table
 public class Week extends AbstractEntity {
     
     private int num;
-    private int year;
-    private ArrayList<int[]> job;
-    //the index of the list corresponds to the number of the person
-    //the array key is the period (which is an enum)
-    //the array value is the number of days of this period worked this week
-    //by the worker num the index.
+    private int yearOfWeek;
+    /* the index of the list corresponds to the number of the person
+     * the array key is the period (which is an enum)
+     * the array value is the number of days of this period worked this week
+     * by the worker num the index.
+     */
+    //@OneToMany
+    //private List<int[]> job;
     
     public Week() {
-	job = new ArrayList<int[]>();
+	//job = new ArrayList<int[]>();
     }
 
     public int getNumber() {
@@ -29,14 +31,14 @@ public class Week extends AbstractEntity {
     }
 
     public int getYear() {
-        return year;
+        return yearOfWeek;
     }
 
     public void setYear(int year) {
-        this.year = year;
+        this.yearOfWeek = year;
     }
     
-    public ArrayList<int[]> getJob() {
-	return job;
-    }
+//    public List<int[]> getJob() {
+//	return job;
+//    }
 }

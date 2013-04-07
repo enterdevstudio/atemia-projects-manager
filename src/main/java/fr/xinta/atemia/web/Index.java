@@ -23,8 +23,8 @@ public class Index extends AbstractServlet {
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
-        request.setAttribute("nbPersons", 9);//personFacade.count());
-        request.setAttribute("nbProjects", 9);//projectFacade.count());
+        request.setAttribute("nbPersons", personFacade.count());
+        request.setAttribute("nbProjects", projectFacade.count());
         //TODO calcul charge de la semaine 
         //Nombre de semaines affectée dans l'appli /
         //nombre de semaine travaillées par an x nb personne
