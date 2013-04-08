@@ -35,6 +35,11 @@ public class CreateProject extends AbstractServlet {
 	project.setName(request.getParameter("name"));
 	project.setDepartment(request.getParameter("department"));
 	project.setNbDaysSold(Integer.parseInt(request.getParameter("nbDaysSold")));
+	project.initWeeks(
+                Integer.parseInt(request.getParameter("startWeek")),
+                Integer.parseInt(request.getParameter("startYear")),
+                Integer.parseInt(request.getParameter("endWeek")),
+                Integer.parseInt(request.getParameter("endYear")));
 	projectFacade.persist(project);
 	
 	request.setAttribute("project", project);

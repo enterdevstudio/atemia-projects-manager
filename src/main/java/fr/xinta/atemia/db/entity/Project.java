@@ -65,6 +65,22 @@ public class Project extends AbstractEntity {
     public int getEndWeek() {
         return endWeek;
     }
+
+    public void setStartWeek(int startWeek) {
+        this.startWeek = startWeek;
+    }
+
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
+
+    public void setEndWeek(int endWeek) {
+        this.endWeek = endWeek;
+    }
+
+    public void setEndYear(int endYear) {
+        this.endYear = endYear;
+    }    
     
     public List<Week> getWeeks() {
 	return weeks;
@@ -81,6 +97,33 @@ public class Project extends AbstractEntity {
             int[] tab = new int[Period.values().length - 1];
             tab[Period.PRODUCTION.ordinal()] = 5; //We put 5 days in production by default
 //            week.getJob().add(workers.size() - 1, tab);
+        }
+    }
+    
+    public void initWeeks(int sw, int sy, int ew, int ey) {
+        startWeek = sw;
+        startYear = sy;
+        endWeek = ew;
+        endYear = ey;
+        
+        int week = endWeek;
+        int year = endYear;
+        // Add weeks between end date and start date, starting by the end
+        // to have an ordered list (add at the head is O(1))
+        while ((year == startYear && week > startWeek)
+                || year > startYear) {
+            
+            Week w = new Week();
+            w.setNumber(week);
+            w.setYear(year);
+            weeks.add(0, w);
+            
+            if (week > 1) {
+                week--;
+            } else {
+                week = 52;
+                year--;
+            }
         }
     }
     

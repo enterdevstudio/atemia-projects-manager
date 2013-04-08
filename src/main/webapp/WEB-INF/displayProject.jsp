@@ -10,11 +10,13 @@
 		<h1>Project</h1>
 	    </header>
 	    <ul>
-		<li><strong>Number :</strong> ${project.id}</li>
-		<li><strong>Name :</strong> ${project.name}</li>
-		<li><strong>Department :</strong> ${project.department}</li>
-		<li><strong>Nb of days sold :</strong> ${project.nbDaysSold}</li>
-		<li><strong>Workers :</strong>
+		<li><strong>Number:</strong> ${project.id}</li>
+		<li><strong>Name:</strong> ${project.name}</li>
+		<li><strong>Department:</strong> ${project.department}</li>
+		<li><strong>Nb of days sold:</strong> ${project.nbDaysSold}</li>
+		<li><strong>Start Week:</strong> ${project.startWeek} (${project.startYear})</li>
+		<li><strong>End Week:</strong> ${project.endWeek} (${project.endYear})</li>
+		<li><strong>Workers:</strong>
 	    <c:choose>
 		<c:when test="${empty project.workers}">
 		    This project has no workers for the moment.
