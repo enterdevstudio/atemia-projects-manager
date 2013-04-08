@@ -127,7 +127,8 @@ public class Project extends AbstractEntity {
         }
     }
     
-    public void changeStartWeek(int newStartWeek, int newStartYear) {
+    //TODO the case where the number of weeks is reduce is not treated
+    public void updateStartWeek(int newStartWeek, int newStartYear) {
         
         Week firstWeek = weeks.get(0);
         int actualStartWeek = firstWeek.getNumber();
@@ -149,9 +150,13 @@ public class Project extends AbstractEntity {
             week.setYear(actualStartYear);
             weeks.add(0, week);
         }
+        
+        startWeek = newStartWeek;
+        startYear = newStartYear;
     }
     
-    public void changeEndWeek(int newEndWeek, int newEndYear) {
+    //TODO the case where the number of weeks is reduce is not treated
+    public void updateEndWeek(int newEndWeek, int newEndYear) {
         
         Week lastWeek = weeks.get(weeks.size() - 1);
         int actualEndWeek = lastWeek.getNumber();
@@ -173,5 +178,8 @@ public class Project extends AbstractEntity {
                 actualEndYear++;
             }
         }
+        
+        endWeek = newEndWeek;
+        endYear = newEndYear;
     }
 }

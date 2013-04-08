@@ -4,6 +4,7 @@
 		    <h1>Project</h1>
 		</header>
 		<form method="post">
+		    <input type="hidden" name="project-id" value="${project.id}" />
 		    <p><label for="input-number">Name:</label></p>
 		    <p>
 			<input type="text" name="name" value="${project.name}" id="input-name" required autofocus />
