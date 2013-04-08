@@ -4,6 +4,7 @@
 		<h1>Person</h1>
 	    </header>
 	    <form method="post">
+                <input type="hidden" name="person-id" value="${person.id}" />
 		<p><label for="input-first-name">First name :</label></p>
 		<p>
 		    <input type="text" name="firstName" value="${person.firstName}" id="input-first-name" required autofocus />

@@ -41,12 +41,19 @@ public class EditPerson extends AbstractServlet {
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
-	Person person = new Person();
-	person.setFirstName(request.getParameter("firstName"));
-	person.setLastName(request.getParameter("lastName"));
-	//TODO need to update ?
+	String id = request.getParameter("person-id");
+	Person person = personFacade.find(id);
 	
-	request.setAttribute("person", person);
+	if (person != null) {
+            person.setFirstName(request.getParameter("firstName"));
+            person.setLastName(request.getParameter("lastName"));
+            //TODO need to update ?
+            personFacade.merge(person);
+            request.setAttribute("person", person);
+	} else {
+	    request.setAttribute("message", "No person has the id " + id + ". Aborting.");
+	}
+	
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
     }
     
