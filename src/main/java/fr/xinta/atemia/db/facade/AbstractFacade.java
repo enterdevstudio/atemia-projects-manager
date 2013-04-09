@@ -3,7 +3,7 @@ package fr.xinta.atemia.db.facade;
 import fr.xinta.atemia.db.entity.AbstractEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -13,13 +13,11 @@ public abstract class AbstractFacade<T extends AbstractEntity> {
     protected final String PERSISTENCE = "fr.xinta_Atemia";
     
     private Class<T> entityClass;
+    
+    @PersistenceContext(unitName = PERSISTENCE)
     private EntityManager entityManager;
 
     public EntityManager getEntityManager() {
-	if (entityManager == null) {
-	    entityManager = Persistence.createEntityManagerFactory(PERSISTENCE).createEntityManager();
-	}
-	
         return this.entityManager;
     }
     
