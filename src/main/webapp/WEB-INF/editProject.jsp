@@ -20,21 +20,15 @@
 			<input type="text" name="nbDaysSold" value="${project.nbDaysSold}" id="input-nbDaysSold" required />
 		    </p>
                     
-                    <p>Start week:</p>
-		    <p>
-                        <label for="input-startWeek">Week Number:</label>
+                    <p><label for="input-startWeek">Start week (2012-W01):</label></p>
+		    <p>                        
 			<input type="week" name="startWeek" value="${project.startWeek}" id="input-startWeek" required />
-                        <label for="input-startYear">Year:</label>
-			<input type="number" name="startYear" value="${project.startYear}" id="input-startYear" required />
-		    </p>
+                    </p>
                     
-                    <p>End week:</p>
+                    <p><label for="input-endWeek">End week (2012-W01):</label></p>
 		    <p>
-                        <label for="input-endWeek">Week Number:</label>
 			<input type="week" name="endWeek" value="${project.endWeek}" id="input-endWeek" required />
-                        <label for="input-endYear">Year:</label>
-			<input type="number" name="endYear" value="${project.endYear}" id="input-endYear" required />
-		    </p>
+                    </p>
 
 		    <p>
 			<input type="submit" name="execute" value="Validate" />

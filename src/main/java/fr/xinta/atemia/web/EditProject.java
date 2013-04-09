@@ -49,10 +49,12 @@ public class EditProject extends AbstractServlet {
             project.setDepartment(request.getParameter("department"));
             project.setNbDaysSold(Integer.parseInt(request.getParameter("nbDaysSold")));
             
-            int startWeek = Integer.parseInt(request.getParameter("startWeek"));
-            int startYear = Integer.parseInt(request.getParameter("startYear"));
-            int endWeek = Integer.parseInt(request.getParameter("endWeek"));
-            int endYear = Integer.parseInt(request.getParameter("endYear"));
+            String sw = request.getParameter("startWeek");
+            String ew = request.getParameter("endWeek");
+            int startWeek = Integer.parseInt(sw.substring(6, 8));
+            int startYear = Integer.parseInt(sw.substring(0, 4));
+            int endWeek = Integer.parseInt(ew.substring(6, 8));
+            int endYear = Integer.parseInt(ew.substring(0, 4));
             
             if (project.getStartWeek() != startWeek ||
                     project.getStartYear() != startYear) {
