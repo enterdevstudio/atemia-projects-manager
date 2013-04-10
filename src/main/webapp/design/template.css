@@ -17,8 +17,8 @@
 /* ---- Generic ---- */
 
 body {
-	margin-left: 0px;
-	font-family: Helvetica, sans-serif;
+    margin-left: 0px;
+    font-family: Helvetica, sans-serif;
 }
 
 h1 { font-family: 'Julius Sans One'; }
@@ -89,8 +89,8 @@ input[type=submit]:hover {
 /* ---- Menu in the Left Panel ---- */
 #menu { margin: 0px 0px 0px 12px; }
 menu {
-	list-style-type: none;
-	padding-left: 0px;
+    list-style-type: none;
+    padding-left: 0px;
 }
 
 .submenu li {
@@ -135,4 +135,24 @@ menu {
 	padding-bottom: 6px;
 }
 #content header h1 { margin-bottom: 0px; }
-#content header form { float: right; }
+#content header form {
+    float: right;
+    margin-left: 4px;
+}
+
+.box {    
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-left: -120px;
+}
+.message-confirm {
+    margin: auto;
+    padding: 12px;
+    text-align: center;
+    background: white;
+    border: solid #CCCCCC 1px;
+    box-shadow: 1px 1px 3px #444444;
+    display: inline-block;
+}

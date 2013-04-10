@@ -48,3 +48,15 @@
 	    <c:if test="${not empty message}">
 		<p>${message}</p>
 	    </c:if>
+	    <c:if test="${not empty message-confirm}">
+                <div class="box">
+                    <div class="message-confirm">
+                        <p>${message-confirm}</p>
+                        <form method="post">
+                            <input type="hidden" name="id" value="${id}" />
+                            <input type="submit" name="yes" value="Yes" />
+                            <input type="submit" name="no" value="No" />
+                        </form>
+                    </div>
+                </div>
+	    </c:if>
