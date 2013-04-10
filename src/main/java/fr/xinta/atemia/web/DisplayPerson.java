@@ -25,7 +25,7 @@ public class DisplayPerson extends AbstractServlet {
 	    throws ServletException, IOException {
 	
 	String id = request.getParameter("person-id");
-	Person person = personFacade.find(Long.parseLong(id));
+	Person person = personFacade.find(id);
 	
 	if (person != null) {
 	    request.setAttribute("person", person);

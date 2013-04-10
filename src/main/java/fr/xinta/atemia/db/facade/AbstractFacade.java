@@ -41,8 +41,8 @@ public abstract class AbstractFacade<T extends AbstractEntity> {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 
-    public T find(Object id) {
-        return getEntityManager().find(getEntityClass(), id);
+    public T find(String id) {
+        return getEntityManager().find(getEntityClass(), Long.parseLong(id));
     }
     
     public List<T> findAll() {
