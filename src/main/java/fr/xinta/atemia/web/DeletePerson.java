@@ -28,7 +28,8 @@ public class DeletePerson extends AbstractServlet {
 	
 	if (person != null) {
 	    request.setAttribute("person", person);
-	    request.setAttribute("message-confirm", "You will delete this person. Are you sure?");
+	    request.setAttribute("id", person.getId());
+	    request.setAttribute("messageconfirm", "You will delete this person. Are you sure?");
 	} else {
 	    request.setAttribute("message", "No person has the id " + id + ". Aborting.");
 	}
@@ -40,7 +41,8 @@ public class DeletePerson extends AbstractServlet {
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         if (request.getParameter("yes") != null) {
-            String id = request.getParameter("person-id");
+            String id = request.getParameter("id");
+            System.out.println("id " + request.getParameter("id"));
             Person person = personFacade.find(id);
 
             if (person != null) {
@@ -51,6 +53,5 @@ public class DeletePerson extends AbstractServlet {
         }
 	
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
-    }
-    
+    }    
 }
