@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Toutes les servlets du projet doivent hériter de cette classe Il faut
- * redéfinir 5 méthodes pour l'utiliser (voir ci-dessous)
+ * All the servlet have to extend this class
  */
 public abstract class AbstractServlet extends HttpServlet {
 

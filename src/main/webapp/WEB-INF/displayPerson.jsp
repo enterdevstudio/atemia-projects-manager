@@ -1,10 +1,13 @@
 <%@ include file="header.jsp" %>
 	    
 	    <header>
+		<form method="post" action="deletePerson">
+		    <input type="hidden" name="person-id" value="${person.id}" />
+		    <input type="submit" name="delete" value="Delete" />
+		</form>
 		<form method="post" action="editPerson">
 		    <input type="hidden" name="person-id" value="${person.id}" />
 		    <input type="submit" name="update" value="Update" />
-		    <input type="submit" name="delete" value="Delete" />
 		</form>
 		<h1>${person.firstName} ${person.lastName}</h1>
 	    </header>
