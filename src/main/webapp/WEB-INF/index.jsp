@@ -13,11 +13,11 @@
                 </tr>
                 <tr>
                     <th>Current projects</th>
-                    <td>${nbProjects}</td>
+                    <td><a href="listProject">${nbProjects}</a></td>
                 </tr>
                 <tr>
                     <th>Persons</th>
-                    <td>${nbPersons}</td>
+                    <td><a href="listPerson">${nbPersons}</a></td>
                 </tr>
                 <tr>
                     <th>Weeks sold</th>

@@ -27,6 +27,7 @@ h2 {
     margin-bottom: 3px;
 }
 li { padding: 3px 0px; }
+a { color: inherit; }
 
 /* --- Default design for table --- */
 table {
@@ -68,21 +69,20 @@ input[type=submit]:hover {
 
 /* ---- The Left Panel ---- */
 #panel {
-	position: fixed;
-	top: 0px;
-	bottom: 0px;
-	max-width: 202px;
-	border-right: solid #CCC 1px;
-	box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    max-width: 202px;
+    border-right: solid #CCC 1px;
+    box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.3);
 }
 
 #panel a {
-	color: inherit;
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #panel header h1 {
-	margin: 12px;
+    margin: 12px;
 }
 
 
