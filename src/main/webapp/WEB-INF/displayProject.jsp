@@ -14,8 +14,8 @@
 		<li><strong>Name:</strong> ${project.name}</li>
 		<li><strong>Department:</strong> ${project.department}</li>
 		<li><strong>Nb of days sold:</strong> ${project.nbDaysSold}</li>
-		<li><strong>Start Week:</strong> ${project.startWeek} (${project.startYear})</li>
-		<li><strong>End Week:</strong> ${project.endWeek} (${project.endYear})</li>
+		<li><strong>Start Week:</strong> ${project.startYear}-W${project.startWeek}</li>
+		<li><strong>End Week:</strong> ${project.endYear}-W${project.endWeek}</li>
 		<li><strong>Workers:</strong>
 	    <c:choose>
 		<c:when test="${empty project.workers}">
@@ -55,17 +55,17 @@
 		</tr>
 	    <c:forEach var="week" items="${project.weeks}">
 		<tr>
-		    <td>${week.number} (${week.year})</td>			
-		<c:forEach var="job" items="${week.job}">                    
+		    <td>${week.year}-W${week.number}</td>			
+		<c:forEach var="activity" items="${week.activities}">                    
                     <td>
-                    <c:if test="${job[0] > 0}">
-                        <span class="production">${job[0]}</span>
-                    </c:if><c:if test="${job[1] > 0}">
-                        <span class="terrain">${job[1]}</span>
-                    </c:if><c:if test="${job[2] > 0}">
-                        <span class="copil">${job[2]}</span>
-                    </c:if><c:if test="${job[3] > 0}">
-                        <span class="conges">${job[3]}</span>
+                    <c:if test="${activity.production > 0}">
+                        <span class="production">${activity.production}</span>
+                    </c:if><c:if test="${activity.terrain > 0}">
+                        <span class="terrain">${activity.terrain}</span>
+                    </c:if><c:if test="${activity.copil > 0}">
+                        <span class="copil">${activity.copil}</span>
+                    </c:if><c:if test="${activity.conges > 0}">
+                        <span class="conges">${activity.conges}</span>
                     </c:if>
                     </td>
 		</c:forEach>

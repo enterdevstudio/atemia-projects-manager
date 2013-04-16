@@ -2,6 +2,7 @@ package fr.xinta.atemia.db.entity;
 
 import java.util.List;
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -16,7 +17,8 @@ public class Project extends AbstractEntity {
     private int startYear;
     private int endWeek;
     private int endYear;
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Week> weeks;
     @ManyToMany
     private List<Person> workers;
@@ -94,9 +96,9 @@ public class Project extends AbstractEntity {
         
 	workers.add(worker);
         for (Week week : weeks) {
-            int[] tab = new int[Period.values().length - 1];
-            tab[Period.PRODUCTION.ordinal()] = 5; //We put 5 days in production by default
-//            week.getJob().add(workers.size() - 1, tab);
+            Activity activity = new Activity();
+            activity.setProduction(5); //We put 5 days in production by default
+            week.getActivities().add(workers.size() - 1, activity);
         }
     }
     
@@ -110,7 +112,7 @@ public class Project extends AbstractEntity {
         int year = endYear;
         // Add weeks between end date and start date, starting by the end
         // to have an ordered list (add at the head is O(1))
-        while ((year == startYear && week > startWeek)
+        while ((year == startYear && week >= startWeek)
                 || year > startYear) {
             
             Week w = new Week();

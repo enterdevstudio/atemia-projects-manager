@@ -15,11 +15,11 @@ public class Week extends AbstractEntity {
      * the array value is the number of days of this period worked this week
      * by the worker num the index.
      */
-    //@OneToMany
-    //private List<int[]> job;
+    @OneToMany
+    private List<Activity> activities;
     
     public Week() {
-	//job = new ArrayList<int[]>();
+	activities = new ArrayList<Activity>();
     }
 
     public int getNumber() {
@@ -38,7 +38,7 @@ public class Week extends AbstractEntity {
         this.yearOfWeek = year;
     }
     
-//    public List<int[]> getJob() {
-//	return job;
-//    }
+    public List<Activity> getActivities() {
+	return activities;
+    }
 }
