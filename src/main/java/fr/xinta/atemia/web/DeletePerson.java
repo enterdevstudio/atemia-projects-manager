@@ -40,18 +40,32 @@ public class DeletePerson extends AbstractServlet {
     @Override
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        if (request.getParameter("yes") != null) {
-            String id = request.getParameter("id");
-            System.out.println("id " + request.getParameter("id"));
-            Person person = personFacade.find(id);
+        // If the person is not found or removed, so by default,
+        // we display the list of persons
+        String view = VIEWS_PATH;
+        
+        String id = request.getParameter("id");
+        Person person = personFacade.find(id);
 
-            if (person != null) {
+        if (person != null) {
+            if (request.getParameter("yes") != null) {                
+                //TODO suppress projet and everything linked with this person
                 personFacade.remove(person);
-            } else {
-                request.setAttribute("message", "No person has the id " + id + ". Aborting.");
+                
+                view += "listPerson.jsp";
+                request.setAttribute("message",
+                        person.getFirstName() + " " + person.getLastName() + 
+                        " has been removed.");
+                request.setAttribute("persons", personFacade.findAll());                
+            } else {                
+                view += "displayPerson.jsp";
+                request.setAttribute("person", person);
             }
+        } else {            
+            request.setAttribute("persons", personFacade.findAll());
+            request.setAttribute("message", "No person has the id " + id + ". Aborting.");
         }
 	
-	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+	request.getRequestDispatcher(view).forward(request, response);
     }    
 }

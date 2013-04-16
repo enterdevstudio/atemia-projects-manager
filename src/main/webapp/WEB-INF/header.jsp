@@ -54,6 +54,7 @@
                         <p>${messageconfirm}</p>
                         <form method="post">
                             <input type="hidden" name="id" value="${id}" />
+                            <input type="hidden" name="execute" value="ok" />
                             <input type="submit" name="yes" value="Yes" />
                             <input type="submit" name="no" value="No" />
                         </form>
