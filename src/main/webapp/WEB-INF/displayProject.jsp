@@ -25,8 +25,8 @@
 		    This project has no workers for the moment.
 		</c:when>
 		<c:otherwise>
-		<c:forEach var="person" items="${project.workers}">
-		    <a href="displayPerson?person-id=${person.id}">${person.firstName} ${person.lastName}</a>
+		<c:forEach var="worker" items="${project.workers}">
+		    <a href="displayPerson?person-id=${worker.id}">${worker.firstName} ${worker.lastName}</a>
 		</c:forEach>
 		</li>
 		</c:otherwise>
@@ -35,7 +35,17 @@
 		
 	    <form method="post" action="addWorkerToProject">
 		<input type="hidden" name="project-id" value="${project.id}" />
-		<input type="submit" name="addWorker" value="Add a worker" />
+                <p><label for="input-id">Add a worker to this project:</label></p>
+                <p>
+                    <input type="text" name="person-id" id="input-id"
+                       list="list-id" autocomplete="off" />
+                    <datalist id="list-id">
+                    <c:forEach var="person" items="${persons}" >
+                        <option value="${person.id} ${person.firstName} ${person.lastName}">
+                    </c:forEach>
+                    </datalist>
+                    <input type="submit" name="execute" value="Add a worker" />
+                </p>
 	    </form>
                 
 

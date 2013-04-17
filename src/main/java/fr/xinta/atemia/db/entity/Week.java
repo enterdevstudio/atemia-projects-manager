@@ -2,6 +2,7 @@ package fr.xinta.atemia.db.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -15,7 +16,7 @@ public class Week extends AbstractEntity {
      * the array value is the number of days of this period worked this week
      * by the worker num the index.
      */
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Activity> activities;
     
     public Week() {

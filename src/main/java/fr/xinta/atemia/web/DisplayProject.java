@@ -29,6 +29,7 @@ public class DisplayProject extends AbstractServlet {
 	
 	if (project != null) {
 	    request.setAttribute("project", project);
+	    request.setAttribute("persons", personFacade.findAll());
 	} else {
 	    request.setAttribute("message", "No project has the id " + id + ". Aborting.");
 	}

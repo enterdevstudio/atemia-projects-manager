@@ -65,6 +65,6 @@ public class DeleteProject extends AbstractServlet {
             request.setAttribute("message", "No project has the id " + id + ". Aborting.");
         }
 	
-	request.getRequestDispatcher(view).forward(request, response);
+	request.getRequestDispatcher("listProject").forward(request, response);
     }    
 }

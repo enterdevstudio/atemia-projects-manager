@@ -37,7 +37,7 @@ public class CreateProject extends AbstractServlet {
 	project.setNbDaysSold(Integer.parseInt(request.getParameter("nbDaysSold")));
         String sw = request.getParameter("startWeek");
         String ew = request.getParameter("endWeek");
-        System.out.println("y" + sw.substring(0, 4) + " w" + sw.substring(6, 8));
+        
 	project.initWeeks(
                 Integer.parseInt(sw.substring(6, 8)),
                 Integer.parseInt(sw.substring(0, 4)),
@@ -46,6 +46,7 @@ public class CreateProject extends AbstractServlet {
 	projectFacade.persist(project);
 	
 	request.setAttribute("project", project);
+	request.setAttribute("persons", personFacade.findAll());
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
     }    
 }

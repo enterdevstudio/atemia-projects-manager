@@ -1,5 +1,6 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Person;
 import fr.xinta.atemia.db.entity.Project;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -29,8 +30,13 @@ public class AddWorkerToProject extends AbstractServlet {
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	Project project = projectFacade.find(request.getParameter("project-id"));
+        String workerId = request.getParameter("person-id").split(" ")[0];
+        Person worker = personFacade.find(workerId);
+        project.AddWorker(worker);
+        projectFacade.merge(project);
 	
 	request.setAttribute("project", project);
+	request.setAttribute("persons", personFacade.findAll());
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
     }
 }

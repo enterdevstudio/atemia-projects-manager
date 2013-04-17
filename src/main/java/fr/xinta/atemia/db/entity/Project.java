@@ -18,7 +18,7 @@ public class Project extends AbstractEntity {
     private int endWeek;
     private int endYear;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Week> weeks;
     @ManyToMany
     private List<Person> workers;
@@ -98,7 +98,7 @@ public class Project extends AbstractEntity {
         for (Week week : weeks) {
             Activity activity = new Activity();
             activity.setProduction(5); //We put 5 days in production by default
-            week.getActivities().add(workers.size() - 1, activity);
+            week.getActivities().add(activity);
         }
     }
     

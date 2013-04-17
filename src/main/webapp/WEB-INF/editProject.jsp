@@ -10,7 +10,7 @@
 			<input type="text" name="name" value="${project.name}" id="input-name" required autofocus />
 		    </p>
 
-		    <p><label for="input-department">Departement:</label></p>
+		    <p><label for="input-department">Department:</label></p>
 		    <p>
 			<input type="text" name="department" value="${project.department}" id="input-department" required />
 		    </p>
