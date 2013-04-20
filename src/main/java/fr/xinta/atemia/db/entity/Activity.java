@@ -1,5 +1,6 @@
 package fr.xinta.atemia.db.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
