@@ -12,11 +12,29 @@
 		</form>
 		<h1>Project</h1>
 	    </header>
+		
+	    <form id="addWorkerForm" method="post" action="addWorkerToProject">
+		<input type="hidden" name="project-id" value="${project.id}" />
+                <p><label for="input-id">Add a worker to this project:</label></p>
+                <p>
+                    <input type="text" name="person-id" id="input-id"
+                           list="list-id" autocomplete="off" required />
+                    <datalist id="list-id">
+                    <c:forEach var="person" items="${persons}" >
+                        <option value="${person.id} ${person.firstName} ${person.lastName}">
+                    </c:forEach>
+                    </datalist>
+                    <input type="submit" name="execute" value="Add a worker" />
+                </p>
+	    </form>
+                    
+            <fmt:formatNumber var="ratio" value="${project.nbDaysAffected / project.nbDaysSold * 100}" maxFractionDigits="2" />
 	    <ul>
 		<li><strong>Number:</strong> ${project.id}</li>
 		<li><strong>Name:</strong> ${project.name}</li>
 		<li><strong>Department:</strong> ${project.department}</li>
-		<li><strong>Nb of days sold:</strong> ${project.nbDaysSold}</li>
+		<li><strong>Nb of days sold:</strong> ${project.nbDaysSold} - <strong>Affected:</strong> ${project.nbDaysAffected}
+                    - <strong>Ratio:</strong> ${ratio}%</li>
 		<li><strong>Start Week:</strong> ${project.startYear}-W${project.startWeek}</li>
 		<li><strong>End Week:</strong> ${project.endYear}-W${project.endWeek}</li>
 		<li><strong>Workers:</strong>
@@ -31,23 +49,7 @@
 		</li>
 		</c:otherwise>
 	    </c:choose>
-	    </ul>
-		
-	    <form method="post" action="addWorkerToProject">
-		<input type="hidden" name="project-id" value="${project.id}" />
-                <p><label for="input-id">Add a worker to this project:</label></p>
-                <p>
-                    <input type="text" name="person-id" id="input-id"
-                           list="list-id" autocomplete="off" required />
-                    <datalist id="list-id">
-                    <c:forEach var="person" items="${persons}" >
-                        <option value="${person.id} ${person.firstName} ${person.lastName}">
-                    </c:forEach>
-                    </datalist>
-                    <input type="submit" name="execute" value="Add a worker" />
-                </p>
-	    </form>
-                
+	    </ul>               
 
             <table>
                 <tr>

@@ -1,6 +1,8 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Activity;
 import fr.xinta.atemia.db.entity.Project;
+import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +29,7 @@ public class DisplayProject extends AbstractServlet {
 	String id = request.getParameter("project-id");
 	Project project = projectFacade.find(id);
 	
-	if (project != null) {
+	if (project != null) {            
 	    request.setAttribute("project", project);
 	    request.setAttribute("persons", personFacade.findAll());
 	} else {

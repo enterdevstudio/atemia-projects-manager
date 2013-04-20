@@ -21,3 +21,8 @@
     display: inline-block;
 }
 
+#addWorkerForm {
+    float: right;
+    margin-top: 30px;
+    margin-right: 73px;
+}

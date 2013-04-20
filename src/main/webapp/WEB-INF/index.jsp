@@ -20,8 +20,9 @@
                     <td><a href="listPerson">${nbPersons}</a></td>
                 </tr>
                 <tr>
-                    <th>Weeks sold</th>
-                    <td>${ratioWeeks}</td>
+                    <th>Working ratio (days)</th>
+                    <fmt:formatNumber var="ratio" value="${daysWorked / daysAvailable * 100}" maxFractionDigits="2" />
+                    <td>${daysWorked} / ${daysAvailable} (${ratio}%)</td>
                 </tr>
             </table>
 	    

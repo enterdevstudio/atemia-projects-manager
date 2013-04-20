@@ -92,6 +92,16 @@ public class Project extends AbstractEntity {
 	return workers;
     }
     
+    public int getNbDaysAffected() {        
+        int nbDaysAffected = 0;
+        for (Week w : getWeeks()) {
+            for (Activity a : w.getActivities()) {
+                nbDaysAffected += a.getNbDaysWork();
+            }
+        }
+        return nbDaysAffected;
+    }
+    
     public void AddWorker(Person worker) {
         
 	workers.add(worker);
