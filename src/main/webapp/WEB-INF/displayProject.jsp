@@ -38,7 +38,7 @@
                 <p><label for="input-id">Add a worker to this project:</label></p>
                 <p>
                     <input type="text" name="person-id" id="input-id"
-                       list="list-id" autocomplete="off" />
+                       list="list-id" autocomplete="off" required />
                     <datalist id="list-id">
                     <c:forEach var="person" items="${persons}" >
                         <option value="${person.id} ${person.firstName} ${person.lastName}">
@@ -59,7 +59,7 @@
                 </tr>
             </table>
 		
-	    <table>
+	    <table id="week-table">
 		<tr>
 		    <th>Week</th>
 		<c:forEach var="person" items="${project.workers}">
@@ -68,7 +68,7 @@
 		</tr>
 	    <c:forEach var="week" items="${project.weeks}">
 		<tr>
-		    <td>${week.year}-W${week.number}</td>			
+		    <th>${week.year}-W${week.number}</th>			
 		<c:forEach var="activity" items="${week.activities}">                    
                     <td>
                     <c:if test="${activity.production > 0}">

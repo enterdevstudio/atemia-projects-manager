@@ -11,11 +11,7 @@ public class Week extends AbstractEntity {
     
     private int num;
     private int yearOfWeek;
-    /* the index of the list corresponds to the number of the person
-     * the array key is the period (which is an enum)
-     * the array value is the number of days of this period worked this week
-     * by the worker num the index.
-     */
+    
     @OneToMany(cascade = CascadeType.ALL)
     private List<Activity> activities;
     

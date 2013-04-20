@@ -4,14 +4,18 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Person extends AbstractEntity {    
     
     private String firstName;
     private String lastName;
+    private int nbDaysAvailable;
     @ManyToMany(mappedBy="workers")
     private List<Project> projects;
+    @OneToMany(mappedBy="worker")
+    private List<Activity> activities;
     
     public Person() {
         projects = new ArrayList<Project>();
@@ -33,7 +37,27 @@ public class Person extends AbstractEntity {
 	this.lastName = lastName;
     }
 
+    public int getNbDaysAvailable() {
+        return nbDaysAvailable;
+    }
+
+    public void setNbDaysAvailable(int nbDaysAvailableByYear) {
+        this.nbDaysAvailable = nbDaysAvailableByYear;
+    }
+
     public List<Project> getProjects() {
         return projects;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+    
+    public int getAffectedDays() {
+        int nb = 0;
+        for (Activity a : getActivities()) {
+            nb += a.getNbDaysWork();
+        }
+        return nb;
     }
 }

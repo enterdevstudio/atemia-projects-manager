@@ -1,6 +1,7 @@
 package fr.xinta.atemia.db.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Activity extends AbstractEntity {
@@ -9,6 +10,8 @@ public class Activity extends AbstractEntity {
     private int terrain;
     private int copil;
     private int conges;
+    @ManyToOne
+    private Person worker;
 
     public int getProduction() {
         return production;
@@ -40,5 +43,17 @@ public class Activity extends AbstractEntity {
 
     public void setConges(int conges) {
         this.conges = conges;
+    }
+
+    public Person getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Person worker) {
+        this.worker = worker;
+    }    
+    
+    public int getNbDaysWork() {
+        return production + terrain + copil;
     }
 }

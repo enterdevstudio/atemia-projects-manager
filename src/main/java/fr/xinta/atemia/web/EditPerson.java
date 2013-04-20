@@ -47,7 +47,7 @@ public class EditPerson extends AbstractServlet {
 	if (person != null) {
             person.setFirstName(request.getParameter("firstName"));
             person.setLastName(request.getParameter("lastName"));
-            //TODO need to update ?
+            person.setNbDaysAvailable(Integer.parseInt(request.getParameter("nbDaysAvailable")));
             personFacade.merge(person);
             request.setAttribute("person", person);
 	} else {

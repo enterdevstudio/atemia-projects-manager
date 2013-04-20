@@ -11,6 +11,8 @@
 		</form>
 		<h1>${person.firstName} ${person.lastName}</h1>
 	    </header>
+            
+            <p>${person.firstName} has ${person.affectedDays} affected days on ${person.nbDaysAvailable} days available this year.</p>
 
 	    <c:choose>
 		<c:when test="${empty person.projects}">

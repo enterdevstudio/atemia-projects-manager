@@ -98,6 +98,7 @@ public class Project extends AbstractEntity {
         for (Week week : weeks) {
             Activity activity = new Activity();
             activity.setProduction(5); //We put 5 days in production by default
+            activity.setWorker(worker);
             week.getActivities().add(activity);
         }
     }

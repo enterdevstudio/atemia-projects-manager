@@ -34,6 +34,7 @@ public class CreatePerson extends AbstractServlet {
 	Person person = new Person();
 	person.setFirstName(request.getParameter("firstName"));
 	person.setLastName(request.getParameter("lastName"));
+        person.setNbDaysAvailable(Integer.parseInt(request.getParameter("nbDaysAvailable")));
 	personFacade.persist(person);
 	
 	request.setAttribute("person", person);

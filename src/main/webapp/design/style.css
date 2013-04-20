@@ -5,3 +5,19 @@
     background-color: black;
     color: white;
 }
+
+
+#week-table th {
+    min-width: 80px;
+}
+
+#week-table td {
+    padding: 0px;
+}
+
+#week-table span {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+}
+

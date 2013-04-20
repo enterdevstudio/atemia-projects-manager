@@ -14,6 +14,12 @@
 		<p>
 		    <input type="text" name="lastName" value="${person.lastName}" id="input-last-name" required />
 		</p>
+
+		<p><label for="input-nb-days">Nb days available per year :</label></p>
+		<p>
+		    <input type="number" name="nbDaysAvailable" value="${person.nbDaysAvailable}" id="input-nb-days" required />
+		</p>
+                
 		<p>
 		    <input type="submit" name="execute" value="Validate" />
 		</p>
