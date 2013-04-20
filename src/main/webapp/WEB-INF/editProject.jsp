@@ -5,7 +5,7 @@
 		</header>
 		<form method="post">
 		    <input type="hidden" name="project-id" value="${project.id}" />
-		    <p><label for="input-number">Name:</label></p>
+		    <p><label for="input-name">Name:</label></p>
 		    <p>
 			<input id="input-name" type="text" name="name"
                                value="${project.name}" required autofocus />

@@ -1,8 +1,6 @@
 package fr.xinta.atemia.web;
 
-import fr.xinta.atemia.db.entity.Activity;
 import fr.xinta.atemia.db.entity.Project;
-import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

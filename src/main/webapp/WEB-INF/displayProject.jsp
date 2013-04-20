@@ -73,6 +73,7 @@
 		    <th>${week.year}-W${week.number}</th>			
 		<c:forEach var="activity" items="${week.activities}">                    
                     <td>
+                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
                     <c:if test="${activity.production > 0}">
                         <span class="production">${activity.production}</span>
                     </c:if><c:if test="${activity.terrain > 0}">
@@ -82,6 +83,7 @@
                     </c:if><c:if test="${activity.conges > 0}">
                         <span class="conges">${activity.conges}</span>
                     </c:if>
+                        </a>
                     </td>
 		</c:forEach>
 		</tr>

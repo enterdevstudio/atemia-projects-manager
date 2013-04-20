@@ -24,11 +24,11 @@ public abstract class AbstractEntity implements Serializable {
     private Date updatedAt;
 
     public Long getId() {
-	    return id;
+        return id;
     }
 
     public void setId(Long id) {
-	    this.id = id;
+        this.id = id;
     }
     
     public Date getUpdatedAt() {
