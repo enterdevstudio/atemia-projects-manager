@@ -7,27 +7,38 @@
 		    <input type="hidden" name="project-id" value="${project.id}" />
 		    <p><label for="input-number">Name:</label></p>
 		    <p>
-			<input type="text" name="name" value="${project.name}" id="input-name" required autofocus />
+			<input id="input-name" type="text" name="name"
+                               value="${project.name}" required autofocus />
 		    </p>
 
 		    <p><label for="input-department">Department:</label></p>
 		    <p>
-			<input type="text" name="department" value="${project.department}" id="input-department" required />
+			<input id="input-department" type="text" name="department"
+                               value="${project.department}" required />
 		    </p>
 
 		    <p><label for="input-nbDaysSold">Number of days sold:</label></p>
 		    <p>
-			<input type="text" name="nbDaysSold" value="${project.nbDaysSold}" id="input-nbDaysSold" required />
+			<input id="input-nbDaysSold" type="text" name="nbDaysSold"
+                               value="${project.nbDaysSold}" required />
 		    </p>
                     
                     <p><label for="input-startWeek">Start week (2012-W01):</label></p>
+                    <c:if test="${not empty project}">
+                        <c:set var="startWeek" value="${project.startYear}-W${(project.startWeek < 10) ? 0 : null}${project.startWeek}" />
+                    </c:if>
 		    <p>                        
-			<input type="week" name="startWeek" value="${project.startWeek}" id="input-startWeek" required />
+			<input id="input-startWeek" type="week" name="startWeek"
+                               value="${startWeek}" required />
                     </p>
                     
                     <p><label for="input-endWeek">End week (2012-W01):</label></p>
+                    <c:if test="${not empty project}">
+                        <c:set var="endWeek" value="${project.endYear}-W${(project.endWeek < 10) ? 0 : null}${project.endWeek}" />
+                    </c:if>
 		    <p>
-			<input type="week" name="endWeek" value="${project.endWeek}" id="input-endWeek" required />
+			<input id="input-endWeek" type="week" name="endWeek"
+                               value="${endWeek}" required />
                     </p>
 
 		    <p>

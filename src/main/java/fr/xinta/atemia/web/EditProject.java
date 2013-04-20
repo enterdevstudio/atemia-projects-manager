@@ -67,6 +67,8 @@ public class EditProject extends AbstractServlet {
             }
             
             projectFacade.merge(project);
+	    request.setAttribute("project", project);
+	    request.setAttribute("persons", personFacade.findAll());
 	} else {
 	    request.setAttribute("message", "No project has the id " + id + ". Aborting.");
 	}
