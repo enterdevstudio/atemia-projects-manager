@@ -13,12 +13,7 @@
 
 #week-table td {
     padding: 0px;
-}
-
-#week-table span {
-    height: 100%;
-    width: 100%;
-    display: inline-block;
+    border: solid black 1px;
 }
 
 #addWorkerForm {

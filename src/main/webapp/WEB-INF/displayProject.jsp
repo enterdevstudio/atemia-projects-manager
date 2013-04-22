@@ -65,25 +65,38 @@
 		<tr>
 		    <th>Week</th>
 		<c:forEach var="person" items="${project.workers}">
-                    <th>${person.firstName} ${person.lastName}</th>
+                    <th colspan="4">${person.firstName} ${person.lastName}</th>
 		</c:forEach>
 		</tr>
 	    <c:forEach var="week" items="${project.weeks}">
 		<tr>
 		    <th>${week.year}-W${week.number}</th>			
-		<c:forEach var="activity" items="${week.activities}">                    
-                    <td>
+		<c:forEach var="activity" items="${week.activities}">
+                    <c:if test="${activity.production > 0}">               
+                    <td class="production" colspan="${activity.productionColspan}">
                         <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
-                    <c:if test="${activity.production > 0}">
-                        <span class="production">${activity.production}</span>
-                    </c:if><c:if test="${activity.terrain > 0}">
-                        <span class="terrain">${activity.terrain}</span>
-                    </c:if><c:if test="${activity.copil > 0}">
-                        <span class="copil">${activity.copil}</span>
-                    </c:if><c:if test="${activity.conges > 0}">
-                        <span class="conges">${activity.conges}</span>
-                    </c:if>
+                            ${activity.production}
                         </a>
+                    </td>
+                    </c:if><c:if test="${activity.terrain > 0}">
+                    <td class="terrain" colspan="${activity.terrainColspan}">
+                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                            ${activity.terrain}
+                        </a>
+                    </td>
+                    </c:if><c:if test="${activity.copil > 0}">
+                    <td class="copil" colspan="${activity.copilColspan}">
+                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                            ${activity.copil}
+                        </a>
+                    </td>
+                    </c:if><c:if test="${activity.conges > 0}">
+                    <td class="conges" colspan="${activity.congesColspan}">
+                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                            ${activity.conges}
+                        </a>
+                    </td>
+                    </c:if>
                     </td>
 		</c:forEach>
 		</tr>

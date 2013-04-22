@@ -6,6 +6,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Activity extends AbstractEntity {
     
+    private static final int NBCATEGORIES = 4;
     private int production;
     private int terrain;
     private int copil;
@@ -55,5 +56,53 @@ public class Activity extends AbstractEntity {
     
     public int getNbDaysWork() {
         return production + terrain + copil;
+    }
+    
+    public int getProductionColspan() {
+        switch (production) {
+            case 0: return 0;
+            case 1: return 1;
+            case 3:
+                return NBCATEGORIES - (getTerrainColspan() + getCopilColspan()+ getCongesColspan()); 
+            case 4: return 3;
+            case 5: return 4;
+            default: return 1;
+        }
+    }
+    
+    public int getTerrainColspan() {
+        switch (terrain) {
+            case 0: return 0;
+            case 1: return 1;
+            case 3:
+                return NBCATEGORIES - (getProductionColspan() + getCopilColspan()+ getCongesColspan()); 
+            case 4: return 3;
+            case 5: return 4;
+            default: return 1;
+        }
+    }
+    
+    public int getCopilColspan() {
+        switch (copil) {
+            case 0: return 0;
+            case 1: return 1;
+            case 3:
+                return NBCATEGORIES - (getProductionColspan() + getTerrainColspan() + getCongesColspan()); 
+            case 4: return 3;
+            case 5: return 4;
+            default: return 1;
+        }
+    }
+    
+    public int getCongesColspan() {
+        switch (conges) {
+            case 0: return 0;
+            case 1: return 1;
+            case 3:
+                return NBCATEGORIES - (getProductionColspan() + getTerrainColspan() + getCopilColspan()); 
+            case 4: return 3;
+            case 5: return 4;
+            default: return 1;
+        }
     }
 }

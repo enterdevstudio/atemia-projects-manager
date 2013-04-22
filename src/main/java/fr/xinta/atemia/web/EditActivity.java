@@ -51,7 +51,7 @@ public class EditActivity extends AbstractServlet {
 	Project project = projectFacade.find(projectId);
 	Activity activity = activityFacade.find(activityId);  
 	
-	if (activity != null) {
+	if (activity != null && project != null) {
             // Update of the activity
             activity.setProduction(Integer.parseInt(request.getParameter("production")));
             activity.setTerrain(Integer.parseInt(request.getParameter("terrain")));
@@ -63,7 +63,7 @@ public class EditActivity extends AbstractServlet {
 	    request.setAttribute("project", project);
 	    request.setAttribute("persons", personFacade.findAll());
 	} else {
-	    request.setAttribute("message", "No activity has the id " + id + ". Aborting.");
+	    request.setAttribute("message", "No activity has the id " + activityId + ". Aborting.");
 	}
 	
 	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
