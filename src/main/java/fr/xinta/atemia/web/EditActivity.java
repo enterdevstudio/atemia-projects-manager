@@ -37,7 +37,7 @@ public class EditActivity extends AbstractServlet {
 	    request.setAttribute("activity", activity);
 	    request.setAttribute("project-id", request.getParameter("project-id"));
 	} else {
-	    request.setAttribute("message", "No activity has the id " + id + ". Aborting.");
+	    request.setAttribute("error_notification", "No activity has the id " + id + ". Aborting.");
 	}
 	
 	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
@@ -49,24 +49,43 @@ public class EditActivity extends AbstractServlet {
 	String projectId = request.getParameter("project-id");
 	String activityId = request.getParameter("activity-id");  
 	Project project = projectFacade.find(projectId);
-	Activity activity = activityFacade.find(activityId);  
+	Activity activity = activityFacade.find(activityId);
+        
+        //Needed to display the view project
+        request.setAttribute("project", project);
+        request.setAttribute("persons", personFacade.findAll());
 	
 	if (activity != null && project != null) {
-            // Update of the activity
-            activity.setProduction(Integer.parseInt(request.getParameter("production")));
-            activity.setTerrain(Integer.parseInt(request.getParameter("terrain")));
-            activity.setCopil(Integer.parseInt(request.getParameter("copil")));
-            activity.setConges(Integer.parseInt(request.getParameter("conges")));
-            activityFacade.merge(activity);
             
-            //Needed to display the view project
-	    request.setAttribute("project", project);
-	    request.setAttribute("persons", personFacade.findAll());
+            try {
+                // Update of the activity
+                int prod = Integer.parseInt(request.getParameter("production"));
+                int terr = Integer.parseInt(request.getParameter("terrain"));
+                int copil = Integer.parseInt(request.getParameter("copil"));
+                int conges = Integer.parseInt(request.getParameter("conges"));
+
+                if (prod + terr + copil + conges == 5) {
+
+                    activity.setProduction(prod);
+                    activity.setTerrain(terr);
+                    activity.setCopil(copil);
+                    activity.setConges(conges);
+                    activityFacade.merge(activity);
+                    
+                    request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+
+                } else {
+                    request.setAttribute("error_notification", "The number of days specified is incorrect.");
+                    initialRequest(request, response);
+                }    
+            } catch (NumberFormatException e) {
+                request.setAttribute("error_notification", "This is not a number.");
+                initialRequest(request, response);
+            }
 	} else {
-	    request.setAttribute("message", "No activity has the id " + activityId + ". Aborting.");
-	}
-	
-	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+	    request.setAttribute("error_notification", "No activity has the id " + activityId + ". Aborting.");
+            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+	}	
     }
     
 }

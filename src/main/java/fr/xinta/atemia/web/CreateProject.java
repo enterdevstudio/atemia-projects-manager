@@ -31,22 +31,51 @@ public class CreateProject extends AbstractServlet {
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
-	Project project = new Project();
-	project.setName(request.getParameter("name"));
-	project.setDepartment(request.getParameter("department"));
-	project.setNbDaysSold(Integer.parseInt(request.getParameter("nbDaysSold")));
+        Project project = new Project();
+        project.setName(request.getParameter("name"));
+        project.setDepartment(request.getParameter("department"));
+        request.setAttribute("project", project);
         
-        String sw = request.getParameter("startWeek");
-        String ew = request.getParameter("endWeek");        
-	project.initWeeks(
-                Integer.parseInt(sw.substring(6, 8)),
-                Integer.parseInt(sw.substring(0, 4)),
-                Integer.parseInt(ew.substring(6, 8)),
-                Integer.parseInt(ew.substring(0, 4)));
-	projectFacade.persist(project);
-	
-	request.setAttribute("project", project);
-	request.setAttribute("persons", personFacade.findAll());
-	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+        try {
+            project.setNbDaysSold(Integer.parseInt(request.getParameter("nbDaysSold")));
+            if (project.getNbDaysSold() < 0) {
+                throw new NumberFormatException();
+            }
+
+            String sw = request.getParameter("startWeek");
+            String ew = request.getParameter("endWeek");        
+            project.initWeeks(
+                    Integer.parseInt(sw.substring(6, 8)),
+                    Integer.parseInt(sw.substring(0, 4)),
+                    Integer.parseInt(ew.substring(6, 8)),
+                    Integer.parseInt(ew.substring(0, 4)));
+            
+            if (project.getEndYear() < project.getStartYear() ||
+                    (project.getEndYear() == project.getStartYear() &&
+                    project.getEndWeek() < project.getStartWeek())) {
+                throw new Exception("Start week is after end week!");
+            }
+                    
+            
+            projectFacade.persist(project);
+
+            request.setAttribute("persons", personFacade.findAll());
+            request.setAttribute("info_notification", "The project " + project.getName() + " has been created.");
+            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+            
+        } catch (NumberFormatException e) {
+            request.setAttribute("error_notification",
+                    "A field has an incorrect value. Please check if nbDaysSold is a positive number and if weeks has a good format.");
+            initialRequest(request, response);
+            
+        } catch (StringIndexOutOfBoundsException e) {
+            request.setAttribute("error_notification",
+                    "Please check that start week and end week format is like 2012-W01");
+            initialRequest(request, response);
+            
+        } catch (Exception e) {
+            request.setAttribute("error_notification", e.getMessage());
+            initialRequest(request, response);
+        }
     }    
 }

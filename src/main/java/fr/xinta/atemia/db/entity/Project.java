@@ -26,6 +26,10 @@ public class Project extends AbstractEntity {
     public Project() {
 	weeks = new ArrayList<Week>();
 	workers = new ArrayList<Person>();
+        startWeek = 1;
+        startYear = 2013;
+        endWeek = 1;
+        endYear = 2013;
     }
 
     public String getName() {

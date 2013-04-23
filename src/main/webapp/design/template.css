@@ -147,6 +147,23 @@ menu {
     text-align: center;
     margin-left: -120px;
 }
+
+.info, .error {
+    color: #888888;
+    background-color: #FBFBFB;
+    border-radius: 5px;
+    padding: 8px;
+    border: solid 2px;
+}
+
+.info {
+    border-color: green;
+}
+
+.error {
+    border-color: red;
+}
+
 .message-confirm {
     margin: auto;
     padding: 12px;

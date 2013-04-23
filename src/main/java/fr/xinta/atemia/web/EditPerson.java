@@ -39,7 +39,7 @@ public class EditPerson extends AbstractServlet {
 
     @Override
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response)
-	    throws ServletException, IOException {
+	    throws ServletException, IOException {	
 	
 	String id = request.getParameter("person-id");
 	Person person = personFacade.find(id);
@@ -47,14 +47,31 @@ public class EditPerson extends AbstractServlet {
 	if (person != null) {
             person.setFirstName(request.getParameter("firstName"));
             person.setLastName(request.getParameter("lastName"));
-            person.setNbDaysAvailable(Integer.parseInt(request.getParameter("nbDaysAvailable")));
-            personFacade.merge(person);
             request.setAttribute("person", person);
+                
+            try {
+                person.setNbDaysAvailable(Integer.parseInt(request.getParameter("nbDaysAvailable")));
+                if (person.getNbDaysAvailable() < 0) {
+                    throw new NumberFormatException();
+                }
+                
+                personFacade.merge(person);
+                
+                request.setAttribute("info_notification", person.getFirstName() + " " + person.getLastName() + " has been updated.");
+                request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+                
+            } catch (NumberFormatException e) {
+                request.setAttribute("error_notification", "Nb days available must be a positive number");
+                initialRequest(request, response);
+                
+            } catch (Exception e) {
+                request.setAttribute("error_notification", e.getMessage());
+                initialRequest(request, response);
+            }      
 	} else {
-	    request.setAttribute("message", "No person has the id " + id + ". Aborting.");
+	    request.setAttribute("error_notification", "No person has the id " + id + ". Aborting.");
+            request.getRequestDispatcher("listPerson").forward(request, response);
 	}
-	
-	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
     }
     
 }

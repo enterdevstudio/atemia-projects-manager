@@ -31,14 +31,30 @@ public class CreatePerson extends AbstractServlet {
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
-	Person person = new Person();
-	person.setFirstName(request.getParameter("firstName"));
-	person.setLastName(request.getParameter("lastName"));
-        person.setNbDaysAvailable(Integer.parseInt(request.getParameter("nbDaysAvailable")));
-	personFacade.persist(person);
+        Person person = new Person();
+        person.setFirstName(request.getParameter("firstName"));
+        person.setLastName(request.getParameter("lastName"));
+        request.setAttribute("person", person);
+            
+        try {
+            person.setNbDaysAvailable(Integer.parseInt(request.getParameter("nbDaysAvailable")));
+            if (person.getNbDaysAvailable() < 0) {
+                throw new NumberFormatException();
+            }
+            
+            personFacade.persist(person);
 	
-	request.setAttribute("person", person);
-	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+            request.setAttribute("info_notification", person.getFirstName() + " " + person.getLastName() + " has been created.");
+            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+            
+        } catch (NumberFormatException e) {
+            request.setAttribute("error_notification", "Nb days available must be a positive number");
+            initialRequest(request, response);
+            
+        } catch (Exception e) {
+            request.setAttribute("error_notification", e.getMessage());
+            initialRequest(request, response);
+        }
     }
     
 }

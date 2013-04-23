@@ -44,9 +44,14 @@
 	</section>
 
 	<section id="content">
-	    <c:if test="${not empty message}">
-		<p>${message}</p>
+	    <c:if test="${not empty error_notification}">
+                <p class="error">Error: ${error_notification}</p>
 	    </c:if>
+                
+	    <c:if test="${not empty info_notification}">
+                <p class="info">${info_notification}</p>
+	    </c:if>
+                
             <c:if test="${not empty messageconfirm}">
                 <div class="box">
                     <div class="message-confirm">
