@@ -1,8 +1,5 @@
 <%@ include file="header.jsp" %>
-                <form method="post">
-		    <input type="hidden" name="project-id" value="${project-id}" />
-		    <input type="hidden" name="activity-id" value="${activity.id}" />
-                    
+                <form method="post">                    
 		    <table>
                         <tr>
                             <th colspan="2">Please distribute the five days of the week between these categories:</th>

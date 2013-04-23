@@ -29,14 +29,26 @@ public class AddWorkerToProject extends AbstractServlet {
     @Override
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-	Project project = projectFacade.find(request.getParameter("project-id"));
-        String workerId = request.getParameter("person-id").split(" ")[0];
-        Person worker = personFacade.find(workerId);
-        project.AddWorker(worker);
-        projectFacade.merge(project);
+	String id = request.getParameter("project-id");
+	Project project = projectFacade.find(id);
 	
-	request.setAttribute("project", project);
-	request.setAttribute("persons", personFacade.findAll());
-	request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+	if (project != null) {
+            String workerId = request.getParameter("person-id").split(" ")[0];
+            Person worker = personFacade.find(workerId);
+            if (worker != null) {
+                project.AddWorker(worker);
+                projectFacade.merge(project);
+
+                request.setAttribute("project", project);
+                request.setAttribute("persons", personFacade.findAll());
+                request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+            } else {
+                request.setAttribute("error_notification", "No person has the id " + workerId + ". Aborting.");
+                request.getRequestDispatcher("displayProject?project-id=" + id).forward(request, response);
+            }
+        } else {
+	    request.setAttribute("error_notification", "No project has the id " + id + ". Aborting.");
+            request.getRequestDispatcher("listProject").forward(request, response);
+	}
     }
 }

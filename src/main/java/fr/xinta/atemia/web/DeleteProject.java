@@ -1,7 +1,6 @@
 package fr.xinta.atemia.web;
 
 import fr.xinta.atemia.db.entity.Project;
-import static fr.xinta.atemia.web.AbstractServlet.VIEWS_PATH;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,12 +12,12 @@ public class DeleteProject extends AbstractServlet {
     
     @Override
     protected String INITIAL_VIEW() {
-	return VIEWS_PATH + "displayProject.jsp";
+	return "displayProject";
     }
 
     @Override
     protected String EXECUTED_VIEW() {
-	return VIEWS_PATH + "index.jsp";        
+	return "listProject";
     }
 
     @Override
@@ -28,22 +27,17 @@ public class DeleteProject extends AbstractServlet {
 	Project project = projectFacade.find(id);
 	
 	if (project != null) {
-	    request.setAttribute("project", project);
 	    request.setAttribute("id", project.getId());
-	    request.setAttribute("messageconfirm", "You will delete this project. Are you sure?");
+	    request.setAttribute("confirmation_message", "You will delete this project. Are you sure?");
+            request.getRequestDispatcher(INITIAL_VIEW() + "?project-id=" + id).forward(request, response);
 	} else {
-	    request.setAttribute("message", "No project has the id " + id + ". Aborting.");
+	    request.setAttribute("error_notification", "No project has the id " + id + ". Aborting.");
+            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
 	}
-	
-	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
     }
 
     @Override
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        // If the person is not found or removed, so by default,
-        // we display the list of persons
-        String view = VIEWS_PATH;
         
         String id = request.getParameter("id");
         Project project = projectFacade.find(id);
@@ -53,18 +47,14 @@ public class DeleteProject extends AbstractServlet {
                 //TODO suppress everything linked with this project (weeks, activity...)
                 projectFacade.remove(project);
                 
-                view += "listProject.jsp";
-                request.setAttribute("message", project.getName() + " has been removed.");
-                request.setAttribute("projects", projectFacade.findAll());                
-            } else {                
-                view += "displayProject.jsp";
-                request.setAttribute("project", project);
+                request.setAttribute("info_notification", project.getName() + " has been removed.");
+                request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+            } else {
+                request.getRequestDispatcher(INITIAL_VIEW() + "?project-id=" + id).forward(request, response);
             }
-        } else {            
-            request.setAttribute("projects", projectFacade.findAll());
-            request.setAttribute("message", "No project has the id " + id + ". Aborting.");
+        } else {
+            request.setAttribute("error_notification", "No project has the id " + id + ". Aborting.");
+            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
         }
-	
-	request.getRequestDispatcher("listProject").forward(request, response);
     }    
 }

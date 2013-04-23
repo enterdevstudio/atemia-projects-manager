@@ -12,12 +12,12 @@ public class DeletePerson extends AbstractServlet {
 
     @Override
     protected String INITIAL_VIEW() {
-	return VIEWS_PATH + "displayPerson.jsp";
+	return "displayPerson";
     }
 
     @Override
     protected String EXECUTED_VIEW() {
-	return VIEWS_PATH + "index.jsp";        
+	return "listPerson";        
     }
 
     @Override
@@ -27,23 +27,18 @@ public class DeletePerson extends AbstractServlet {
 	Person person = personFacade.find(id);
 	
 	if (person != null) {
-	    request.setAttribute("person", person);
-	    request.setAttribute("id", person.getId());
-	    request.setAttribute("messageconfirm", "You will delete this person. Are you sure?");
+	    request.setAttribute("id", id);
+	    request.setAttribute("confirmation_message", "You will delete this person. Are you sure?");
+            request.getRequestDispatcher(INITIAL_VIEW() + "?person-id=" + id).forward(request, response);
 	} else {
-	    request.setAttribute("message", "No person has the id " + id + ". Aborting.");
-	}
-	
-	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
+	    request.setAttribute("error_notification", "No person has the id " + id + ". Aborting.");
+            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+	}	
     }
 
     @Override
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        // If the person is not found or removed, so by default,
-        // we display the list of persons
-        String view = VIEWS_PATH;
-        
+                
         String id = request.getParameter("id");
         Person person = personFacade.find(id);
 
@@ -52,20 +47,15 @@ public class DeletePerson extends AbstractServlet {
                 //TODO suppress projet and everything linked with this person
                 personFacade.remove(person);
                 
-                view += "listPerson.jsp";
-                request.setAttribute("message",
-                        person.getFirstName() + " " + person.getLastName() + 
-                        " has been removed.");
-                request.setAttribute("persons", personFacade.findAll());                
-            } else {                
-                view += "displayPerson.jsp";
-                request.setAttribute("person", person);
+                request.setAttribute("info_notification",
+                        person.getFirstName() + " " + person.getLastName() + " has been removed.");
+                request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);             
+            } else {
+                request.getRequestDispatcher(INITIAL_VIEW() + "?person-id=" + id).forward(request, response);
             }
-        } else {            
-            request.setAttribute("persons", personFacade.findAll());
-            request.setAttribute("message", "No person has the id " + id + ". Aborting.");
+        } else {
+	    request.setAttribute("error_notification", "No person has the id " + id + ". Aborting.");
+            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
         }
-	
-	request.getRequestDispatcher(view).forward(request, response);
     }    
 }

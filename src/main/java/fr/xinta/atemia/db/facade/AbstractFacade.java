@@ -42,7 +42,11 @@ public abstract class AbstractFacade<T extends AbstractEntity> {
     }
 
     public T find(String id) {
-        return getEntityManager().find(getEntityClass(), Long.parseLong(id));
+        T object = null;
+        try {
+            object = getEntityManager().find(getEntityClass(), Long.parseLong(id));
+        } catch (NumberFormatException e) { } //return null if incorrectly parsed
+        return object;
     }
     
     public List<T> findAll() {

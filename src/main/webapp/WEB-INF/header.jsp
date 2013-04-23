@@ -52,10 +52,10 @@
                 <p class="info">${info_notification}</p>
 	    </c:if>
                 
-            <c:if test="${not empty messageconfirm}">
+            <c:if test="${not empty confirmation_message}">
                 <div class="box">
                     <div class="message-confirm">
-                        <p>${messageconfirm}</p>
+                        <p>${confirmation_message}</p>
                         <form method="post">
                             <input type="hidden" name="id" value="${id}" />
                             <input type="hidden" name="execute" value="ok" />

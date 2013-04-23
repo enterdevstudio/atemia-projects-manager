@@ -3,7 +3,6 @@ package fr.xinta.atemia.web;
 import fr.xinta.atemia.db.entity.Activity;
 import fr.xinta.atemia.db.entity.Project;
 import fr.xinta.atemia.db.facade.ActivityFacade;
-import static fr.xinta.atemia.web.AbstractServlet.VIEWS_PATH;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -24,23 +23,24 @@ public class EditActivity extends AbstractServlet {
 
     @Override
     protected String EXECUTED_VIEW() {
-        return VIEWS_PATH + "displayProject.jsp";
+        return "displayProject";
     }
 
     @Override
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-	String id = request.getParameter("activity-id");
-	Activity activity = activityFacade.find(id);        
+	String projectId = request.getParameter("project-id");
+	String activityId = request.getParameter("activity-id");
+	Activity activity = activityFacade.find(activityId);     
 	
-	if (activity != null) {            
+	if (activity != null) {
 	    request.setAttribute("activity", activity);
-	    request.setAttribute("project-id", request.getParameter("project-id"));
+	    request.setAttribute("project-id", projectId);
+            request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
 	} else {
-	    request.setAttribute("error_notification", "No activity has the id " + id + ". Aborting.");
-	}
-	
-	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
+	    request.setAttribute("error_notification", "No activity has the id " + activityId + ". Aborting.");
+            request.getRequestDispatcher(EXECUTED_VIEW() + "?project-id=" + projectId).forward(request, response);
+	}	
     }
 
     @Override
@@ -50,13 +50,8 @@ public class EditActivity extends AbstractServlet {
 	String activityId = request.getParameter("activity-id");  
 	Project project = projectFacade.find(projectId);
 	Activity activity = activityFacade.find(activityId);
-        
-        //Needed to display the view project
-        request.setAttribute("project", project);
-        request.setAttribute("persons", personFacade.findAll());
 	
-	if (activity != null && project != null) {
-            
+	if (activity != null && project != null) {            
             try {
                 // Update of the activity
                 int prod = Integer.parseInt(request.getParameter("production"));
@@ -75,7 +70,7 @@ public class EditActivity extends AbstractServlet {
                     request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
 
                 } else {
-                    request.setAttribute("error_notification", "The number of days specified is incorrect.");
+                    request.setAttribute("error_notification", "The number of days specified is incorrect. The sum has to be 5.");
                     initialRequest(request, response);
                 }    
             } catch (NumberFormatException e) {
@@ -84,7 +79,7 @@ public class EditActivity extends AbstractServlet {
             }
 	} else {
 	    request.setAttribute("error_notification", "No activity has the id " + activityId + ". Aborting.");
-            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+            request.getRequestDispatcher(EXECUTED_VIEW() + "?project-id=" + projectId).forward(request, response);
 	}	
     }
     
