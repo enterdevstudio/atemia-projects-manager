@@ -13,13 +13,17 @@
 
 		    <p><label for="input-department">Department:</label></p>
 		    <p>
-			<input id="input-department" type="text" name="department"
-                               value="${project.department}" required />
+                        <select id="input-department" name="department">
+                            <option value="DPT" selected>DPT</option>
+                            <option value="DEC">DEC</option>
+                            <option value="Prospection">Prospection</option>
+                            <option value="Gestion">Gestion</option>
+                        </select>
 		    </p>
 
 		    <p><label for="input-nbDaysSold">Number of days sold:</label></p>
 		    <p>
-			<input id="input-nbDaysSold" type="text" name="nbDaysSold"
+			<input id="input-nbDaysSold" type="number" name="nbDaysSold"
                                value="${project.nbDaysSold}" required />
 		    </p>
                     
