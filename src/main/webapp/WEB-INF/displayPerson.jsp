@@ -26,12 +26,14 @@
 			    <th>ID</th>
 			    <th>Name</th>
 			    <th>Department</th>
+			    <th>Nb Days Affected</th>
 			</tr>
 			<c:forEach var="project" items="${person.projects}" >
 			<tr>
 			    <td><a href="displayProject?project-id=${project.id}">${project.id}</a></td>
 			    <td>${project.name}</td>
 			    <td>${project.department}</td>
+			    <td>${project.getNbDaysAffected(person.id)}</td>
 			</tr>
 			</c:forEach>
 		    </table>
