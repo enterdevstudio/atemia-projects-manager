@@ -13,6 +13,8 @@ public class Activity extends AbstractEntity {
     private int conges;
     @ManyToOne
     private Person worker;
+    @ManyToOne
+    private Week week;
 
     public int getProduction() {
         return production;
@@ -52,7 +54,15 @@ public class Activity extends AbstractEntity {
 
     public void setWorker(Person worker) {
         this.worker = worker;
-    }    
+    }
+
+    public Week getWeek() {
+        return week;
+    }
+
+    public void setWeek(Week week) {
+        this.week = week;
+    }
     
     public int getNbDaysWork() {
         return production + terrain + copil;

@@ -12,6 +12,8 @@ public class Person extends AbstractEntity {
     private String firstName;
     private String lastName;
     private int nbDaysAvailable;
+    private boolean isAdmin;
+    
     @ManyToMany(mappedBy="workers")
     private List<Project> projects;
     @OneToMany(mappedBy="worker")
@@ -43,6 +45,14 @@ public class Person extends AbstractEntity {
 
     public void setNbDaysAvailable(int nbDaysAvailableByYear) {
         this.nbDaysAvailable = nbDaysAvailableByYear;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.isAdmin = admin;
     }
 
     public List<Project> getProjects() {

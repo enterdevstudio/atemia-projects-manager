@@ -17,6 +17,7 @@ public class Project extends AbstractEntity {
     private int startYear;
     private int endWeek;
     private int endYear;
+    private boolean status;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Week> weeks;
@@ -86,7 +87,15 @@ public class Project extends AbstractEntity {
 
     public void setEndYear(int endYear) {
         this.endYear = endYear;
-    }    
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     
     public List<Week> getWeeks() {
 	return weeks;
