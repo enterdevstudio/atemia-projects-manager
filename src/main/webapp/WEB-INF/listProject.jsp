@@ -11,20 +11,20 @@
 		<c:otherwise>
 		    <table>
 			<tr>
-			    <th>ID</th>
 			    <th>Name</th>
 			    <th>Department</th>
+			    <th>Number of days affected</th>
 			    <th>Number of days sold</th>
 			</tr>
 			<c:forEach var="project" items="${projects}">
 			<tr>
 			    <td>
 				<a href="displayProject?project-id=${project.id}">
-				    <c:out value="${project.id}" />
+				    <c:out value="${project.name}" />
 				</a>
 			    </td>
-			    <td><c:out value="${project.name}" /></td>
 			    <td><c:out value="${project.department}" /></td>
+			    <td><c:out value="${project.nbDaysAffected}" /></td>
 			    <td><c:out value="${project.nbDaysSold}" /></td>
 			</tr>
 			</c:forEach>			    

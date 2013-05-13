@@ -38,7 +38,7 @@ public class CreateProject extends AbstractServlet {
         request.setAttribute("project", project);
         
         try {
-            project.setNbDaysSold(Integer.parseInt(request.getParameter("nbDaysSold")));
+            project.setNbDaysSold(Float.parseFloat(request.getParameter("nbDaysSold")));
             if (project.getNbDaysSold() < 0) {
                 throw new NumberFormatException();
             }
@@ -64,7 +64,7 @@ public class CreateProject extends AbstractServlet {
             
         } catch (NumberFormatException e) {
             request.setAttribute("error_notification",
-                    "A field has an incorrect value. Please check if nbDaysSold is a positive number and if weeks has a good format.");
+                    "A field has an incorrect value. Please check if nbDaysSold is a positive number and if weeks have a good format.");
             initialRequest(request, response);
             
         } catch (StringIndexOutOfBoundsException e) {

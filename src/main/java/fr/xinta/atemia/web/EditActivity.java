@@ -62,13 +62,14 @@ public class EditActivity extends AbstractServlet {
 	
 	if (activity != null && project != null) {            
             try {
+                int nbDaysAff = activity.getWorker().getNbDaysAffected(activity.getWeek()) - activity.getNbDaysSet();
                 // Update of the activity
                 int prod = Integer.parseInt(request.getParameter("production"));
                 int terr = Integer.parseInt(request.getParameter("terrain"));
                 int copil = Integer.parseInt(request.getParameter("copil"));
                 int conges = Integer.parseInt(request.getParameter("conges"));
                 
-                if (prod + terr + copil + conges <= 5) {
+                if (prod + terr + copil + conges + nbDaysAff <= 5) {
 
                     activity.setProduction(prod);
                     activity.setTerrain(terr);
@@ -79,7 +80,8 @@ public class EditActivity extends AbstractServlet {
                     request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
 
                 } else {
-                    request.setAttribute("error_notification", "The number of days specified is incorrect. The sum has to be <= than 5.");
+                    request.setAttribute("error_notification", "Impossible to add these days, your input plus " +
+                             nbDaysAff + " days in other projects is more than 5 days per week.");
                     initialRequest(request, response);
                 } 
                     

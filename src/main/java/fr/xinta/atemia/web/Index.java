@@ -28,7 +28,7 @@ public class Index extends AbstractServlet {
         int w = 0, av = 0;
         List<Person> workers = personFacade.findAll();
         for (Person person : workers) {
-            w += person.getAffectedDays();
+            w += person.getNbDaysAffected();
             av += person.getNbDaysAvailable();
         }
         request.setAttribute("nbPersons", workers.size());

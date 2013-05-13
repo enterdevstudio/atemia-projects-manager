@@ -1,6 +1,8 @@
 package fr.xinta.atemia.db.entity;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Week implements Serializable{
     

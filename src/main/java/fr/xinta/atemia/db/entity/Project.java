@@ -1,8 +1,8 @@
 package fr.xinta.atemia.db.entity;
 
+import fr.xinta.atemia.db.facade.Utils;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -13,7 +13,7 @@ public class Project extends AbstractEntity {
 
     private String name;
     private String department;
-    private int nbDaysSold;
+    private float nbDaysSold;
     private Week startWeek;
     private Week endWeek;
     private boolean status;
@@ -39,12 +39,12 @@ public class Project extends AbstractEntity {
 	this.department = department;
     }
 
-    public int getNbDaysSold() {
+    public float getNbDaysSold() {
 	return nbDaysSold;
     }
 
-    public void setNbDaysSold(int nbHoursSold) {
-	this.nbDaysSold = nbHoursSold;
+    public void setNbDaysSold(float nbDaysSold) {
+	this.nbDaysSold = nbDaysSold;
     }
 
     public Week getStartWeek() {
@@ -107,21 +107,7 @@ public class Project extends AbstractEntity {
     }
     
     public List<Week> getWeeks() {
-        List<Week> list = new LinkedList<Week>();
-        int week = endWeek.getNumber();
-        int year = endWeek.getYear();
-        while ((year == startWeek.getYear() && week >= startWeek.getNumber())
-                || year > startWeek.getYear()) {
-            list.add(0, new Week(week, year));
-            
-            if (week > 1) {
-                week--;
-            } else {
-                week = 52;
-                year--;
-            }
-        }
-        return list;
+        return Utils.getWeeks(startWeek, endWeek);
     }
     
     public void AddWorker(Person worker) {

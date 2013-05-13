@@ -51,7 +51,7 @@ public class EditProject extends AbstractServlet {
             request.setAttribute("project", project);            
             
             try {
-                project.setNbDaysSold(Integer.parseInt(request.getParameter("nbDaysSold")));
+                project.setNbDaysSold(Float.parseFloat(request.getParameter("nbDaysSold")));
                 if (project.getNbDaysSold() < 0) {
                     throw new NumberFormatException();
                 }

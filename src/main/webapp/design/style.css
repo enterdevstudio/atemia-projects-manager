@@ -12,7 +12,7 @@
 
 #week-table td {
     padding: 0px;
-    border-width: 1px;
+    border: solid #CCCCCC 1px;
 }
 
 #addWorkerForm {
