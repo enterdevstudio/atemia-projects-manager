@@ -1,5 +1,6 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.facade.ActivityFacade;
 import fr.xinta.atemia.db.facade.PersonFacade;
 import fr.xinta.atemia.db.facade.ProjectFacade;
 import java.io.IOException;
@@ -22,6 +23,8 @@ public abstract class AbstractServlet extends HttpServlet {
     protected PersonFacade personFacade;
     @EJB
     protected ProjectFacade projectFacade;
+    @EJB
+    protected ActivityFacade activityFacade;
 
     //Méthode car on ne peut pas mettre d'attributs en abstract  
     /**

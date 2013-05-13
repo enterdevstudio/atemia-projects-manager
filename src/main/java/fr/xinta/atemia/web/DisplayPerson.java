@@ -1,7 +1,9 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Activity;
 import fr.xinta.atemia.db.entity.Person;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;

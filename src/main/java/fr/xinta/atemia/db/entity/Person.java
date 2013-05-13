@@ -7,7 +7,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Person extends AbstractEntity {    
+public class Person extends AbstractEntity {
     
     private String firstName;
     private String lastName;
@@ -15,13 +15,9 @@ public class Person extends AbstractEntity {
     private boolean isAdmin;
     
     @ManyToMany(mappedBy="workers")
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<Project>();
     @OneToMany(mappedBy="worker")
-    private List<Activity> activities;
-    
-    public Person() {
-        projects = new ArrayList<Project>();
-    }
+    private List<Activity> activities = new ArrayList<Activity>();
 
     public String getFirstName() {
 	return firstName;
@@ -65,7 +61,7 @@ public class Person extends AbstractEntity {
     
     public int getAffectedDays() {
         int nb = 0;
-        for (Activity a : getActivities()) {
+        for (Activity a : activities) {
             nb += a.getNbDaysWork();
         }
         return nb;

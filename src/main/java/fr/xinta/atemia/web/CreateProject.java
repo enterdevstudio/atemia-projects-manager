@@ -1,6 +1,7 @@
 package fr.xinta.atemia.web;
 
 import fr.xinta.atemia.db.entity.Project;
+import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,19 +44,17 @@ public class CreateProject extends AbstractServlet {
             }
 
             String sw = request.getParameter("startWeek");
-            String ew = request.getParameter("endWeek");        
-            project.initWeeks(
+            String ew = request.getParameter("endWeek");
+            project.setStartWeek(new Week(
                     Integer.parseInt(sw.substring(6, 8)),
-                    Integer.parseInt(sw.substring(0, 4)),
+                    Integer.parseInt(sw.substring(0, 4))));
+            project.setEndWeek(new Week(
                     Integer.parseInt(ew.substring(6, 8)),
-                    Integer.parseInt(ew.substring(0, 4)));
+                    Integer.parseInt(ew.substring(0, 4))));
             
-            if (project.getEndYear() < project.getStartYear() ||
-                    (project.getEndYear() == project.getStartYear() &&
-                    project.getEndWeek() < project.getStartWeek())) {
+            if (project.getStartWeek().compare(project.getEndWeek()) < 0) {
                 throw new Exception("Start week is after end week!");
-            }
-                    
+            }                    
             
             projectFacade.persist(project);
 

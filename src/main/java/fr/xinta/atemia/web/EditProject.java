@@ -1,6 +1,7 @@
 package fr.xinta.atemia.web;
 
 import fr.xinta.atemia.db.entity.Project;
+import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,23 +58,21 @@ public class EditProject extends AbstractServlet {
                 
                 String sw = request.getParameter("startWeek");
                 String ew = request.getParameter("endWeek");
-                int startWeek = Integer.parseInt(sw.substring(6, 8));
-                int startYear = Integer.parseInt(sw.substring(0, 4));
-                int endWeek = Integer.parseInt(ew.substring(6, 8));
-                int endYear = Integer.parseInt(ew.substring(0, 4));
+                Week startWeek = new Week(Integer.parseInt(sw.substring(6, 8)),
+                        Integer.parseInt(sw.substring(0, 4)));
+                Week endWeek = new Week(Integer.parseInt(ew.substring(6, 8)), 
+                        Integer.parseInt(ew.substring(0, 4)));
                 
-                if (endYear < startYear || (endYear == startYear && endWeek < startWeek)) {
+                if (startWeek.compare(endWeek) < 0) {
                     throw new Exception("Start week is after end week!");
                 }
             
-                if (project.getStartWeek() != startWeek ||
-                        project.getStartYear() != startYear) {
-                    project.updateStartWeek(startWeek, startYear);
+                if (startWeek.compare(project.getStartWeek()) != 0) {
+                    project.setStartWeek(startWeek);
                 }
 
-                if (project.getEndWeek() != endWeek ||
-                        project.getEndYear() != endYear) {
-                    project.updateEndWeek(endWeek, endYear);
+                if (endWeek.compare(project.getEndWeek()) != 0) {
+                    project.setEndWeek(endWeek);
                 }
 
                 projectFacade.merge(project);

@@ -11,10 +11,11 @@ public class Activity extends AbstractEntity {
     private int terrain;
     private int copil;
     private int conges;
+    private Week week;
     @ManyToOne
     private Person worker;
     @ManyToOne
-    private Week week;
+    private Project project;
 
     public int getProduction() {
         return production;
@@ -48,6 +49,14 @@ public class Activity extends AbstractEntity {
         this.conges = conges;
     }
 
+    public Week getWeek() {
+        return week;
+    }
+
+    public void setWeek(Week week) {
+        this.week = week;
+    }
+
     public Person getWorker() {
         return worker;
     }
@@ -56,63 +65,76 @@ public class Activity extends AbstractEntity {
         this.worker = worker;
     }
 
-    public Week getWeek() {
-        return week;
+    public Project getProject() {
+        return project;
     }
 
-    public void setWeek(Week week) {
-        this.week = week;
+    public void setProject(Project project) {
+        this.project = project;
     }
     
     public int getNbDaysWork() {
         return production + terrain + copil;
     }
-    
+
+    public int getNbDaysSet() {
+        return getNbDaysWork() + conges;
+    }
+
     public int getProductionColspan() {
-        switch (production) {
-            case 0: return 0;
-            case 1: return 1;
-            case 3:
-                return NBCATEGORIES - (getTerrainColspan() + getCopilColspan()+ getCongesColspan()); 
-            case 4: return 3;
-            case 5: return 4;
-            default: return 1;
+        if (production == 0) {
+            return 0;
+        } else {
+            int col = NBCATEGORIES;
+            if (terrain > 0)
+                col--;
+            if (copil > 0)
+                col--;
+            if (conges > 0)
+                col--;
+            return col;
         }
+        
+//        switch (production) {
+//            case 0: return 0;
+//            case 1: return 1;
+//            case 3:
+//                return NBCATEGORIES - (getTerrainColspan() + getCopilColspan()+ getCongesColspan()); 
+//            case 4: return 3;
+//            case 5: return 4;
+//            default: return 1;
+//        }
     }
     
     public int getTerrainColspan() {
-        switch (terrain) {
-            case 0: return 0;
-            case 1: return 1;
-            case 3:
-                return NBCATEGORIES - (getProductionColspan() + getCopilColspan()+ getCongesColspan()); 
-            case 4: return 3;
-            case 5: return 4;
-            default: return 1;
+        if (terrain == 0) {
+            return 0;
+        } else {
+            int col = NBCATEGORIES - getProductionColspan();
+            if (copil > 0)
+                col--;
+            if (conges > 0)
+                col--;
+            return col;
         }
     }
     
     public int getCopilColspan() {
-        switch (copil) {
-            case 0: return 0;
-            case 1: return 1;
-            case 3:
-                return NBCATEGORIES - (getProductionColspan() + getTerrainColspan() + getCongesColspan()); 
-            case 4: return 3;
-            case 5: return 4;
-            default: return 1;
+        if (copil == 0) {
+            return 0;
+        } else {
+            int col = NBCATEGORIES - getProductionColspan() - getTerrainColspan();
+            if (conges > 0)
+                col--;
+            return col;
         }
     }
     
     public int getCongesColspan() {
-        switch (conges) {
-            case 0: return 0;
-            case 1: return 1;
-            case 3:
-                return NBCATEGORIES - (getProductionColspan() + getTerrainColspan() + getCopilColspan()); 
-            case 4: return 3;
-            case 5: return 4;
-            default: return 1;
+        if (conges == 0) {
+            return 0;
+        } else {
+            return NBCATEGORIES - getProductionColspan() - getTerrainColspan() -getCopilColspan();
         }
     }
 }

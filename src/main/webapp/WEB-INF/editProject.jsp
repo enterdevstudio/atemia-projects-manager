@@ -28,21 +28,15 @@
 		    </p>
                     
                     <p><label for="input-startWeek">Start week (2012-W01):</label></p>
-                    <c:if test="${not empty project}">
-                        <c:set var="startWeek" value="${project.startYear}-W${(project.startWeek < 10) ? 0 : null}${project.startWeek}" />
-                    </c:if>
 		    <p>                        
 			<input id="input-startWeek" type="week" name="startWeek"
-                               value="${startWeek}" required />
+                               value="${project.startWeek}" required />
                     </p>
                     
                     <p><label for="input-endWeek">End week (2012-W01):</label></p>
-                    <c:if test="${not empty project}">
-                        <c:set var="endWeek" value="${project.endYear}-W${(project.endWeek < 10) ? 0 : null}${project.endWeek}" />
-                    </c:if>
 		    <p>
 			<input id="input-endWeek" type="week" name="endWeek"
-                               value="${endWeek}" required />
+                               value="${project.endWeek}" required />
                     </p>
 
 		    <p>

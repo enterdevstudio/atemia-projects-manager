@@ -6,14 +6,13 @@
     color: white;
 }
 
-
 #week-table th {
     min-width: 80px;
 }
 
 #week-table td {
     padding: 0px;
-    border: solid black 1px;
+    border-width: 1px;
 }
 
 #addWorkerForm {

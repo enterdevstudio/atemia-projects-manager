@@ -1,22 +1,17 @@
 package fr.xinta.atemia.db.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import java.io.Serializable;
 
-@Entity
-public class Week extends AbstractEntity {
+public class Week implements Serializable{
     
     private int num;
     private int yearOfWeek;
+
+    public Week() {}
     
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Activity> activities;
-    
-    public Week() {
-	activities = new ArrayList<Activity>();
+    public Week(int num, int year) {
+        this.num = num;
+        this.yearOfWeek = year;
     }
 
     public int getNumber() {
@@ -35,7 +30,16 @@ public class Week extends AbstractEntity {
         this.yearOfWeek = year;
     }
     
-    public List<Activity> getActivities() {
-	return activities;
+    public int compare(Week week) {
+        if (week.getYear() == getYear()) {
+            return week.getNumber() - getNumber();
+        } else {
+            return week.getYear() - getYear();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return yearOfWeek + "-W" + ((num < 10) ? "0" : "") + num;
     }
 }
