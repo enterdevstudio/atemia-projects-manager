@@ -30,7 +30,6 @@
                     
             <fmt:formatNumber var="ratio" value="${project.nbDaysAffected / project.nbDaysSold * 100}" maxFractionDigits="2" />
 	    <ul>
-		<li><strong>Number:</strong> ${project.id}</li>
 		<li><strong>Name:</strong> ${project.name}</li>
 		<li><strong>Department:</strong> ${project.department}</li>
 		<li><strong>Nb of days sold:</strong> ${project.nbDaysSold} - <strong>Affected:</strong> ${project.nbDaysAffected}
