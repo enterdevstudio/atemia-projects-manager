@@ -38,7 +38,7 @@
 	    </menu>
 
 	    <footer>
-                v1.1<br />
+                <a href="changelog">v1.2</a><br />
 		Application developed by <a href="http://www.xinta.fr">Xinta</a><br />
 		Source code available <a href="https://github.com/Flaburgan/atemia-projects-manager">on Github</a>
 	    </footer>
