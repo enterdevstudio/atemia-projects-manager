@@ -52,7 +52,22 @@ public class EditPerson extends AbstractServlet {
             try {
                 person.setNbDaysAvailable(Integer.parseInt(request.getParameter("nbDaysAvailable")));
                 if (person.getNbDaysAvailable() < 0) {
-                    throw new NumberFormatException();
+                    throw new NumberFormatException("Nb days available must be a positive number.");
+                }
+                
+                person.setProduction(Integer.parseInt(request.getParameter("production")));
+                person.setProspection(Integer.parseInt(request.getParameter("prospection")));
+                person.setGestion(Integer.parseInt(request.getParameter("gestion")));
+                person.setCommunication(Integer.parseInt(request.getParameter("communication")));
+                if (person.getProduction() < 0 || person.getProduction() > 100 ||
+                        person.getProspection()< 0 || person.getProspection()> 100 ||
+                        person.getGestion()< 0 || person.getGestion()> 100 ||
+                        person.getCommunication() < 0 || person.getCommunication() > 100) {
+                    throw new NumberFormatException("Percentage must be between 0 and 100.");
+                }
+                
+                if (person.getProduction() + person.getProspection()+ person.getGestion() + person.getCommunication() != 100) {
+                    throw new NumberFormatException("Sum of percentages must be egal to 100.");
                 }
                 
                 personFacade.merge(person);
@@ -61,7 +76,7 @@ public class EditPerson extends AbstractServlet {
                 request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
                 
             } catch (NumberFormatException e) {
-                request.setAttribute("error_notification", "Nb days available must be a positive number");
+                request.setAttribute("error_notification", e.getMessage());
                 initialRequest(request, response);
                 
             } catch (Exception e) {

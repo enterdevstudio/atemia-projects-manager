@@ -13,6 +13,10 @@ public class Person extends AbstractEntity {
     private String firstName;
     private String lastName;
     private int nbDaysAvailable;
+    private int production;
+    private int prospection;
+    private int gestion;
+    private int communication;
     private boolean isAdmin;
     
     @ManyToMany(mappedBy="workers")
@@ -46,11 +50,43 @@ public class Person extends AbstractEntity {
         this.nbDaysAvailable = nbDaysAvailableByYear;
     }
 
+    public int getProduction() {
+        return production;
+    }
+
+    public void setProduction(int production) {
+        this.production = production;
+    }
+
+    public int getProspection() {
+        return prospection;
+    }
+
+    public void setProspection(int prospection) {
+        this.prospection = prospection;
+    }
+
+    public int getGestion() {
+        return gestion;
+    }
+
+    public void setGestion(int gestion) {
+        this.gestion = gestion;
+    }
+
+    public int getCommunication() {
+        return communication;
+    }
+
+    public void setCommunication(int communication) {
+        this.communication = communication;
+    }
+
     public boolean isAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
+    public void isAdmin(boolean admin) {
         this.isAdmin = admin;
     }
 

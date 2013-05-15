@@ -9,6 +9,9 @@
             <ul>
                 <li>Add ratio to listPerson page</li>
                 <li>Add possiblity to link a person to a project as a manager</li>
+                <li>Add categories (prod, prospec, gestion, comm) to dispatch days of a person</li>
+                <li>Add a changelog to the application (you are reading it!)</li>
+                <li>Fix person tables presentation</li>
             </ul>
 
             <h2>v1.1</h2>

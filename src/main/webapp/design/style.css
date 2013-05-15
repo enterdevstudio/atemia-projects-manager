@@ -28,3 +28,7 @@
 .no-border {
     border: 0px;
 }
+
+#input-production, #input-prospection, #input-gestion, #input-communication {
+    width: 38px;
+}
