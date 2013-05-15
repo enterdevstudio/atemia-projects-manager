@@ -81,7 +81,9 @@ public class EditProject extends AbstractServlet {
                 if (person == null)
                     throw new Exception("You have to add a manager to the project");
                 project.setManager(person);
-                project.AddWorker(person);
+                if (!project.getWorkers().contains(person)) {
+                    project.AddWorker(person);
+                }
 
                 projectFacade.merge(project);
 

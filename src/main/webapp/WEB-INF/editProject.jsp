@@ -24,7 +24,10 @@
                     <p><label for="input-manager">Manager:</label></p>
                     <p>
                         <input type="text" name="manager-id" id="input-manager"
-                           list="list-manager" autocomplete="off" required />
+                               <c:if test="${not empty project.manager}">
+                               value="${project.manager.id} ${project.manager.firstName} ${project.manager.lastName}"
+                               </c:if>
+                               list="list-manager" autocomplete="off" required />
                         <datalist id="list-manager">
                         <c:forEach var="person" items="${persons}" >
                             <option value="${person.id} ${person.firstName} ${person.lastName}">

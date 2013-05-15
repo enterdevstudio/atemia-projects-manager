@@ -13,7 +13,7 @@
 	    </header>
             
             <fmt:formatNumber var="ratio" value="${person.nbDaysAffected / person.nbDaysAvailable * 100}" maxFractionDigits="2" />
-            <p>${person.firstName} has ${person.nbDaysAffected} affected days on ${person.nbDaysAvailable} days available this year. (${ratio}%)<br />
+            <p>${person.firstName} has ${person.nbDaysAffected} affected days on ${person.nbDaysAvailable} days available this year (${ratio}%).<br />
             Days are dispatched between ${person.production}% in production, ${person.prospection}% in prospection,
             ${person.gestion}% in gestion and ${person.communication}% in communication</p>
 
