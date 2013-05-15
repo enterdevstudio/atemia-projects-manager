@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -18,9 +19,11 @@ public class Project extends AbstractEntity {
     private Week endWeek;
     private boolean status;
 
+    @ManyToOne
+    private Person manager;
     @OneToMany(mappedBy="project")
     private List<Activity> activities = new ArrayList<Activity>();
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Person> workers = new ArrayList<Person>();
 
     public String getName() {
@@ -69,6 +72,14 @@ public class Project extends AbstractEntity {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public Person getManager() {
+        return manager;
+    }
+
+    public void setManager(Person manager) {
+        this.manager = manager;
     }
     
     public List<Person> getWorkers() {

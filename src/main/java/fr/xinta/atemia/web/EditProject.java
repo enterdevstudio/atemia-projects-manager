@@ -1,5 +1,6 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Person;
 import fr.xinta.atemia.db.entity.Project;
 import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class EditProject extends AbstractServlet {
 	
 	if (project != null) {
 	    request.setAttribute("project", project);
+	    request.setAttribute("persons", personFacade.findAll());
 	} else {
 	    request.setAttribute("message", "No project has the id " + id + ". Aborting.");
 	}
@@ -48,6 +50,9 @@ public class EditProject extends AbstractServlet {
 	if (project != null) {
             project.setName(request.getParameter("name"));
             project.setDepartment(request.getParameter("department"));
+            Person person = personFacade.find(request.getParameter("manager-id").split(" ")[0]);
+            project.setManager(person);
+            project.AddWorker(person);
             request.setAttribute("project", project);            
             
             try {

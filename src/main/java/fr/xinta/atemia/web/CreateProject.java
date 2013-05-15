@@ -1,5 +1,6 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Person;
 import fr.xinta.atemia.db.entity.Project;
 import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class CreateProject extends AbstractServlet {
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	
+        request.setAttribute("persons", personFacade.findAll());
 	request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
     }
 
@@ -35,6 +37,9 @@ public class CreateProject extends AbstractServlet {
         Project project = new Project();
         project.setName(request.getParameter("name"));
         project.setDepartment(request.getParameter("department"));
+        Person person = personFacade.find(request.getParameter("manager-id").split(" ")[0]);
+        project.setManager(person);
+        project.AddWorker(person);
         request.setAttribute("project", project);
         
         try {

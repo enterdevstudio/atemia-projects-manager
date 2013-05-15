@@ -37,8 +37,6 @@
 			</tr>
 			</c:forEach>
 		    </table>
-		</c:otherwise>
-	    </c:choose>
                     
                     <table>
 			<tr>
@@ -52,5 +50,7 @@
 			</tr>
 			</c:forEach>
 		    </table>
+		</c:otherwise>
+	    </c:choose>
 	    
 <%@ include file="footer.jsp" %>

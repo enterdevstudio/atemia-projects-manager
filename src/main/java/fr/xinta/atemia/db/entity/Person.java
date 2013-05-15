@@ -17,6 +17,8 @@ public class Person extends AbstractEntity {
     
     @ManyToMany(mappedBy="workers")
     private List<Project> projects = new ArrayList<Project>();
+    @OneToMany(mappedBy="manager")
+    private List<Project> managedProjects = new ArrayList<Project>();
     @OneToMany(mappedBy="worker")
     private List<Activity> activities = new ArrayList<Activity>();
 
@@ -54,6 +56,10 @@ public class Person extends AbstractEntity {
 
     public List<Project> getProjects() {
         return projects;
+    }
+    
+    public List<Project> getManagedProjects() {
+        return managedProjects;
     }
 
     public List<Activity> getActivities() {

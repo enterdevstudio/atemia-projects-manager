@@ -20,6 +20,17 @@
                             <option value="Gestion">Gestion</option>
                         </select>
 		    </p>
+                    
+                    <p><label for="input-manager">Manager:</label></p>
+                    <p>
+                        <input type="text" name="manager-id" id="input-manager"
+                           list="list-manager" autocomplete="off" required />
+                        <datalist id="list-manager">
+                        <c:forEach var="person" items="${persons}" >
+                            <option value="${person.id} ${person.firstName} ${person.lastName}">
+                        </c:forEach>
+                        </datalist>
+                    </p>
 
 		    <p><label for="input-nbDaysSold">Number of days sold:</label></p>
 		    <p>
