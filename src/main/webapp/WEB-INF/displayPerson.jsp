@@ -15,6 +15,20 @@
             <fmt:formatNumber var="ratio" value="${person.nbDaysAffected / person.nbDaysAvailable * 100}" maxFractionDigits="2" />
             <p>${person.firstName} has ${person.nbDaysAffected} affected days on ${person.nbDaysAvailable} days available this year. (${ratio}%)</p>
 
+            <c:choose>
+		<c:when test="${empty person.managedProjects}">
+		    <p>This person does not manage any project for the moment.</p>
+		</c:when>
+		<c:otherwise>
+                    <p>Managed projects:
+                        <c:forEach var="project" items="${person.managedProjects}" >
+                            <a href="displayProject?project-id=${project.id}">${project.name}</a>, 
+                        </c:forEach>
+                    </p>
+		</c:otherwise>
+	    </c:choose>
+            
+            
 	    <c:choose>
 		<c:when test="${empty person.projects}">
 		    <p>This person does not participate to a project for the moment.</p>

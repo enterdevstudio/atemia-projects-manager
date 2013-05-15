@@ -32,7 +32,7 @@
 	    <ul>
 		<li><strong>Name:</strong> ${project.name}</li>
 		<li><strong>Department:</strong> ${project.department}</li>
-		<li><strong>Manager:</strong> ${project.manager.firstName} ${project.manager.lastName}</li>
+		<li><strong>Manager:</strong> <a href="displayPerson?person-id=${project.manager.id}">${project.manager.firstName} ${project.manager.lastName}</a></li>
 		<li><strong>Nb of days sold:</strong> ${project.nbDaysSold} - <strong>Affected:</strong> ${project.nbDaysAffected}
                     - <strong>Ratio:</strong> ${ratio}%</li>
 		<li><strong>Start Week:</strong> ${project.startWeek}</li>

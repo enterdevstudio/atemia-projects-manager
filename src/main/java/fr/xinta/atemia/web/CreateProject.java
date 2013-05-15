@@ -37,9 +37,6 @@ public class CreateProject extends AbstractServlet {
         Project project = new Project();
         project.setName(request.getParameter("name"));
         project.setDepartment(request.getParameter("department"));
-        Person person = personFacade.find(request.getParameter("manager-id").split(" ")[0]);
-        project.setManager(person);
-        project.AddWorker(person);
         request.setAttribute("project", project);
         
         try {
@@ -59,9 +56,14 @@ public class CreateProject extends AbstractServlet {
             
             if (project.getStartWeek().compare(project.getEndWeek()) < 0) {
                 throw new Exception("Start week is after end week!");
-            }                    
+            }
+            
+            Person person = personFacade.find(request.getParameter("manager-id").split(" ")[0]);
+            project.setManager(person);
+            project.AddWorker(person);
             
             projectFacade.persist(project);
+            personFacade.merge(person);
 
             request.setAttribute("persons", personFacade.findAll());
             request.setAttribute("info_notification", "The project " + project.getName() + " has been created.");
