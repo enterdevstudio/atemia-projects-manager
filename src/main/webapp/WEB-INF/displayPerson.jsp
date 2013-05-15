@@ -20,36 +20,42 @@
 		    <p>This person does not participate to a project for the moment.</p>
 		</c:when>
 		<c:otherwise>
-		    <p>This person participates to the following projects:</p>
-		    <table>
-			<tr>
-			    <th>Name</th>
-			    <th>Department</th>
-			    <th>Nb Days Affected</th>
-			    <th>Nb Days Sold</th>
-			</tr>
-			<c:forEach var="project" items="${person.projects}" >
-			<tr>
-			    <td><a href="displayProject?project-id=${project.id}">${project.name}</a></td>
-			    <td>${project.department}</td>
-			    <td>${project.getNbDaysAffected(person.id)}</td>
-			    <td>${project.nbDaysSold}</td>
-			</tr>
-			</c:forEach>
-		    </table>
-                    
                     <table>
-			<tr>
-			    <th>Week</th>
-			    <th>Nb Days Affected</th>
-			</tr>
-			<c:forEach var="week" items="${person.weeks}" >
-			<tr>
-			    <td>${week}</td>
-			    <td>${person.getNbDaysAffected(week)}</td>
-			</tr>
-			</c:forEach>
-		    </table>
+                        <tr>
+                            <td class="no-border">
+                                <table>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Department</th>
+                                        <th>Nb Days Affected</th>
+                                        <th>Nb Days Sold</th>
+                                    </tr>
+                                    <c:forEach var="project" items="${person.projects}" >
+                                    <tr>
+                                        <td><a href="displayProject?project-id=${project.id}">${project.name}</a></td>
+                                        <td>${project.department}</td>
+                                        <td>${project.getNbDaysAffected(person.id)}</td>
+                                        <td>${project.nbDaysSold}</td>
+                                    </tr>
+                                    </c:forEach>
+                                </table>
+                            </td>
+                            <td class="no-border">
+                                <table id="person_week">
+                                    <tr>
+                                        <th>Week</th>
+                                        <th>Nb Days Affected</th>
+                                    </tr>
+                                    <c:forEach var="week" items="${person.weeks}" >
+                                    <tr>
+                                        <td>${week}</td>
+                                        <td>${person.getNbDaysAffected(week)}</td>
+                                    </tr>
+                                    </c:forEach>
+                                </table>
+                            </td>
+                        </tr>
+                     </table>
 		</c:otherwise>
 	    </c:choose>
 	    
