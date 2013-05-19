@@ -116,7 +116,7 @@ public class Person extends AbstractEntity {
      */
     public int getNbDaysAffected(Week week) {
         int nb = 0;
-        for (Activity a : activities) {
+        for (Activity a : getActivities()) {
             if (a.getWeek().compare(week) == 0) {
                 nb += a.getNbDaysWork();
             }

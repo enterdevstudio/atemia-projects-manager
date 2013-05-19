@@ -4,6 +4,13 @@
 		<h1>Changelog</h1>
 	    </header>
 
+            <h2>v1.3</h2>
+            <ul>
+                <li>Improve person view by floating right the week table</li>
+                <li>Add Atemia background</li>
+                <li>Fix production input in activity page</li>
+            </ul>
+
             <h2>v1.2</h2>
 
             <ul>

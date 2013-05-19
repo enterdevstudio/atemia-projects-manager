@@ -5,6 +5,7 @@
     <jta-data-source>atemia-datasource</jta-data-source>
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>
   </persistence-unit>
 </persistence>

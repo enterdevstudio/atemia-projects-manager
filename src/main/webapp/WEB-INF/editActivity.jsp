@@ -7,10 +7,10 @@
                         </tr>
                         <tr class="production">
                             <td>
-                                <label for="input-production">Production:</label>
+                                <label for="input_production">Production:</label>
                             </td>
                             <td>
-                                <input id="input-production" type="number" name="production"
+                                <input id="input_production" type="number" name="production"
                                        value="${activity.production}" required autofocus />
                             </td>
                         </tr>
