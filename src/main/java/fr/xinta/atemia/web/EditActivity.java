@@ -76,7 +76,9 @@ public class EditActivity extends AbstractServlet {
                     activity.setCopil(copil);
                     activity.setConges(conges);
                     activityFacade.merge(activity);
-                    
+                    projectFacade.merge(activity.getProject());
+                    personFacade.merge(activity.getWorker());
+            
                     request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
 
                 } else {

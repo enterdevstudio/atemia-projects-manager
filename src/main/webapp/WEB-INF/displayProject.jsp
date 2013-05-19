@@ -70,7 +70,7 @@
 		</tr>
 	    <c:forEach var="week" items="${project.weeks}">
 		<tr>
-		    <th>${week.year}-W${week.number}</th>		
+		    <th>${week}</th>		
 		<c:forEach var="person" items="${project.workers}">
                     <c:set var="activity" value="${project.getActivity(person, week)}" />
                     

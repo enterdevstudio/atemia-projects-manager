@@ -8,6 +8,7 @@
             <ul>
                 <li>Improve person view by floating right the week table</li>
                 <li>Add Atemia background</li>
+                <li>Add verification to weeks when create / update a project</li>
                 <li>Fix production input in activity page</li>
             </ul>
 

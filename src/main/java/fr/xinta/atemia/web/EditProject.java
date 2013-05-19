@@ -59,11 +59,21 @@ public class EditProject extends AbstractServlet {
                 }
                 
                 String sw = request.getParameter("startWeek");
+                int num = Integer.parseInt(sw.substring(6, 8));
+                int year = Integer.parseInt(sw.substring(0, 4));
+                if (year < 1900 || year > 2500 || num < 1 || num > 52) {
+                    throw new Exception("Start week is incorrect!");
+                }
+                Week startWeek = new Week(num, year);
+
                 String ew = request.getParameter("endWeek");
-                Week startWeek = new Week(Integer.parseInt(sw.substring(6, 8)),
-                        Integer.parseInt(sw.substring(0, 4)));
-                Week endWeek = new Week(Integer.parseInt(ew.substring(6, 8)), 
-                        Integer.parseInt(ew.substring(0, 4)));
+                num = Integer.parseInt(ew.substring(6, 8));
+                year = Integer.parseInt(ew.substring(0, 4));
+                if (year < 1900 || year > 2500 || num < 1 || num > 52) {
+                    throw new Exception("End week is incorrect!");
+                }
+                Week endWeek = new Week(num, year);
+                
                 
                 if (startWeek.compare(endWeek) < 0) {
                     throw new Exception("Start week is after end week!");

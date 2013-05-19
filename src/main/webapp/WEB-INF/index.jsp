@@ -12,7 +12,7 @@
                     <th colspan="2"><h2>Global indicators</h2></th>
                 </tr>
                 <tr>
-                    <th>Current projects</th>
+                    <th>Projects</th>
                     <td><a href="listProject">${nbProjects}</a></td>
                 </tr>
                 <tr>

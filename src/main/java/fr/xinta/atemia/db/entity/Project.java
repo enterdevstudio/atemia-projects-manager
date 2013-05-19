@@ -91,9 +91,8 @@ public class Project extends AbstractEntity {
     }
     
     public Activity getActivity(Person worker, Week week) {
-        for (Activity activity : getActivities()) {
-            if (activity.getWorker().getId() == worker.getId() &&
-                activity.getWeek().compare(week) == 0)
+        for (Activity activity : worker.getActivities()) {
+            if (activity.getWeek().compare(week) == 0)
                 return activity;
         }
         return null;
