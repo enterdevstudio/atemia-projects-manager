@@ -22,7 +22,8 @@
 }
 
 #person_week {
-    margin-left: 42px;
+    float: right;
+    margin: 0px 25px;
 }
 
 .no-border {

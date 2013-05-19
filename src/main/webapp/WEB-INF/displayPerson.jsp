@@ -11,6 +11,22 @@
 		</form>
 		<h1>${person.firstName} ${person.lastName}</h1>
 	    </header>
+                    
+            <c:set var="weeks" value="${person.weeks}" />
+	    <c:if test="${not empty weeks}">
+                <table id="person_week">
+                    <tr>
+                        <th>Week</th>
+                        <th>Nb Days Affected</th>
+                    </tr>
+                    <c:forEach var="week" items="${weeks}" >
+                    <tr>
+                        <td>${week}</td>
+                        <td>${person.getNbDaysAffected(week)}</td>
+                    </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
             
             <fmt:formatNumber var="ratio" value="${person.nbDaysAffected / person.nbDaysAvailable * 100}" maxFractionDigits="2" />
             <p>${person.firstName} has ${person.nbDaysAffected} affected days on ${person.nbDaysAvailable} days available this year (${ratio}%).<br />
@@ -30,7 +46,6 @@
 		</c:otherwise>
 	    </c:choose>
             
-            
 	    <c:choose>
 		<c:when test="${empty person.projects}">
 		    <p>This person does not participate to a project for the moment.</p>
@@ -38,40 +53,20 @@
 		<c:otherwise>
                     <table>
                         <tr>
-                            <td class="no-border">
-                                <table>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Department</th>
-                                        <th>Nb Days Affected</th>
-                                        <th>Nb Days Sold</th>
-                                    </tr>
-                                    <c:forEach var="project" items="${person.projects}" >
-                                    <tr>
-                                        <td><a href="displayProject?project-id=${project.id}">${project.name}</a></td>
-                                        <td>${project.department}</td>
-                                        <td>${project.getNbDaysAffected(person.id)}</td>
-                                        <td>${project.nbDaysSold}</td>
-                                    </tr>
-                                    </c:forEach>
-                                </table>
-                            </td>
-                            <td class="no-border">
-                                <table id="person_week">
-                                    <tr>
-                                        <th>Week</th>
-                                        <th>Nb Days Affected</th>
-                                    </tr>
-                                    <c:forEach var="week" items="${person.weeks}" >
-                                    <tr>
-                                        <td>${week}</td>
-                                        <td>${person.getNbDaysAffected(week)}</td>
-                                    </tr>
-                                    </c:forEach>
-                                </table>
-                            </td>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Nb Days Affected</th>
+                            <th>Nb Days Sold</th>
                         </tr>
-                     </table>
+                        <c:forEach var="project" items="${person.projects}" >
+                        <tr>
+                            <td><a href="displayProject?project-id=${project.id}">${project.name}</a></td>
+                            <td>${project.department}</td>
+                            <td>${project.getNbDaysAffected(person.id)}</td>
+                            <td>${project.nbDaysSold}</td>
+                        </tr>
+                        </c:forEach>
+                    </table>
 		</c:otherwise>
 	    </c:choose>
 	    
