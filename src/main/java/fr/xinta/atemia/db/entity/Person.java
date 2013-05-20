@@ -102,8 +102,8 @@ public class Person extends AbstractEntity {
         return activities;
     }
     
-    public int getNbDaysAffected() {
-        int nb = 0;
+    public float getNbDaysAffected() {
+        float nb = 0;
         for (Activity a : activities) {
             nb += a.getNbDaysWork();
         }
@@ -114,8 +114,8 @@ public class Person extends AbstractEntity {
      * @param week the week looked
      * @return the number of days this person work for a given week
      */
-    public int getNbDaysAffected(Week week) {
-        int nb = 0;
+    public float getNbDaysAffected(Week week) {
+        float nb = 0;
         for (Activity a : getActivities()) {
             if (a.getWeek().compare(week) == 0) {
                 nb += a.getNbDaysWork();

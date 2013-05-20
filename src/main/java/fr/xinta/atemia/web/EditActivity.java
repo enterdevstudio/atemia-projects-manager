@@ -62,14 +62,15 @@ public class EditActivity extends AbstractServlet {
 	
 	if (activity != null && project != null) {            
             try {
-                int nbDaysAff = activity.getWorker().getNbDaysAffected(activity.getWeek()) - activity.getNbDaysSet();
+                float nbDaysAff = activity.getWorker().getNbDaysAffected(activity.getWeek()) - activity.getNbDaysSet();
                 // Update of the activity
-                int prod = Integer.parseInt(request.getParameter("production"));
-                int terr = Integer.parseInt(request.getParameter("terrain"));
-                int copil = Integer.parseInt(request.getParameter("copil"));
-                int conges = Integer.parseInt(request.getParameter("conges"));
+                float prod = Float.parseFloat(request.getParameter("production"));
+                float terr = Float.parseFloat(request.getParameter("terrain"));
+                float copil = Float.parseFloat(request.getParameter("copil"));
+                float conges = Float.parseFloat(request.getParameter("conges"));
                 
-                if (prod + terr + copil + conges + nbDaysAff <= 5) {
+                float sum = prod + terr + copil + conges + nbDaysAff;
+                if (sum >= 0 && sum <= 5) {
 
                     activity.setProduction(prod);
                     activity.setTerrain(terr);
@@ -83,7 +84,7 @@ public class EditActivity extends AbstractServlet {
 
                 } else {
                     request.setAttribute("error_notification", "Impossible to add these days, your input plus " +
-                             nbDaysAff + " days in other projects is more than 5 days per week.");
+                             nbDaysAff + " days in other projects is not between 0 and 5 days per week");
                     initialRequest(request, response);
                 } 
                     

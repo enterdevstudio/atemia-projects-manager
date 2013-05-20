@@ -32,7 +32,7 @@ a { color: inherit; }
 
 /* --- Default design for table --- */
 table {
-    margin: 25px auto;
+    margin: 12px auto;
     border-collapse: collapse;
 }
 tr { background-color: white; }

@@ -7,8 +7,7 @@
 }
 
 #week-table th, #week-table td {
-    min-width: 80px;
-    border: solid #CCCCCC 1px;  
+    border: solid #CCCCCC 1px;
 }
 
 #week-table tr:first-child th {

@@ -7,45 +7,45 @@ import javax.persistence.ManyToOne;
 public class Activity extends AbstractEntity {
     
     private static final int NBCATEGORIES = 4;
-    private int production;
-    private int terrain;
-    private int copil;
-    private int conges;
+    private float production;
+    private float terrain;
+    private float copil;
+    private float conges;
     private Week week;
     @ManyToOne
     private Person worker;
     @ManyToOne
     private Project project;
 
-    public int getProduction() {
+    public float getProduction() {
         return production;
     }
 
-    public void setProduction(int production) {
+    public void setProduction(float production) {
         this.production = production;
     }
 
-    public int getTerrain() {
+    public float getTerrain() {
         return terrain;
     }
 
-    public void setTerrain(int terrain) {
+    public void setTerrain(float terrain) {
         this.terrain = terrain;
     }
 
-    public int getCopil() {
+    public float getCopil() {
         return copil;
     }
 
-    public void setCopil(int copil) {
+    public void setCopil(float copil) {
         this.copil = copil;
     }
 
-    public int getConges() {
+    public float getConges() {
         return conges;
     }
 
-    public void setConges(int conges) {
+    public void setConges(float conges) {
         this.conges = conges;
     }
 
@@ -73,11 +73,11 @@ public class Activity extends AbstractEntity {
         this.project = project;
     }
     
-    public int getNbDaysWork() {
+    public float getNbDaysWork() {
         return production + terrain + copil;
     }
 
-    public int getNbDaysSet() {
+    public float getNbDaysSet() {
         return getNbDaysWork() + conges;
     }
 
@@ -94,16 +94,6 @@ public class Activity extends AbstractEntity {
                 col--;
             return col;
         }
-        
-//        switch (production) {
-//            case 0: return 0;
-//            case 1: return 1;
-//            case 3:
-//                return NBCATEGORIES - (getTerrainColspan() + getCopilColspan()+ getCongesColspan()); 
-//            case 4: return 3;
-//            case 5: return 4;
-//            default: return 1;
-//        }
     }
     
     public int getTerrainColspan() {
