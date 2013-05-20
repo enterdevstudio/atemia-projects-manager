@@ -6,6 +6,8 @@
 
             <h2>v1.3</h2>
             <ul>
+                <li>Days are now decimal numbers</li>
+                <li>Weeks can now be selected with a datePicker</li>
                 <li>Improve person view by floating right the week table</li>
                 <li>Add Atemia background</li>
                 <li>Add verification to weeks when create / update a project</li>

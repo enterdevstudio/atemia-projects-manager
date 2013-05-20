@@ -10,6 +10,11 @@
 	<link rel="stylesheet" href="./design/style.css" />
 	<link rel="stylesheet" href="./design/template.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="./design/favicon.ico" />
+        
+        <!-- jquery for the date picker -->
+        <link rel="stylesheet" href="./libs/jquery-ui.css" />
+        <script src="./libs/jquery-1.9.1.js"></script>
+        <script src="./libs/jquery-ui-modified.js"></script>
     </head>
     <body>		
 	<section id="panel">

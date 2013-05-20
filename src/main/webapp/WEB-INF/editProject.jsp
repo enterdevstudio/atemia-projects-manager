@@ -43,19 +43,32 @@
                     
                     <p><label for="input-startWeek">Start week (2012-W01):</label></p>
 		    <p>                        
-			<input id="input-startWeek" type="week" name="startWeek"
-                               value="${project.startWeek}" required />
+                        <input id="input-startWeek" class="datepicker" type="text" name="startWeek"
+                               value="${project.startWeek}" autocomplete="off" required />
                     </p>
                     
                     <p><label for="input-endWeek">End week (2012-W01):</label></p>
 		    <p>
-			<input id="input-endWeek" type="week" name="endWeek"
-                               value="${project.endWeek}" required />
+			<input id="input-endWeek" class="datepicker" type="text" name="endWeek"
+                               value="${project.endWeek}" autocomplete="off" required />
                     </p>
 
 		    <p>
 			<input type="submit" name="execute" value="Validate" />
 		    </p>
 		</form>
+            
+		<script>
+                    $(function() {
+                        $(".datepicker").datepicker({
+                            showWeek: true,
+                            firstDay: 1,
+                            showOtherMonths: true,
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: 'yy-W'
+                        });
+                    });
+		</script>
 			
 	    <%@ include file="footer.jsp" %>
