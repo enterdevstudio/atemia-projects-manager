@@ -99,16 +99,16 @@ public class Project extends AbstractEntity {
         return null;
     }
     
-    public int getNbDaysAffected() {        
-        int nbDaysAffected = 0;
+    public float getNbDaysAffected() {        
+        float nbDaysAffected = 0;
         for (Activity a : getActivities()) {
             nbDaysAffected += a.getNbDaysWork();
         }
         return nbDaysAffected;
     }
     
-    public int getNbDaysAffected(Long idWorker) {        
-        int nbDaysAffected = 0;
+    public float getNbDaysAffected(Long idWorker) {        
+        float nbDaysAffected = 0;
         for (Activity a : getActivities()) {
             if (a.getWorker().getId() == idWorker) {
                 nbDaysAffected += a.getNbDaysWork();
