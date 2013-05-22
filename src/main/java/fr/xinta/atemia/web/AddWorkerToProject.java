@@ -36,16 +36,17 @@ public class AddWorkerToProject extends AbstractServlet {
             String workerId = request.getParameter("person-id").split(" ")[0];
             Person worker = personFacade.find(workerId);
             if (worker != null) {
-                project.AddWorker(worker);
-                projectFacade.merge(project);
-
-                request.setAttribute("project", project);
-                request.setAttribute("persons", personFacade.findAll());
-                request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+                if (!project.getWorkers().contains(worker)) {
+                    project.AddWorker(worker);
+                    projectFacade.merge(project);
+                } else {
+                    request.setAttribute("error_notification", "This worker already works on this project! Aborting.");
+                }
             } else {
                 request.setAttribute("error_notification", "No person has the id " + workerId + ". Aborting.");
-                request.getRequestDispatcher("displayProject?project-id=" + id).forward(request, response);
             }
+            // Display the project
+            request.getRequestDispatcher("displayProject?project-id=" + id).forward(request, response);
         } else {
 	    request.setAttribute("error_notification", "No project has the id " + id + ". Aborting.");
             request.getRequestDispatcher("listProject").forward(request, response);
