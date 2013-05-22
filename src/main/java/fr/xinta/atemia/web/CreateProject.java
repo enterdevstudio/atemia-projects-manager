@@ -68,7 +68,8 @@ public class CreateProject extends AbstractServlet {
             Person person = personFacade.find(request.getParameter("manager-id").split(" ")[0]);
             if (person == null)
                 throw new Exception("You have to add a manager to the project");
-            project.setManager(person);
+            person.getManagedProjects().add(project);
+            project.setManager(person);            
             project.AddWorker(person);
             
             projectFacade.persist(project);

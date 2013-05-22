@@ -4,6 +4,16 @@
 		<h1>Changelog</h1>
 	    </header>
 
+            <h2>v1.4</h2>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li>Fix project not added to his manager</li>
+            </ul>
+
             <h2>v1.3</h2>
             <ul>
                 <li>Days are now decimal numbers</li>

@@ -3,6 +3,7 @@ package fr.xinta.atemia.db.entity;
 import fr.xinta.atemia.db.facade.Utils;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -142,5 +143,19 @@ public class Person extends AbstractEntity {
         }
         
         return Utils.getWeeks(startWeek, endWeek);
+    }
+    
+    public void removeManagedProject(Project project) {
+        Iterator<Project> iterator = getManagedProjects().iterator();
+        boolean notFound = iterator.hasNext();
+        while (notFound) {
+            Project p = iterator.next();
+            if (p.getId() == project.getId()) {
+                iterator.remove();
+                notFound = false;
+            } else {
+                notFound = iterator.hasNext();
+            }
+        }
     }
 }

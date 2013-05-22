@@ -87,12 +87,20 @@ public class EditProject extends AbstractServlet {
                     project.setEndWeek(endWeek);
                 }                
                 
-                Person person = personFacade.find(request.getParameter("manager-id").split(" ")[0]);
-                if (person == null)
-                    throw new Exception("You have to add a manager to the project");
-                project.setManager(person);
-                if (!project.getWorkers().contains(person)) {
-                    project.AddWorker(person);
+                Person newManager = personFacade.find(request.getParameter("manager-id").split(" ")[0]);
+                if (newManager == null)
+                    throw new Exception("You have to set a manager to the project");
+                
+                Person oldManager = project.getManager();
+                if (newManager.getId() != oldManager.getId()) {
+                    oldManager.removeManagedProject(project);
+                    newManager.getManagedProjects().add(project);           
+                    project.setManager(newManager);
+                    if (!project.getWorkers().contains(newManager)) {
+                        project.AddWorker(newManager);
+                    }
+                    personFacade.merge(oldManager);
+                    personFacade.merge(newManager);
                 }
 
                 projectFacade.merge(project);
