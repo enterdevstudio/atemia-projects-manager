@@ -53,6 +53,8 @@ public class EditPerson extends AbstractServlet {
                 person.setNbDaysAvailable(Integer.parseInt(request.getParameter("nbDaysAvailable")));
                 if (person.getNbDaysAvailable() < 0) {
                     throw new NumberFormatException("Nb days available must be a positive number.");
+                } else if (person.getNbDaysAvailable() > 365) {
+                    throw new NumberFormatException("Nb days available is greater than 365!");
                 }
                 
                 person.setProduction(Integer.parseInt(request.getParameter("production")));
@@ -74,10 +76,6 @@ public class EditPerson extends AbstractServlet {
                 
                 request.setAttribute("info_notification", person.getFirstName() + " " + person.getLastName() + " has been updated.");
                 request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
-                
-            } catch (NumberFormatException e) {
-                request.setAttribute("error_notification", e.getMessage());
-                initialRequest(request, response);
                 
             } catch (Exception e) {
                 request.setAttribute("error_notification", e.getMessage());

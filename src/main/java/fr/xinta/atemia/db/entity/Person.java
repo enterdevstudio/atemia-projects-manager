@@ -105,7 +105,7 @@ public class Person extends AbstractEntity {
     
     public float getNbDaysAffected() {
         float nb = 0;
-        for (Activity a : activities) {
+        for (Activity a : getActivities()) {
             nb += a.getNbDaysWork();
         }
         return nb;

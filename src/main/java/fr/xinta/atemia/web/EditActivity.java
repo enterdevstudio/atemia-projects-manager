@@ -25,77 +25,89 @@ public class EditActivity extends AbstractServlet {
 
     @Override
     protected void initialRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-	String projectId = request.getParameter("project-id");
-	String activityId = request.getParameter("activity-id");
-	Activity activity = activityFacade.find(activityId);
-        Project project = projectFacade.find(projectId);
 	
-	if (activity == null) {
-            int num = Integer.parseInt(request.getParameter("week"));
-            int year = Integer.parseInt(request.getParameter("year"));
-            Person worker = personFacade.find(request.getParameter("person-id"));
-            
-            activity = new Activity();
-            activity.setWeek(new Week(num, year));
-            activity.setProject(project);
-            project.getActivities().add(activity);
-            activity.setWorker(worker);
-            worker.getActivities().add(activity);
-            
-            activityFacade.persist(activity);
-            projectFacade.merge(project);
-            personFacade.merge(worker);
-	}
-        request.setAttribute("activity", activity);
-        request.setAttribute("project-id", projectId);
-        request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
+        try {
+            String projectId = request.getParameter("project-id");
+            String activityId = request.getParameter("activity-id");
+            Activity activity = activityFacade.find(activityId);
+            Project project = projectFacade.find(projectId);
+            if (project == null)
+                    throw new Exception("No project has this id. Aborting.");
+        
+            if (activity == null) {
+                int num = Integer.parseInt(request.getParameter("week"));
+                int year = Integer.parseInt(request.getParameter("year"));
+                Person worker = personFacade.find(request.getParameter("person-id"));
+                if (worker == null)
+                    throw new Exception("No person has this id. Aborting.");
+
+                activity = new Activity();
+                activity.setWeek(new Week(num, year));
+                activity.setProject(project);
+                project.getActivities().add(activity);
+                activity.setWorker(worker);
+                worker.getActivities().add(activity);
+
+                activityFacade.persist(activity);
+                projectFacade.merge(project);
+                personFacade.merge(worker);
+            }
+            request.setAttribute("activity", activity);
+            request.setAttribute("project-id", projectId);
+            request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
+        
+        } catch (NumberFormatException e) {
+            request.setAttribute("error_notification", "week or year is not a valid number");
+            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+
+        } catch (Exception e) {
+            request.setAttribute("error_notification", e.getMessage());
+            request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+        }
     }
 
     @Override
     protected void executeRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-              
-	String projectId = request.getParameter("project-id");
-	String activityId = request.getParameter("activity-id");
-	Project project = projectFacade.find(projectId);
-	Activity activity = activityFacade.find(activityId);
-	
-	if (activity != null && project != null) {            
-            try {
-                float nbDaysAff = activity.getWorker().getNbDaysAffected(activity.getWeek()) - activity.getNbDaysSet();
-                // Update of the activity
-                float prod = Float.parseFloat(request.getParameter("production"));
-                float terr = Float.parseFloat(request.getParameter("terrain"));
-                float copil = Float.parseFloat(request.getParameter("copil"));
-                float conges = Float.parseFloat(request.getParameter("conges"));
-                
-                float sum = prod + terr + copil + conges + nbDaysAff;
-                if (sum >= 0 && sum <= 5) {
+           
+        try {   
+            String projectId = request.getParameter("project-id");
+            String activityId = request.getParameter("activity-id");
+            Project project = projectFacade.find(projectId);
+            Activity activity = activityFacade.find(activityId);
+            if (project == null)
+                    throw new Exception("No project has this id. Aborting.");
+            if (activity == null)
+                    throw new Exception("No activity has this id. Aborting.");
+	       
+            float nbDaysAff = activity.getWorker().getNbDaysAffected(activity.getWeek()) - activity.getNbDaysSet();
+            // Update of the activity
+            float prod = Float.parseFloat(request.getParameter("production"));
+            float terr = Float.parseFloat(request.getParameter("terrain"));
+            float copil = Float.parseFloat(request.getParameter("copil"));
+            float conges = Float.parseFloat(request.getParameter("conges"));
 
-                    activity.setProduction(prod);
-                    activity.setTerrain(terr);
-                    activity.setCopil(copil);
-                    activity.setConges(conges);
-                    activityFacade.merge(activity);
-                    projectFacade.merge(activity.getProject());
-                    personFacade.merge(activity.getWorker());
-            
-                    request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+            float sum = prod + terr + copil + conges + nbDaysAff;
+            if (sum >= 0 && sum <= 5) {
 
-                } else {
-                    request.setAttribute("error_notification", "Impossible to add these days, your input plus " +
-                             nbDaysAff + " days in other projects is not between 0 and 5 days per week");
-                    initialRequest(request, response);
-                } 
-                    
-            } catch (NumberFormatException e) {
-                request.setAttribute("error_notification", "This is not a number.");
+                activity.setProduction(prod);
+                activity.setTerrain(terr);
+                activity.setCopil(copil);
+                activity.setConges(conges);
+                activityFacade.merge(activity);
+
+                request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+
+            } else {
+                request.setAttribute("error_notification", "Impossible to add these days, your input plus " +
+                         nbDaysAff + " days in other projects is not between 0 and 5 days per week");
                 initialRequest(request, response);
-            }
-	} else {
-	    request.setAttribute("error_notification", "No activity has the id " + activityId + ". Aborting.");
+            }                    
+        } catch (NumberFormatException e) {
+            request.setAttribute("error_notification", "This is not a number.");
+            initialRequest(request, response);
+        } catch (Exception e) {
+	    request.setAttribute("error_notification", e.getMessage());
             request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
 	}	
-    }
-    
+    }    
 }
