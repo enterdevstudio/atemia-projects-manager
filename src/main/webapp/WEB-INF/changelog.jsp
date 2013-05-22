@@ -9,8 +9,8 @@
                 <li></li>
                 <li></li>
                 <li></li>
-                <li></li>
-                <li></li>
+                <li>NbDaysAffected is now a float</li>
+                <li>Fix error 500 when re-adding a worker in a project</li>
                 <li>Fix project not added to his manager</li>
             </ul>
 

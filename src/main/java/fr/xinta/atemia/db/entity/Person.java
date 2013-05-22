@@ -125,7 +125,6 @@ public class Person extends AbstractEntity {
         return nb;
     }
     
-    
     public List<Week> getWeeks() {
         if (getActivities().isEmpty())
             return null;
@@ -145,8 +144,16 @@ public class Person extends AbstractEntity {
         return Utils.getWeeks(startWeek, endWeek);
     }
     
+    public void removeProject(Project project) {
+        removeActivities(project);
+        removeProject(project, getProjects().iterator());
+    }
+    
     public void removeManagedProject(Project project) {
-        Iterator<Project> iterator = getManagedProjects().iterator();
+        removeProject(project, getManagedProjects().iterator());
+    }
+    
+    private void removeProject(Project project, Iterator<Project> iterator) {
         boolean notFound = iterator.hasNext();
         while (notFound) {
             Project p = iterator.next();
@@ -155,6 +162,16 @@ public class Person extends AbstractEntity {
                 notFound = false;
             } else {
                 notFound = iterator.hasNext();
+            }
+        }
+    }
+    
+    private void removeActivities(Project project) {
+        Iterator<Activity> iterator = getActivities().iterator();
+        while (iterator.hasNext()) {
+            Activity activity = iterator.next();
+            if (activity.getProject().getId() == project.getId()) {
+                iterator.remove();
             }
         }
     }

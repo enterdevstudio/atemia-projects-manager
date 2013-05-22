@@ -1,6 +1,8 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Activity;
 import fr.xinta.atemia.db.entity.Person;
+import fr.xinta.atemia.db.entity.Project;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,13 +45,26 @@ public class DeletePerson extends AbstractServlet {
         Person person = personFacade.find(id);
 
         if (person != null) {
-            if (request.getParameter("yes") != null) {                
-                //TODO suppress projet and everything linked with this person
-                personFacade.remove(person);
-                
-                request.setAttribute("info_notification",
-                        person.getFirstName() + " " + person.getLastName() + " has been removed.");
-                request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);             
+            if (request.getParameter("yes") != null) {
+                if (person.getManagedProjects().isEmpty()) {
+
+                    for (Project p : person.getProjects()) {
+                        p.removePerson(person);
+                        projectFacade.merge(p);
+                    }
+                    for (Activity a : person.getActivities()) {
+                        activityFacade.remove(a);
+                    }
+                    personFacade.remove(person);
+
+                    request.setAttribute("info_notification",
+                            person.getFirstName() + " " + person.getLastName() + " has been removed.");
+                    request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
+                } else {
+                    request.setAttribute("error_notification",
+                            "You can not delete a person who manage projects, change the manager by updating project first.");
+                    request.getRequestDispatcher(INITIAL_VIEW() + "?person-id=" + id).forward(request, response);
+                }
             } else {
                 request.getRequestDispatcher(INITIAL_VIEW() + "?person-id=" + id).forward(request, response);
             }

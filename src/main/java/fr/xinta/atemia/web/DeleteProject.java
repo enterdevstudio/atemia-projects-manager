@@ -1,5 +1,7 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Activity;
+import fr.xinta.atemia.db.entity.Person;
 import fr.xinta.atemia.db.entity.Project;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -43,8 +45,18 @@ public class DeleteProject extends AbstractServlet {
         Project project = projectFacade.find(id);
 
         if (project != null) {
-            if (request.getParameter("yes") != null) {                
-                //TODO suppress everything linked with this project (weeks, activity...)
+            if (request.getParameter("yes") != null) {
+                Person manager = project.getManager();
+                manager.removeManagedProject(project);
+                personFacade.merge(manager);
+                
+                for (Person p : project.getWorkers()) {
+                    p.removeProject(project);
+                    personFacade.merge(p);
+                }
+                for (Activity a : project.getActivities()) {
+                    activityFacade.remove(a);
+                }
                 projectFacade.remove(project);
                 
                 request.setAttribute("info_notification", project.getName() + " has been removed.");

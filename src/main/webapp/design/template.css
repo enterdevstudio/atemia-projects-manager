@@ -146,9 +146,8 @@ menu {
 .box {    
     position: absolute;
     top: 25%;
-    width: 100%;
+    width: 80%;
     text-align: center;
-    margin-left: -120px;
 }
 
 .info, .error {

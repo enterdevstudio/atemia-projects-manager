@@ -3,6 +3,7 @@ package fr.xinta.atemia.db.entity;
 import fr.xinta.atemia.db.facade.Utils;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -135,5 +136,26 @@ public class Project extends AbstractEntity {
         worker.getActivities().add(activity);
         activity.setWeek(week);
         getActivities().add(activity);
+    }
+    
+    public void removePerson(Person person) {
+        removeActivities(person);
+        Iterator<Person> iterator = getWorkers().iterator();
+        while (iterator.hasNext()) {
+            Person worker = iterator.next();
+            if (worker.getId() == person.getId()) {
+                iterator.remove();
+            }
+        }
+    }
+    
+    private void removeActivities(Person person) {
+        Iterator<Activity> iterator = getActivities().iterator();
+        while (iterator.hasNext()) {
+            Activity activity = iterator.next();
+            if (activity.getWorker().getId() == person.getId()) {
+                iterator.remove();
+            }
+        }
     }
 }
