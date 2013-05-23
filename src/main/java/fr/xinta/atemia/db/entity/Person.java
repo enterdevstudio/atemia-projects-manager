@@ -119,7 +119,7 @@ public class Person extends AbstractEntity {
         float nb = 0;
         for (Activity a : getActivities()) {
             if (a.getWeek().compare(week) == 0) {
-                nb += a.getNbDaysWork();
+                nb += a.getNbDaysSet();
             }
         }
         return nb;

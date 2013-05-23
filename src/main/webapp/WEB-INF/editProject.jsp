@@ -18,6 +18,8 @@
                             <option value="DEC">DEC</option>
                             <option value="Prospection">Prospection</option>
                             <option value="Gestion">Gestion</option>
+                            <option value="Communication">Communication</option>
+                            <option value="Développement de produits">Développement de produits</option>
                         </select>
 		    </p>
                     
