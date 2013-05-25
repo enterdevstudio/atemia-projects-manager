@@ -1,5 +1,6 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Activity;
 import fr.xinta.atemia.db.entity.Person;
 import fr.xinta.atemia.db.entity.Project;
 import fr.xinta.atemia.db.entity.Week;
@@ -72,8 +73,22 @@ public class CreateProject extends AbstractServlet {
             project.setManager(person);            
             project.AddWorker(person);
             
+            // We persist the project first, then create activities and then merge
             projectFacade.persist(project);
+                    
+            for (Week week : project.getWeeks()) {
+                Activity activity = new Activity();
+                activity.setWeek(week);
+                activity.setConges(person.getConges(week));
+                activity.setProject(project);
+                project.getActivities().add(activity);
+                activity.setWorker(person);
+                person.getActivities().add(activity);
+                activityFacade.persist(activity);
+            }
+            
             personFacade.merge(person);
+            projectFacade.merge(project);
 
             request.setAttribute("persons", personFacade.findAll());
             request.setAttribute("info_notification", "The project " + project.getName() + " has been created.");

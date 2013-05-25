@@ -1,9 +1,11 @@
 package fr.xinta.atemia.web;
 
+import fr.xinta.atemia.db.entity.Activity;
 import fr.xinta.atemia.db.entity.Person;
 import fr.xinta.atemia.db.entity.Project;
 import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
+import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +58,22 @@ public class EditProject extends AbstractServlet {
                 project.setNbDaysSold(Float.parseFloat(request.getParameter("nbDaysSold")));
                 if (project.getNbDaysSold() < 0) {
                     throw new NumberFormatException();
+                }                
+                
+                Person newManager = personFacade.find(request.getParameter("manager-id").split(" ")[0]);
+                if (newManager == null)
+                    throw new Exception("You have to set a manager to the project");
+                
+                Person oldManager = project.getManager();
+                if (newManager.getId() != oldManager.getId()) {
+                    oldManager.removeManagedProject(project);
+                    newManager.getManagedProjects().add(project);           
+                    project.setManager(newManager);
+                    if (!project.getWorkers().contains(newManager)) {
+                        project.AddWorker(newManager);
+                    }
+                    personFacade.merge(oldManager);
+                    personFacade.merge(newManager);
                 }
                 
                 String sw = request.getParameter("startWeek");
@@ -85,22 +103,37 @@ public class EditProject extends AbstractServlet {
 
                 if (endWeek.compare(project.getEndWeek()) != 0) {
                     project.setEndWeek(endWeek);
-                }                
+                }
                 
-                Person newManager = personFacade.find(request.getParameter("manager-id").split(" ")[0]);
-                if (newManager == null)
-                    throw new Exception("You have to set a manager to the project");
-                
-                Person oldManager = project.getManager();
-                if (newManager.getId() != oldManager.getId()) {
-                    oldManager.removeManagedProject(project);
-                    newManager.getManagedProjects().add(project);           
-                    project.setManager(newManager);
-                    if (!project.getWorkers().contains(newManager)) {
-                        project.AddWorker(newManager);
+                // Update activities
+                // Delete the old ones
+                Iterator<Activity> iterator = project.getActivities().iterator();
+                while (iterator.hasNext()) {
+                    Activity activity = iterator.next();
+                    if (project.getStartWeek().compare(activity.getWeek()) < 0 ||
+                        project.getEndWeek().compare(activity.getWeek()) > 0) {
+                        
+                        iterator.remove();
+                        activity.getWorker().getActivities().remove(activity);
+                        activityFacade.remove(activity);
                     }
-                    personFacade.merge(oldManager);
-                    personFacade.merge(newManager);
+                }
+                
+                // Add the new ones                
+                for (Week week : project.getWeeks()) {
+                    if (project.getActivity(project.getManager(), week) == null) {
+                        for (Person person : project.getWorkers()) {
+                            Activity activity = new Activity();
+                            activity.setWeek(week);
+                            activity.setConges(person.getConges(week));
+                            activity.setProject(project);
+                            project.getActivities().add(activity);
+                            activity.setWorker(person);
+                            person.getActivities().add(activity);
+                            activityFacade.persist(activity);
+                            personFacade.merge(person);
+                        }
+                    }
                 }
 
                 projectFacade.merge(project);

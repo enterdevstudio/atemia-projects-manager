@@ -34,24 +34,26 @@ public class EditActivity extends AbstractServlet {
             if (project == null)
                     throw new Exception("No project has this id. Aborting.");
         
-            if (activity == null) {
-                int num = Integer.parseInt(request.getParameter("week"));
-                int year = Integer.parseInt(request.getParameter("year"));
-                Person worker = personFacade.find(request.getParameter("person-id"));
-                if (worker == null)
-                    throw new Exception("No person has this id. Aborting.");
-
-                activity = new Activity();
-                activity.setWeek(new Week(num, year));
-                activity.setProject(project);
-                project.getActivities().add(activity);
-                activity.setWorker(worker);
-                worker.getActivities().add(activity);
-
-                activityFacade.persist(activity);
-                projectFacade.merge(project);
-                personFacade.merge(worker);
-            }
+//            if (activity == null) {
+//                int num = Integer.parseInt(request.getParameter("week"));
+//                int year = Integer.parseInt(request.getParameter("year"));
+//                Person worker = personFacade.find(request.getParameter("person-id"));
+//                if (worker == null)
+//                    throw new Exception("No person has this id. Aborting.");
+//
+//                activity = new Activity();
+//                Week week = new Week(num, year);
+//                activity.setWeek(week);
+//                activity.setConges(worker.getConges(week));
+//                activity.setProject(project);
+//                project.getActivities().add(activity);
+//                activity.setWorker(worker);
+//                worker.getActivities().add(activity);
+//
+//                activityFacade.persist(activity);
+//                projectFacade.merge(project);
+//                personFacade.merge(worker);
+//            }
             request.setAttribute("activity", activity);
             request.setAttribute("project-id", projectId);
             request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
@@ -79,7 +81,7 @@ public class EditActivity extends AbstractServlet {
             if (activity == null)
                     throw new Exception("No activity has this id. Aborting.");
 	       
-            float nbDaysAff = activity.getWorker().getNbDaysAffected(activity.getWeek()) - activity.getNbDaysSet();
+            float nbDaysAff = activity.getWorker().getNbDaysAffected(activity.getWeek(), false) - activity.getNbDaysSet();
             // Update of the activity
             float prod = Float.parseFloat(request.getParameter("production"));
             float terr = Float.parseFloat(request.getParameter("terrain"));
@@ -94,6 +96,14 @@ public class EditActivity extends AbstractServlet {
                 activity.setCopil(copil);
                 activity.setConges(conges);
                 activityFacade.merge(activity);
+                
+                // Update other activities with conges
+                for (Activity act : activity.getWorker().getActivities()) {
+                    if (act.getWeek().compare(activity.getWeek()) == 0) {
+                        act.setConges(conges);
+                        activityFacade.merge(act);
+                    }
+                }
 
                 request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
 

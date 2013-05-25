@@ -115,11 +115,11 @@ public class Person extends AbstractEntity {
      * @param week the week looked
      * @return the number of days this person work for a given week
      */
-    public float getNbDaysAffected(Week week) {
+    public float getNbDaysAffected(Week week, boolean includeConges) {
         float nb = 0;
         for (Activity a : getActivities()) {
             if (a.getWeek().compare(week) == 0) {
-                nb += a.getNbDaysSet();
+                nb += (includeConges) ? a.getNbDaysSet() : a.getNbDaysWork();
             }
         }
         return nb;
@@ -142,6 +142,15 @@ public class Person extends AbstractEntity {
         }
         
         return Utils.getWeeks(startWeek, endWeek);
+    }
+    
+    public float getConges(Week week) {
+        for (Activity activity : getActivities()) {
+            if (activity.getWeek().compare(week) == 0) {
+                return activity.getConges();
+            }
+        }
+        return 0;
     }
     
     public void removeProject(Project project) {

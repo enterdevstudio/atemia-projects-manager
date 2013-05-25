@@ -75,7 +75,7 @@
                     <c:set var="activity" value="${project.getActivity(person, week)}" />
                     
                     <c:choose>
-                        <c:when test="${empty activity || activity.nbDaysSet == 0}">
+                        <c:when test="${empty activity}">
                             <td colspan="4">
                                 <a href="editActivity?week=${week.number}&amp;year=${week.year}&amp;person-id=${person.id}&amp;project-id=${project.id}">
                                     +
@@ -83,31 +83,42 @@
                             </td>
                         </c:when>
                         <c:otherwise>
-                            <c:if test="${activity.production > 0}">               
-                            <td class="production" colspan="${activity.productionColspan}">
-                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
-                                    ${activity.production}
-                                </a>
-                            </td>
-                            </c:if><c:if test="${activity.terrain > 0}">
-                            <td class="terrain" colspan="${activity.terrainColspan}">
-                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
-                                    ${activity.terrain}
-                                </a>
-                            </td>
-                            </c:if><c:if test="${activity.copil > 0}">
-                            <td class="copil" colspan="${activity.copilColspan}">
-                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
-                                    ${activity.copil}
-                                </a>
-                            </td>
-                            </c:if><c:if test="${activity.conges > 0}">
-                            <td class="conges" colspan="${activity.congesColspan}">
-                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
-                                    ${activity.conges}
-                                </a>
-                            </td>
-                            </c:if>
+                            <c:choose>
+                                <c:when test="${activity.nbDaysSet == 0}">
+                                    <td colspan="4">
+                                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                            +
+                                        </a>
+                                    </td>                                    
+                                </c:when>
+                                <c:otherwise>
+                                    <c:if test="${activity.production > 0}">               
+                                    <td class="production" colspan="${activity.productionColspan}">
+                                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                            ${activity.production}
+                                        </a>
+                                    </td>
+                                    </c:if><c:if test="${activity.terrain > 0}">
+                                    <td class="terrain" colspan="${activity.terrainColspan}">
+                                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                            ${activity.terrain}
+                                        </a>
+                                    </td>
+                                    </c:if><c:if test="${activity.copil > 0}">
+                                    <td class="copil" colspan="${activity.copilColspan}">
+                                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                            ${activity.copil}
+                                        </a>
+                                    </td>
+                                    </c:if><c:if test="${activity.conges > 0}">
+                                    <td class="conges" colspan="${activity.congesColspan}">
+                                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                            ${activity.conges}
+                                        </a>
+                                    </td>
+                                    </c:if>
+                                </c:otherwise>
+                            </c:choose>
                         </c:otherwise>
                     </c:choose>
 		</c:forEach>

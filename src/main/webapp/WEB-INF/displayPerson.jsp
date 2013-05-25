@@ -22,7 +22,7 @@
                     <c:forEach var="week" items="${weeks}" >
                     <tr>
                         <td>${week}</td>
-                        <td>${person.getNbDaysAffected(week)}</td>
+                        <td>${person.getNbDaysAffected(week, true)}</td>
                     </tr>
                     </c:forEach>
                 </table>
