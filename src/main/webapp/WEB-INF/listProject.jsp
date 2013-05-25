@@ -6,7 +6,7 @@
 
 	    <c:choose>
 		<c:when test="${empty projects}">
-		    <p>There is no projects in the application for the moment.</p>
+                    <p>There is no projects in the application for the moment. <a href="createProject">Create one.</a></p>
 		</c:when>
 		<c:otherwise>
 		    <table>

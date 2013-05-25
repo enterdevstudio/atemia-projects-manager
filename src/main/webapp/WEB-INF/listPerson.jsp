@@ -7,7 +7,7 @@
 
 	    <c:choose>
 		<c:when test="${empty persons}">
-		    <p>There is nobody in the application for the moment.</p>
+		    <p>There is nobody in the application for the moment. <a href="createPerson">Create one</a>.</p>
 		</c:when>
 		<c:otherwise>
 		    <table>
