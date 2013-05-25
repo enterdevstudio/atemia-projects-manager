@@ -32,28 +32,10 @@ public class EditActivity extends AbstractServlet {
             Activity activity = activityFacade.find(activityId);
             Project project = projectFacade.find(projectId);
             if (project == null)
-                    throw new Exception("No project has this id. Aborting.");
-        
-//            if (activity == null) {
-//                int num = Integer.parseInt(request.getParameter("week"));
-//                int year = Integer.parseInt(request.getParameter("year"));
-//                Person worker = personFacade.find(request.getParameter("person-id"));
-//                if (worker == null)
-//                    throw new Exception("No person has this id. Aborting.");
-//
-//                activity = new Activity();
-//                Week week = new Week(num, year);
-//                activity.setWeek(week);
-//                activity.setConges(worker.getConges(week));
-//                activity.setProject(project);
-//                project.getActivities().add(activity);
-//                activity.setWorker(worker);
-//                worker.getActivities().add(activity);
-//
-//                activityFacade.persist(activity);
-//                projectFacade.merge(project);
-//                personFacade.merge(worker);
-//            }
+                    throw new Exception("No project has this id. Aborting.");        
+            if (activity == null)
+                    throw new Exception("No activity has this id. Aborting.");
+            
             request.setAttribute("activity", activity);
             request.setAttribute("project-id", projectId);
             request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);
