@@ -4,12 +4,18 @@
 		<h1>Changelog</h1>
 	    </header>
 
+            <h2>v1.6</h2>
+            <ul>
+                <li>Congés are now updated in every projects of a person</li>
+                <li>Font family is now "the sans"</li>
+                <li>Fix datepicker return the number of the week without 0 when nb < 10</li>
+                <li>Fix unable to change the start week and the end week of a project (activities are now adapted)</li>
+            </ul>
+
             <h2>v1.5</h2>
             <ul>
                 <li>Add «communication» and «développement de produits» to department</li>
                 <li>Count congés in week table on person page</li>
-                <li></li>
-                <li></li>
             </ul>
 
             <h2>v1.4</h2>

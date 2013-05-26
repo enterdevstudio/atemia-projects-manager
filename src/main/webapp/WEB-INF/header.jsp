@@ -13,7 +13,7 @@
         
         <!-- jquery for the date picker -->
         <link rel="stylesheet" href="./libs/jquery-ui.css" />
-        <script src="./libs/jquery-1.9.1.js"></script>
+        <script src="./libs/jquery-2.0.0.min.js"></script>
         <script src="./libs/jquery-ui-modified.js"></script>
     </head>
     <body>		
