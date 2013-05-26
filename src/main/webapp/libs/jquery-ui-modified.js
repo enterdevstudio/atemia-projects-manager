@@ -8941,7 +8941,8 @@ $.extend(Datepicker.prototype, {
 								(date.getYear() % 100 < 10 ? "0" : "") + date.getYear() % 100);
 							break;
 						case 'W':  //Modified by xinta
-							output += 'W' + this.iso8601Week(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
+							var wN = this.iso8601Week(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
+							output += 'W' + ((wN < 10) ? '0' : '') + wN;
 							break;
 						case "@":
 							output += date.getTime();
