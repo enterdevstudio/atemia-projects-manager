@@ -4,6 +4,13 @@
 		<h1>Changelog</h1>
 	    </header>
 
+            <h2>v1.7</h2>
+            <ul>
+                <li>Add repartition of the day in the week on the person page</li>
+                <li>Fix activities were not deleted correctly when updating project/li>
+                <li>Fix regression activities were not created when a worker was added.</li>
+            </ul>
+
             <h2>v1.6</h2>
             <ul>
                 <li>Congés are now updated in every projects of a person</li>

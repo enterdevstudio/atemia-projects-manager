@@ -3,7 +3,7 @@
                     <input type="hidden" name="activity-id" value="${activity.id}" />
 		    <table>
                         <tr>
-                            <th colspan="2">Please distribute the five days of the week between these categories:</th>
+                            <th colspan="2">Please distribute the days of the week between these categories:</th>
                         </tr>
                         <tr class="production">
                             <td>

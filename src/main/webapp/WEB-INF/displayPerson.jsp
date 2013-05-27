@@ -17,12 +17,22 @@
                 <table id="person_week">
                     <tr>
                         <th>Week</th>
-                        <th>Nb Days Affected</th>
+                        <th colspan="4">Nb Days Affected</th>
+                        <th>Total</th>
                     </tr>
                     <c:forEach var="week" items="${weeks}" >
+                    <c:set var="activity" value="${person.getNbDaysAffected(week)}" />
                     <tr>
                         <td>${week}</td>
-                        <td>${person.getNbDaysAffected(week, true)}</td>
+                        <c:choose>
+                            <c:when test="${activity.nbDaysSet == 0}">
+                                <td colspan="4">0.0</td>
+                            </c:when>
+                            <c:otherwise>
+                                <%@ include file="displayActivity.jsp" %>
+                            </c:otherwise>
+                        </c:choose>
+                        <td>${activity.nbDaysSet}</td>
                     </tr>
                     </c:forEach>
                 </table>

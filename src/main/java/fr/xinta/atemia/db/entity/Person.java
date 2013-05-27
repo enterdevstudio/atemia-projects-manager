@@ -125,6 +125,19 @@ public class Person extends AbstractEntity {
         return nb;
     }
     
+    public Activity getNbDaysAffected(Week week) {
+        Activity act = new Activity();
+        for (Activity a : getActivities()) {
+            if (a.getWeek().compare(week) == 0) {
+                act.setProduction(act.getProduction() + a.getProduction());
+                act.setTerrain(act.getTerrain() + a.getTerrain());
+                act.setCopil(act.getCopil() + a.getCopil());
+                act.setConges(act.getConges() + a.getConges());
+            }
+        }
+        return act;
+    }
+    
     public List<Week> getWeeks() {
         if (getActivities().isEmpty())
             return null;
