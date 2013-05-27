@@ -113,8 +113,9 @@ public class EditProject extends AbstractServlet {
                     if (project.getStartWeek().compare(activity.getWeek()) < 0 ||
                         project.getEndWeek().compare(activity.getWeek()) > 0) {
                         
-                        iterator.remove();
                         activity.getWorker().getActivities().remove(activity);
+                        personFacade.merge(activity.getWorker());
+                        iterator.remove();
                         activityFacade.remove(activity);
                     }
                 }
