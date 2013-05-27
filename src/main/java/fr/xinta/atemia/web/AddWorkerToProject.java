@@ -2,6 +2,7 @@ package fr.xinta.atemia.web;
 
 import fr.xinta.atemia.db.entity.Person;
 import fr.xinta.atemia.db.entity.Project;
+import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +39,9 @@ public class AddWorkerToProject extends AbstractServlet {
             if (worker != null) {
                 if (!project.getWorkers().contains(worker)) {
                     project.AddWorker(worker);
+                    for (Week week : project.getWeeks()) {
+                        activityFacade.persist(project.AddActivity(week, worker));
+                    }
                     projectFacade.merge(project);
                 } else {
                     request.setAttribute("error_notification", "This worker already works on this project! Aborting.");

@@ -77,14 +77,7 @@ public class CreateProject extends AbstractServlet {
             projectFacade.persist(project);
                     
             for (Week week : project.getWeeks()) {
-                Activity activity = new Activity();
-                activity.setWeek(week);
-                activity.setConges(person.getConges(week));
-                activity.setProject(project);
-                project.getActivities().add(activity);
-                activity.setWorker(person);
-                person.getActivities().add(activity);
-                activityFacade.persist(activity);
+                activityFacade.persist(project.AddActivity(week, person));
             }
             
             personFacade.merge(person);

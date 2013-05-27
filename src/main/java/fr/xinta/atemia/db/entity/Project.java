@@ -128,14 +128,15 @@ public class Project extends AbstractEntity {
         worker.getProjects().add(this);
     }
     
-    public void AddActivity(Week week, Person worker) {
+    public Activity AddActivity(Week week, Person person) {
         Activity activity = new Activity();
-        activity.setProduction(5); //We put 5 days in production by default
-        activity.setProject(this);
-        activity.setWorker(worker);
-        worker.getActivities().add(activity);
         activity.setWeek(week);
+        activity.setConges(person.getConges(week));
+        activity.setProject(this);
         getActivities().add(activity);
+        activity.setWorker(person);
+        person.getActivities().add(activity);
+        return activity;
     }
     
     public void removePerson(Person person) {

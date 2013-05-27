@@ -123,14 +123,7 @@ public class EditProject extends AbstractServlet {
                 for (Week week : project.getWeeks()) {
                     if (project.getActivity(project.getManager(), week) == null) {
                         for (Person person : project.getWorkers()) {
-                            Activity activity = new Activity();
-                            activity.setWeek(week);
-                            activity.setConges(person.getConges(week));
-                            activity.setProject(project);
-                            project.getActivities().add(activity);
-                            activity.setWorker(person);
-                            person.getActivities().add(activity);
-                            activityFacade.persist(activity);
+                            activityFacade.persist(project.AddActivity(week, person));
                             personFacade.merge(person);
                         }
                     }
