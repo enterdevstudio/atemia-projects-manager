@@ -59,18 +59,5 @@
 			<input type="submit" name="execute" value="Validate" />
 		    </p>
 		</form>
-            
-		<script>
-                    $(function() {
-                        $(".datepicker").datepicker({
-                            showWeek: true,
-                            firstDay: 1,
-                            showOtherMonths: true,
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: 'yy-W'
-                        });
-                    });
-		</script>
 			
 	    <%@ include file="footer.jsp" %>
