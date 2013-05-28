@@ -1,4 +1,8 @@
 <%@ include file="header.jsp" %>
+	    
+	    <header>
+		<h1>Editing activity of ${activity.worker.firstName} ${activity.worker.lastName}</h1>
+	    </header>
                 <form method="post">
                     <input type="hidden" name="activity-id" value="${activity.id}" />
 		    <table>
