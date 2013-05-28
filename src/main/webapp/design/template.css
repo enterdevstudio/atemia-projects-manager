@@ -122,7 +122,6 @@ menu {
 #content header {
     border-bottom: solid #CCC 1px;
     margin: 12px;
-    padding-bottom: 6px;
 }
 #content header h1 { margin-bottom: 0px; }
 #content header form {
