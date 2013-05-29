@@ -6,11 +6,11 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Activity extends AbstractEntity {
     
-    private static final int NBCATEGORIES = 4;
+    private static final int NBCATEGORIES = 3;
     private float production;
     private float terrain;
     private float copil;
-    private float conges;
+    
     private Week week;
     @ManyToOne
     private Person worker;
@@ -41,14 +41,6 @@ public class Activity extends AbstractEntity {
         this.copil = copil;
     }
 
-    public float getConges() {
-        return conges;
-    }
-
-    public void setConges(float conges) {
-        this.conges = conges;
-    }
-
     public Week getWeek() {
         return week;
     }
@@ -77,10 +69,6 @@ public class Activity extends AbstractEntity {
         return production + terrain + copil;
     }
 
-    public float getNbDaysSet() {
-        return getNbDaysWork() + conges;
-    }
-
     public int getProductionColspan() {
         if (production == 0) {
             return 0;
@@ -89,8 +77,6 @@ public class Activity extends AbstractEntity {
             if (terrain > 0)
                 col--;
             if (copil > 0)
-                col--;
-            if (conges > 0)
                 col--;
             return col;
         }
@@ -103,8 +89,6 @@ public class Activity extends AbstractEntity {
             int col = NBCATEGORIES - getProductionColspan();
             if (copil > 0)
                 col--;
-            if (conges > 0)
-                col--;
             return col;
         }
     }
@@ -113,18 +97,7 @@ public class Activity extends AbstractEntity {
         if (copil == 0) {
             return 0;
         } else {
-            int col = NBCATEGORIES - getProductionColspan() - getTerrainColspan();
-            if (conges > 0)
-                col--;
-            return col;
-        }
-    }
-    
-    public int getCongesColspan() {
-        if (conges == 0) {
-            return 0;
-        } else {
-            return NBCATEGORIES - getProductionColspan() - getTerrainColspan() -getCopilColspan();
+            return NBCATEGORIES - getProductionColspan() - getTerrainColspan();
         }
     }
 }

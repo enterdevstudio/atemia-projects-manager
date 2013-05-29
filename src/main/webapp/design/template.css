@@ -136,7 +136,7 @@ menu {
     text-align: center;
 }
 
-.info, .error {
+.info, .warning, .error {
     color: #888888;
     background-color: #FBFBFB;
     border-radius: 5px;
@@ -146,6 +146,10 @@ menu {
 
 .info {
     border-color: green;
+}
+
+.warning {
+    border-color: orange;
 }
 
 .error {

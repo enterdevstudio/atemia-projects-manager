@@ -43,13 +43,13 @@
                                value="${project.nbDaysSold}" required />
 		    </p>
                     
-                    <p><label for="input-startWeek">Start week (2012-W01):</label></p>
+                    <p><label for="input-startWeek">Start week:</label></p>
 		    <p>                        
                         <input id="input-startWeek" class="datepicker" type="text" name="startWeek"
                                value="${project.startWeek}" autocomplete="off" required />
                     </p>
                     
-                    <p><label for="input-endWeek">End week (2012-W01):</label></p>
+                    <p><label for="input-endWeek">End week:</label></p>
 		    <p>
 			<input id="input-endWeek" class="datepicker" type="text" name="endWeek"
                                value="${project.endWeek}" autocomplete="off" required />

@@ -65,7 +65,7 @@
 		<tr>
 		    <th>Week</th>
 		<c:forEach var="person" items="${project.workers}">
-                    <th colspan="4">${person.firstName} ${person.lastName}</th>
+                    <th colspan="3">${person.firstName} ${person.lastName}</th>
 		</c:forEach>
 		</tr>
 	    <c:forEach var="week" items="${project.weeks}">
@@ -75,15 +75,33 @@
                     <c:set var="activity" value="${project.getActivity(person, week)}" />
                     
                     <c:choose>
-                        <c:when test="${activity.nbDaysSet == 0}">
-                            <td colspan="4">
+                        <c:when test="${activity.nbDaysWork == 0}">
+                            <td colspan="3">
                                 <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
                                     +
                                 </a>
                             </td>                                    
                         </c:when>
                         <c:otherwise>
-                            <%@ include file="displayActivity.jsp" %>
+                            <c:if test="${activity.production > 0}">               
+                            <td class="production" colspan="${activity.productionColspan}">
+                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                    ${activity.production}
+                                </a>
+                            </td>
+                            </c:if><c:if test="${activity.terrain > 0}">
+                            <td class="terrain" colspan="${activity.terrainColspan}">
+                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                    ${activity.terrain}
+                                </a>
+                            </td>
+                            </c:if><c:if test="${activity.copil > 0}">
+                            <td class="copil" colspan="${activity.copilColspan}">
+                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                    ${activity.copil}
+                                </a>
+                            </td>
+                            </c:if>
                         </c:otherwise>
                     </c:choose>
 		</c:forEach>

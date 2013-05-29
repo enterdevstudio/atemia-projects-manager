@@ -36,15 +36,6 @@
                                        value="${activity.copil}" required />
                             </td>
                         </tr>
-                        <tr class="conges">
-                            <td>
-                                <label for="input-conges">Congés:</label>
-                            </td>
-                            <td>
-                                <input id="input-conges" type="number" name="conges"
-                                       value="${activity.conges}" required />
-                            </td>
-                        </tr>
                         <tr>
                             <td colspan="2" style="border: 0px;">
                                 <input type="submit" name="execute" value="Validate" />

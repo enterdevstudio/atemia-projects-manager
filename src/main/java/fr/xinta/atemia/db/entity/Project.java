@@ -131,7 +131,6 @@ public class Project extends AbstractEntity {
     public Activity AddActivity(Week week, Person person) {
         Activity activity = new Activity();
         activity.setWeek(week);
-        activity.setConges(person.getConges(week));
         activity.setProject(this);
         getActivities().add(activity);
         activity.setWorker(person);

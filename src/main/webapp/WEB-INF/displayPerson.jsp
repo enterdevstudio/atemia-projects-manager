@@ -9,6 +9,10 @@
 		    <input type="hidden" name="person-id" value="${person.id}" />
 		    <input type="submit" name="update" value="Update" />
 		</form>
+		<form method="post" action="manageConges">
+		    <input type="hidden" name="person-id" value="${person.id}" />
+		    <input type="submit" name="conges" value="Availability" />
+		</form>
 		<h1>${person.firstName} ${person.lastName}</h1>
 	    </header>
                     
@@ -17,22 +21,39 @@
                 <table id="person_week">
                     <tr>
                         <th>Week</th>
-                        <th colspan="4">Nb Days Affected</th>
+                        <th colspan="3">Nb Days Affected</th>
+                        <th>Unavailable</th>
                         <th>Total</th>
                     </tr>
                     <c:forEach var="week" items="${weeks}" >
                     <c:set var="activity" value="${person.getNbDaysAffected(week)}" />
+                    <c:set var="conges" value="${person.getNbDaysConges(week.toString())}" />
                     <tr>
                         <td>${week}</td>
                         <c:choose>
-                            <c:when test="${activity.nbDaysSet == 0}">
-                                <td colspan="4">0.0</td>
+                            <c:when test="${activity.nbDaysWork == 0}">
+                                <td colspan="3">0.0</td>
                             </c:when>
                             <c:otherwise>
-                                <%@ include file="displayActivity.jsp" %>
+                                <c:if test="${activity.production > 0}">               
+                                <td class="production" colspan="${activity.productionColspan}">
+                                    ${activity.production}
+                                </td>
+                                </c:if><c:if test="${activity.terrain > 0}">
+                                <td class="terrain" colspan="${activity.terrainColspan}">
+                                    ${activity.terrain}
+                                </td>
+                                </c:if><c:if test="${activity.copil > 0}">
+                                <td class="copil" colspan="${activity.copilColspan}">
+                                    ${activity.copil}
+                                </td>
+                                </c:if>
                             </c:otherwise>
                         </c:choose>
-                        <td>${activity.nbDaysSet}</td>
+                        <td class="conges">${conges}</td>
+                        <td<c:if test="${activity.nbDaysWork + conges > 5}">
+                            style="background-color: red;"
+                        </c:if>>${activity.nbDaysWork + conges}</td>
                     </tr>
                     </c:forEach>
                 </table>

@@ -12,9 +12,12 @@
 	<link rel="shortcut icon" type="image/x-icon" href="./design/favicon.ico" />
         
         <!-- jquery for the date picker -->
+        <script type="text/javascript" src="./libs/jquery-2.0.0.min.js"></script>
+        <script type="text/javascript" src="./libs/jquery-ui-modified.js"></script>
+        <script type="text/javascript" src="./libs/jquery.jqplot.min.js"></script>
+        <script type="text/javascript" src="./libs/jqplot.pieRenderer.min.js"></script>
         <link rel="stylesheet" href="./libs/jquery-ui.css" />
-        <script src="./libs/jquery-2.0.0.min.js"></script>
-        <script src="./libs/jquery-ui-modified.js"></script>
+        <link rel="stylesheet" type="text/css" href="./libs/jquery.jqplot.css" />
     </head>
     <body>		
 	<section id="panel">
@@ -43,7 +46,7 @@
 	    </menu>
 
 	    <footer>
-                <a href="changelog">v1.4</a><br />
+                <a href="changelog">v1.7</a><br />
 		Application developed by <a href="http://www.xinta.fr">Xinta</a><br />
 		Source code available <a href="https://github.com/Flaburgan/atemia-projects-manager">on Github</a>
 	    </footer>
@@ -52,6 +55,10 @@
 	<section id="content">
 	    <c:if test="${not empty error_notification}">
                 <p class="error">Error: ${error_notification}</p>
+	    </c:if>
+                
+	    <c:if test="${not empty warning_notification}">
+                <p class="warning">Warning: ${warning_notification}</p>
 	    </c:if>
                 
 	    <c:if test="${not empty info_notification}">

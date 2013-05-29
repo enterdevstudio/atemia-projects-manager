@@ -4,6 +4,7 @@ import fr.xinta.atemia.db.facade.Utils;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.TreeMap;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -26,6 +27,7 @@ public class Person extends AbstractEntity {
     private List<Project> managedProjects = new ArrayList<Project>();
     @OneToMany(mappedBy="worker")
     private List<Activity> activities = new ArrayList<Activity>();
+    private TreeMap<String, Float> conges = new TreeMap<String, Float>();
 
     public String getFirstName() {
 	return firstName;
@@ -102,6 +104,15 @@ public class Person extends AbstractEntity {
     public List<Activity> getActivities() {
         return activities;
     }
+
+    public TreeMap<String, Float> getConges() {
+        return conges;
+    }
+    
+    public float getNbDaysConges(String week) {
+        Float f = getConges().get(week);
+        return (f != null) ? f : 0;
+    }
     
     public float getNbDaysAffected() {
         float nb = 0;
@@ -114,17 +125,7 @@ public class Person extends AbstractEntity {
     /**
      * @param week the week looked
      * @return the number of days this person work for a given week
-     */
-    public float getNbDaysAffected(Week week, boolean includeConges) {
-        float nb = 0;
-        for (Activity a : getActivities()) {
-            if (a.getWeek().compare(week) == 0) {
-                nb += (includeConges) ? a.getNbDaysSet() : a.getNbDaysWork();
-            }
-        }
-        return nb;
-    }
-    
+     */    
     public Activity getNbDaysAffected(Week week) {
         Activity act = new Activity();
         for (Activity a : getActivities()) {
@@ -132,38 +133,56 @@ public class Person extends AbstractEntity {
                 act.setProduction(act.getProduction() + a.getProduction());
                 act.setTerrain(act.getTerrain() + a.getTerrain());
                 act.setCopil(act.getCopil() + a.getCopil());
-                act.setConges(act.getConges() + a.getConges());
             }
         }
         return act;
     }
     
     public List<Week> getWeeks() {
-        if (getActivities().isEmpty())
+        if (getActivities().isEmpty() && getConges().isEmpty())
             return null;
         
-        Week startWeek = getActivities().get(0).getWeek();
-        Week endWeek = getActivities().get(0).getWeek();
+        Week startWeek = null;
+        Week endWeek = null;
+        if (!getActivities().isEmpty()) {
         
-        for (Activity activity : getActivities()) {
-            if (startWeek.compare(activity.getWeek()) < 0) {
-                startWeek = activity.getWeek();
+            // Get the first and the last week of all project
+            startWeek = getActivities().get(0).getWeek();
+            endWeek = getActivities().get(0).getWeek();
+
+            for (Activity activity : getActivities()) {
+                if (startWeek.compare(activity.getWeek()) < 0) {
+                    startWeek = activity.getWeek();
+                }
+                if (endWeek.compare(activity.getWeek()) > 0) {
+                    endWeek = activity.getWeek();
+                }
             }
-            if (endWeek.compare(activity.getWeek()) > 0) {
-                endWeek = activity.getWeek();
+        }
+        
+        Week firstCongesWeek = null;
+        Week lastCongesWeek = null;
+        if (!getConges().isEmpty()) {
+            try {
+                firstCongesWeek = new Week(getConges().firstKey());
+                lastCongesWeek = new Week(getConges().lastKey());
+            } catch (Exception e) {}
+            
+            if (getActivities().isEmpty()) {
+                startWeek = firstCongesWeek;
+                endWeek = lastCongesWeek;
+            } else {
+                // Check if there is conges before or after that
+                if (startWeek.compare(firstCongesWeek) < 0) {
+                    startWeek =  firstCongesWeek;
+                }
+                if (endWeek.compare(lastCongesWeek) > 0) {
+                    endWeek =  lastCongesWeek;
+                }
             }
         }
         
         return Utils.getWeeks(startWeek, endWeek);
-    }
-    
-    public float getConges(Week week) {
-        for (Activity activity : getActivities()) {
-            if (activity.getWeek().compare(week) == 0) {
-                return activity.getConges();
-            }
-        }
-        return 0;
     }
     
     public void removeProject(Project project) {

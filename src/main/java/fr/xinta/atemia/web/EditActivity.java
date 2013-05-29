@@ -2,6 +2,7 @@ package fr.xinta.atemia.web;
 
 import fr.xinta.atemia.db.entity.Activity;
 import fr.xinta.atemia.db.entity.Project;
+import fr.xinta.atemia.db.entity.Week;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,36 +61,30 @@ public class EditActivity extends AbstractServlet {
                     throw new Exception("No project has this id. Aborting.");
             if (activity == null)
                     throw new Exception("No activity has this id. Aborting.");
-	       
-            float nbDaysAff = activity.getWorker().getNbDaysAffected(activity.getWeek(), false) - activity.getNbDaysSet();
+	    
+            Week week = activity.getWeek();
+            float nbDaysAff = activity.getWorker().getNbDaysAffected(week).getNbDaysWork()
+                    + activity.getWorker().getNbDaysConges(week.toString()) - activity.getNbDaysWork();
             // Update of the activity
             float prod = Float.parseFloat(request.getParameter("production"));
             float terr = Float.parseFloat(request.getParameter("terrain"));
             float copil = Float.parseFloat(request.getParameter("copil"));
-            float conges = Float.parseFloat(request.getParameter("conges"));
 
-            float sum = prod + terr + copil + conges + nbDaysAff;
-            if (sum >= 0 && sum <= 5) {
+            float sum = prod + terr + copil + nbDaysAff;
+            if (sum >= 0 && sum <= 7) {
 
+                if (sum > 5)
+                    request.setAttribute("warning_notification", "you add more than 5 days on the week " + week + " !");
                 activity.setProduction(prod);
                 activity.setTerrain(terr);
                 activity.setCopil(copil);
-                activity.setConges(conges);
                 activityFacade.merge(activity);
-                
-                // Update other activities with conges
-                for (Activity act : activity.getWorker().getActivities()) {
-                    if (act.getWeek().compare(activity.getWeek()) == 0) {
-                        act.setConges(conges);
-                        activityFacade.merge(act);
-                    }
-                }
 
                 request.getRequestDispatcher(EXECUTED_VIEW()).forward(request, response);
 
             } else {
                 request.setAttribute("error_notification", "Impossible to add these days, your input plus " +
-                         nbDaysAff + " days in other projects is not between 0 and 5 days per week");
+                         nbDaysAff + " days in other projects is not between 0 and 7 days per week");
                 initialRequest(request, response);
             }                    
         } catch (NumberFormatException e) {
