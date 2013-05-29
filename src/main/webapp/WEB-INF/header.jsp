@@ -46,7 +46,7 @@
 	    </menu>
 
 	    <footer>
-                <a href="changelog">v1.7</a><br />
+                <a href="changelog">v1.8</a><br />
 		Application developed by <a href="http://www.xinta.fr">Xinta</a><br />
 		Source code available <a href="https://github.com/Flaburgan/atemia-projects-manager">on Github</a>
 	    </footer>

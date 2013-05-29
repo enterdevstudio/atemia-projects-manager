@@ -74,7 +74,7 @@ public class EditActivity extends AbstractServlet {
             if (sum >= 0 && sum <= 7) {
 
                 if (sum > 5)
-                    request.setAttribute("warning_notification", "you add more than 5 days on the week " + week + " !");
+                    request.setAttribute("warning_notification", "you added more than 5 days on the week " + week + " !");
                 activity.setProduction(prod);
                 activity.setTerrain(terr);
                 activity.setCopil(copil);
