@@ -65,7 +65,7 @@
 		<tr>
 		    <th>Week</th>
 		<c:forEach var="person" items="${project.workers}">
-                    <th colspan="3">${person.firstName} ${person.lastName}</th>
+                    <th colspan="4">${person.firstName} ${person.lastName}</th>
 		</c:forEach>
 		</tr>
 	    <c:forEach var="week" items="${project.weeks}">
@@ -73,6 +73,7 @@
 		    <th>${week}</th>		
 		<c:forEach var="person" items="${project.workers}">
                     <c:set var="activity" value="${project.getActivity(person, week)}" />
+                    <c:set var="conges" value="${person.getNbDaysConges(week.toString())}" />
                     
                     <c:choose>
                         <c:when test="${activity.nbDaysWork == 0}">
@@ -104,6 +105,10 @@
                             </c:if>
                         </c:otherwise>
                     </c:choose>
+                            
+                    <td<c:if test="${conges > 0}"> class="conges"</c:if>>
+                        <a href="manageConges?person-id=${person.id}&amp;week=${week.toString()}">${conges}</a>
+                    </td>
 		</c:forEach>
 		</tr>
 	    </c:forEach>

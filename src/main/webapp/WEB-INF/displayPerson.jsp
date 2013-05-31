@@ -50,7 +50,9 @@
                                 </c:if>
                             </c:otherwise>
                         </c:choose>
-                        <td class="conges">${conges}</td>
+                        <td<c:if test="${conges > 0}"> class="conges"</c:if>>
+                            <a href="manageConges?person-id=${person.id}&amp;week=${week.toString()}">${conges}</a>
+                        </td>
                         <td<c:if test="${activity.nbDaysWork + conges > 5}">
                             style="background-color: red;"
                         </c:if>>${activity.nbDaysWork + conges}</td>

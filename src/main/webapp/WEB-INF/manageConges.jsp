@@ -13,11 +13,12 @@
                         <form method="post">
                             <input type="hidden" name="person-id" value="${person.id}" />
                             <td>
-                                <input id="input-week" class="datepicker" type="text"
+                                <input id="input-week" class="datepicker" type="text" value="${week}"
                                        name="week" autocomplete="off" style="width: 80px;" required />
                             </td>
                             <td>
-                                <input type="number" id="input-nbDays" name="nbDays" style="width: 80px;" required />
+                                <input type="number" id="input-nbDays" name="nbDays" style="width: 80px;"
+                                       value="${person.getNbDaysConges(week.toString())}" required />
                             </td>
                             <td style="border: 0px;">
                                 <input type="submit" name="setDays" value="Set" />

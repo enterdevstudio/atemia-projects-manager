@@ -4,6 +4,12 @@
 		<h1>Changelog</h1>
 	    </header>
 
+            <h2>v1.9</h2>
+            <ul>
+                <li>Days unavailable are now indicated on the project page.</li>
+                <li>It's now possible to manage availability table of the person page or the project page</li>
+            </ul>
+
             <h2>v1.8</h2>
             <ul>
                 <li>Days unavailable are not processed separatly on the person page</li>

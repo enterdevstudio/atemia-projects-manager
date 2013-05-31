@@ -29,10 +29,11 @@ public class ManageConges extends AbstractServlet {
                     throw new Exception("No person has this id. Aborting.");
             
             request.setAttribute("person", person);
+            String weekParam = request.getParameter("week");
             
             if (request.getParameter("setDays") != null) {
                 try {
-                    Week week = new Week(request.getParameter("week"));
+                    Week week = new Week(weekParam);
                     float conges = Float.parseFloat(request.getParameter("nbDays"));
                     if (conges < 0 || conges > 5)
                         throw new Exception("Nb days must be between 0 and 5");
@@ -47,6 +48,8 @@ public class ManageConges extends AbstractServlet {
                 } catch (Exception e) {
                     request.setAttribute("error_notification", e.getMessage());
                 }
+            } else {
+                request.setAttribute("week", weekParam);
             }
             
             request.getRequestDispatcher(INITIAL_VIEW()).forward(request, response);        
