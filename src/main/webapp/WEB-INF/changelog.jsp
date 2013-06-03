@@ -6,6 +6,7 @@
 
             <h2>v1.9</h2>
             <ul>
+                <li>Weeks on person page are displayed using an accordion</li>
                 <li>Days unavailable are now indicated on the project page.</li>
                 <li>It's now possible to manage availability table of the person page or the project page</li>
             </ul>

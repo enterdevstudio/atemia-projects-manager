@@ -12,6 +12,14 @@
                     dateFormat: 'yy-W'
                 });
             });
+            
+            
+            $(function() {
+                $("#person_week").accordion({
+                    heightStyle: "content",
+                    collapsible: true
+                });
+            });
         </script>
     </body>
 </html>

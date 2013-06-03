@@ -25,6 +25,11 @@
     margin: 0px 25px;
 }
 
+#person_week table {
+    margin: 0px;
+    font-size: small;
+}
+
 .no-border {
     border: 0px;
 }

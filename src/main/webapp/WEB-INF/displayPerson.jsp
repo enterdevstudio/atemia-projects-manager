@@ -18,47 +18,67 @@
                     
             <c:set var="weeks" value="${person.weeks}" />
 	    <c:if test="${not empty weeks}">
-                <table id="person_week">
-                    <tr>
-                        <th>Week</th>
-                        <th colspan="3">Nb Days Affected</th>
-                        <th>Unavailable</th>
-                        <th>Total</th>
-                    </tr>
-                    <c:forEach var="week" items="${weeks}" >
-                    <c:set var="activity" value="${person.getNbDaysAffected(week)}" />
-                    <c:set var="conges" value="${person.getNbDaysConges(week.toString())}" />
-                    <tr>
-                        <td>${week}</td>
-                        <c:choose>
-                            <c:when test="${activity.nbDaysWork == 0}">
-                                <td colspan="3">0.0</td>
-                            </c:when>
-                            <c:otherwise>
-                                <c:if test="${activity.production > 0}">               
-                                <td class="production" colspan="${activity.productionColspan}">
-                                    ${activity.production}
+                <c:set var="currentYear" value="${person.weeks.get(0).year}" />
+                <div id="person_week">
+                    <h3>${currentYear}</h3>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Week</th>
+                                <th colspan="3">Nb Days Affected</th>
+                                <th>Unavailable</th>
+                                <th>Total</th>
+                            </tr>
+                    <c:forEach var="week" items="${weeks}" >                            
+                        <c:if test="${week.year != currentYear}">
+                            <c:set var="currentYear" value="${week.year}" />
+                        </table>
+                    </div>
+                    <h3>${currentYear}</h3>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Week</th>
+                                <th colspan="3">Nb Days Affected</th>
+                                <th>Unavailable</th>
+                                <th>Total</th>
+                            </tr>
+                        </c:if>                
+                        <c:set var="activity" value="${person.getNbDaysAffected(week)}" />
+                        <c:set var="conges" value="${person.getNbDaysConges(week.toString())}" />
+                            <tr>
+                                <td>${week}</td>
+                                <c:choose>
+                                    <c:when test="${activity.nbDaysWork == 0}">
+                                        <td colspan="3">0.0</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:if test="${activity.production > 0}">               
+                                        <td class="production" colspan="${activity.productionColspan}">
+                                            ${activity.production}
+                                        </td>
+                                        </c:if><c:if test="${activity.terrain > 0}">
+                                        <td class="terrain" colspan="${activity.terrainColspan}">
+                                            ${activity.terrain}
+                                        </td>
+                                        </c:if><c:if test="${activity.copil > 0}">
+                                        <td class="copil" colspan="${activity.copilColspan}">
+                                            ${activity.copil}
+                                        </td>
+                                        </c:if>
+                                    </c:otherwise>
+                                </c:choose>
+                                <td<c:if test="${conges > 0}"> class="conges"</c:if>>
+                                    <a href="manageConges?person-id=${person.id}&amp;week=${week.toString()}">${conges}</a>
                                 </td>
-                                </c:if><c:if test="${activity.terrain > 0}">
-                                <td class="terrain" colspan="${activity.terrainColspan}">
-                                    ${activity.terrain}
-                                </td>
-                                </c:if><c:if test="${activity.copil > 0}">
-                                <td class="copil" colspan="${activity.copilColspan}">
-                                    ${activity.copil}
-                                </td>
-                                </c:if>
-                            </c:otherwise>
-                        </c:choose>
-                        <td<c:if test="${conges > 0}"> class="conges"</c:if>>
-                            <a href="manageConges?person-id=${person.id}&amp;week=${week.toString()}">${conges}</a>
-                        </td>
-                        <td<c:if test="${activity.nbDaysWork + conges > 5}">
-                            style="background-color: red;"
-                        </c:if>>${activity.nbDaysWork + conges}</td>
-                    </tr>
-                    </c:forEach>
-                </table>
+                                <td<c:if test="${activity.nbDaysWork + conges > 5}">
+                                    style="background-color: red;"
+                                </c:if>>${activity.nbDaysWork + conges}</td>
+                            </tr>
+                        </c:forEach>
+                        </table>
+                    </div>
+                </div>
             </c:if>
             
             <fmt:formatNumber var="ratio" value="${person.nbDaysAffected / person.nbDaysAvailable * 100}" maxFractionDigits="2" />
