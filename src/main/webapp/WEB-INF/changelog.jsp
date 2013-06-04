@@ -4,6 +4,12 @@
 		<h1>Changelog</h1>
 	    </header>
 
+            <h2>v2.0</h2>
+            <ul>
+                <li>Weeks on person page are displayed using an accordion</li>
+                <li>Days unavailable are now indicated on the project page.</li>
+            </ul>
+
             <h2>v1.9</h2>
             <ul>
                 <li>Weeks on person page are displayed using an accordion</li>

@@ -14,10 +14,8 @@
         <!-- jquery for the date picker -->
         <script type="text/javascript" src="./libs/jquery-2.0.0.min.js"></script>
         <script type="text/javascript" src="./libs/jquery-ui-modified.js"></script>
-        <script type="text/javascript" src="./libs/jquery.jqplot.min.js"></script>
-        <script type="text/javascript" src="./libs/jqplot.pieRenderer.min.js"></script>
+        <script type="text/javascript" src="./ui.js"></script>
         <link rel="stylesheet" href="./libs/jquery-ui.css" />
-        <link rel="stylesheet" type="text/css" href="./libs/jquery.jqplot.css" />
     </head>
     <body>		
 	<section id="panel">
@@ -46,7 +44,7 @@
 	    </menu>
 
 	    <footer>
-                <a href="changelog">v1.8</a><br />
+                <a href="changelog">v2.0</a><br />
 		Application developed by <a href="http://www.xinta.fr">Xinta</a><br />
 		Source code available <a href="https://github.com/Flaburgan/atemia-projects-manager">on Github</a>
 	    </footer>

@@ -12,10 +12,7 @@ body {
     background: url("bg.jpg") fixed bottom right no-repeat;
 }
 
-h2 {
-    margin-bottom: 3px;
-}
-li { padding: 3px 0px; }
+h2 { margin-bottom: 0px; }
 a { color: inherit; }
 
 /* --- Default design for table --- */
@@ -62,23 +59,19 @@ input[type=submit]:hover {
     position: fixed;
     top: 0px;
     bottom: 0px;
-    max-width: 202px;
+    max-width: 200px;
     border-right: solid #CCC 1px;
     box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.3);
     background: white;
+    padding: 0px 8px;
 }
 
 #panel a {
     text-decoration: none;
 }
 
-#panel header h1 {
-    margin: 12px;
-}
-
 
 /* ---- Menu in the Left Panel ---- */
-#menu { margin: 0px 0px 0px 12px; }
 menu {
     list-style-type: none;
     padding-left: 0px;
@@ -102,11 +95,11 @@ menu {
     width: 100%;
     position: absolute;
     bottom: 0px;
+    left: 0px;
     color: #888;
     font-style: italic;
     font-size: 11px;
     text-align: center;
-    margin-top: 42px;
 }
 
 #panel footer a { font-weight: bold; }
@@ -115,7 +108,7 @@ menu {
 
 /* ---- Content ---- */
 #content {
-    margin-left: 220px;
+    margin-left: 225px;
 }
 
 
