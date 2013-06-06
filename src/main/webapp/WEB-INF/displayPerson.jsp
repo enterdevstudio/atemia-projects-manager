@@ -18,9 +18,9 @@
                     
             <c:set var="weeks" value="${person.weeks}" />
 	    <c:if test="${not empty weeks}">
-                <c:set var="currentYear" value="${person.weeks.get(0).year}" />
-                <div id="person_week">
-                    <h3>${currentYear}</h3>
+                <c:set var="firstWeek" value="${weeks.get(0)}" />
+                <div id="person_week" class="accordion">
+                    <h3>${firstWeek.year}-W${firstWeek.number}</h3>
                     <div>
                         <table>
                             <tr>
@@ -29,12 +29,11 @@
                                 <th>Unavailable</th>
                                 <th>Total</th>
                             </tr>
-                    <c:forEach var="week" items="${weeks}" >                            
-                        <c:if test="${week.year != currentYear}">
-                            <c:set var="currentYear" value="${week.year}" />
+                    <c:forEach var="week" items="${weeks}" >
+                        <c:if test="${week.number == 1 || week.number == 14 || week.number == 27 || week.number == 40}">
                         </table>
                     </div>
-                    <h3>${currentYear}</h3>
+                    <h3>${week.year}-W${week.number}</h3>
                     <div>
                         <table>
                             <tr>

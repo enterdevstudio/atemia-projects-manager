@@ -12,7 +12,7 @@ $(function() {
 
 
 $(function() {
-    $("#person_week").accordion({
+    $(".accordion").accordion({
         heightStyle: "content",
         collapsible: true
     });

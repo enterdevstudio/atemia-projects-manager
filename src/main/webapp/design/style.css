@@ -1,10 +1,8 @@
 .production { background-color: #44BB44; }
 .terrain { background-color: #FF4F3F; }
 .copil { background-color: #88BBFF; }
-.conges {
-    background-color: black;
-    color: white;
-}
+.conges { background-color: black; }
+.conges { color: white !important; }
 
 #week-table th, #week-table td {
     border: solid #CCCCCC 1px;
@@ -34,6 +32,18 @@
     border: 0px;
 }
 
+.center {
+    text-align: center;
+}
+
 #input-production, #input-prospection, #input-gestion, #input-communication {
     width: 38px;
+}
+
+.accordion {
+    display: inline-block;
+}
+
+.accordion h3 {
+    text-align: left;
 }

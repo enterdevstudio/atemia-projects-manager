@@ -51,67 +51,88 @@
 	    </c:choose>
 	    </ul>               
 
-            <table>
-                <tr>
-                    <td style="border: 0px;">Caption : </td>
-                    <td class="production">Production</td>
-                    <td class="terrain">Terrain</td>
-                    <td class="copil">Copil</td>
-                    <td class="conges">Congés</td>
-                </tr>
-            </table>
+            <div class="center">
+                <table>
+                    <tr>
+                        <td style="border: 0px;">Caption : </td>
+                        <td class="production">Production</td>
+                        <td class="terrain">Terrain</td>
+                        <td class="copil">Copil</td>
+                        <td class="conges">Congés</td>
+                    </tr>
+                </table>
 		
-	    <table id="week-table">
-		<tr>
-		    <th>Week</th>
-		<c:forEach var="person" items="${project.workers}">
-                    <th colspan="4">${person.firstName} ${person.lastName}</th>
-		</c:forEach>
-		</tr>
-	    <c:forEach var="week" items="${project.weeks}">
-		<tr>
-		    <th>${week}</th>		
-		<c:forEach var="person" items="${project.workers}">
-                    <c:set var="activity" value="${project.getActivity(person, week)}" />
-                    <c:set var="conges" value="${person.getNbDaysConges(week.toString())}" />
-                    
-                    <c:choose>
-                        <c:when test="${activity.nbDaysWork == 0}">
-                            <td colspan="3">
-                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
-                                    +
-                                </a>
-                            </td>                                    
-                        </c:when>
-                        <c:otherwise>
-                            <c:if test="${activity.production > 0}">               
-                            <td class="production" colspan="${activity.productionColspan}">
-                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
-                                    ${activity.production}
-                                </a>
-                            </td>
-                            </c:if><c:if test="${activity.terrain > 0}">
-                            <td class="terrain" colspan="${activity.terrainColspan}">
-                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
-                                    ${activity.terrain}
-                                </a>
-                            </td>
-                            </c:if><c:if test="${activity.copil > 0}">
-                            <td class="copil" colspan="${activity.copilColspan}">
-                                <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
-                                    ${activity.copil}
-                                </a>
-                            </td>
-                            </c:if>
-                        </c:otherwise>
-                    </c:choose>
-                            
-                    <td<c:if test="${conges > 0}"> class="conges"</c:if>>
-                        <a href="manageConges?person-id=${person.id}&amp;week=${week.toString()}">${conges}</a>
-                    </td>
-		</c:forEach>
-		</tr>
-	    </c:forEach>
-	    </table>
-			
+                <c:set var="weeks" value="${project.weeks}" />
+                <c:set var="firstWeek" value="${weeks.get(0)}" />            
+                <div class="accordion">
+                    <h3>${firstWeek.year}-W${firstWeek.number}</h3>
+                    <div>
+                        <table id="week-table">
+                            <tr>
+                                <th>Week</th>
+                            <c:forEach var="person" items="${project.workers}">
+                                <th colspan="4">${person.firstName} ${person.lastName}</th>
+                            </c:forEach>
+                            </tr>
+                        <c:forEach var="week" items="${weeks}">
+                            <c:if test="${week.number == 1 || week.number == 14 || week.number == 27 || week.number == 40}">
+                        </table>
+                    </div>
+
+                    <h3>${week.year}-W${week.number}</h3>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Week</th>
+                            <c:forEach var="person" items="${project.workers}">
+                                <th colspan="4">${person.firstName} ${person.lastName}</th>
+                            </c:forEach>
+                            </tr>
+                        </c:if>      
+                        <tr>
+                            <th>${week}</th>		
+                        <c:forEach var="person" items="${project.workers}">
+                            <c:set var="activity" value="${project.getActivity(person, week)}" />
+                            <c:set var="conges" value="${person.getNbDaysConges(week.toString())}" />
+                            <c:choose>
+                                <c:when test="${activity.nbDaysWork == 0}">
+                                    <td colspan="3">
+                                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                            +
+                                        </a>
+                                    </td>                                    
+                                </c:when>
+                                <c:otherwise>
+                                    <c:if test="${activity.production > 0}">               
+                                    <td class="production" colspan="${activity.productionColspan}">
+                                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                            ${activity.production}
+                                        </a>
+                                    </td>
+                                    </c:if><c:if test="${activity.terrain > 0}">
+                                    <td class="terrain" colspan="${activity.terrainColspan}">
+                                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                            ${activity.terrain}
+                                        </a>
+                                    </td>
+                                    </c:if><c:if test="${activity.copil > 0}">
+                                    <td class="copil" colspan="${activity.copilColspan}">
+                                        <a href="editActivity?activity-id=${activity.id}&amp;project-id=${project.id}">
+                                            ${activity.copil}
+                                        </a>
+                                    </td>
+                                    </c:if>
+                                </c:otherwise>
+                            </c:choose>
+
+                                <td<c:if test="${conges > 0}"> class="conges"</c:if>>
+                                    <a href="manageConges?person-id=${person.id}&amp;week=${week.toString()}">${conges}</a>
+                                </td>
+                            </c:forEach>
+                            </tr>
+                        </c:forEach>
+                        </table>
+                    </div>
+                </div>
+            </div>	
 	    <%@ include file="footer.jsp" %>
