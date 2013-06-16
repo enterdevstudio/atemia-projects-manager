@@ -45,7 +45,7 @@ To have the lastest version of Glassfish, go on https://glassfish.java.net/ and 
 
 If encounter errors, server logs can be found in glassfish/domains/domain1/logs/
 
-Inside this zip file, you'll find a /bin/ directory which contains the "asadmin" script.
+Inside the zip file, you'll find a /bin/ directory which contains the "asadmin" script.
 
 You can start and stop default domain with
 
@@ -68,10 +68,18 @@ Run ping-connection-pool to be sure the connection pool can connect to the datab
 
     asadmin ping-connection-pool atemia-pool
     
+You may need to add the mysql connector (mysql-connector-java-5.1.23.jar or more recent) in /glassfish/domains/domain1/lib/ext
+    
 Now, let's deploy the application:
 
     asadmin deploy path-to-the-war.war
     
 The application should now be accessible on localhost:8080
 
-## How to re-deploy
+## How to redeploy
+
+To redeploy, run
+
+	    asadmin redeploy path-to-the-war.war
+	    
+It will ask you the name, put Atemia-1.0
