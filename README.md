@@ -43,13 +43,17 @@ Connect to your database and create a database and a user:
 This application was tested on the GlassFish server. You can use another server if you want but it needs to support servlet and EJB.
 To have the lastest version of Glassfish, go on https://glassfish.java.net/ and download the zip file.
 
+If encounter errors, server logs can be found in glassfish/domains/domain1/logs/
+
 Inside this zip file, you'll find a /bin/ directory which contains the "asadmin" script.
-If you have a graphic access, you'll probably prefer administrate from localhost:4848
 
 You can start and stop default domain with
 
     asadmin start-domain
     asadmin stop-domain
+    
+First, start the default domain. Then, if you have a graphic access, you'll probably prefere to continue outside the command line.
+Go on localhost:4848 with your favorite browser.
 
 We need to create a datasource to allow the application to communicate with the DB.
 First, let's create a pool:
@@ -69,3 +73,5 @@ Now, let's deploy the application:
     asadmin deploy path-to-the-war.war
     
 The application should now be accessible on localhost:8080
+
+## How to re-deploy
